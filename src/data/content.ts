@@ -1,4 +1,5 @@
-// Single source of copy. Every fact comes from Ruth's résumé; do not add claims it does not make.
+// Single source of copy. Facts come from Ruth's résumé, except STOREFRONTS, which the requester
+// supplied (the Shopify work is not on the résumé). Do not add claims neither source makes.
 
 export type Link = { label: string; href: string };
 export type Highlight = { lead: string; text: string };
@@ -25,6 +26,26 @@ export type Project = {
   figures: Figure[];
   cover: CoverKind;
 };
+
+export type Storefront = {
+  slug: string;
+  name: string;
+  category: string;
+  platform: string;
+  url: string;
+  domain: string;
+  summary: string;
+  stack: string[];
+  image: string;
+  /** object-position for portrait crops of the 1440×900 screenshot. */
+  focus: string;
+};
+
+export type PythonService = { title: string; text: string; stack: string[]; project: string };
+
+export type HeroSlide =
+  | { key: string; title: string; kind: "project"; cover: CoverKind; index: string }
+  | { key: string; title: string; kind: "store"; image: string; focus: string };
 
 export type Discipline = { index: string; title: string; items: string[] };
 export type Role = { period: string; org: string; role: string; location: string };
@@ -62,7 +83,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     index: "00 — 1",
     title: "Interface engineering",
-    items: ["React, Next.js, Tailwind CSS", "Responsive & touch interfaces", "User flows & UI consistency"],
+    items: ["React, Next.js, Tailwind CSS", "Shopify & Hydrogen storefronts", "Responsive & touch interfaces", "User flows & UI consistency"],
   },
   {
     index: "00 — 2",
@@ -77,7 +98,7 @@ export const DISCIPLINES: Discipline[] = [
   {
     index: "00 — 4",
     title: "Full stack & cloud",
-    items: ["Node.js, FastAPI, GraphQL", "AWS, Docker, Kubernetes", "OpenAI API features"],
+    items: ["Python — FastAPI, Django", "Node.js, GraphQL, Kafka", "AWS, Docker, Kubernetes", "OpenAI API features"],
   },
 ];
 
@@ -250,6 +271,126 @@ export const PROJECTS: Project[] = [
     figures: [],
     cover: "touch",
   },
+];
+
+// Supplied by the requester. Summaries describe each brand as its own site does; the platform line
+// is the requester's (all five serve from cdn.shopify.com, checked 2026-10-01).
+export const STOREFRONTS: Storefront[] = [
+  {
+    slug: "mejuri",
+    name: "Mejuri",
+    category: "Fine jewelry",
+    platform: "Shopify",
+    url: "https://mejuri.com",
+    domain: "mejuri.com",
+    summary: "Modern fine-jewelry e-commerce built around storytelling and everyday luxury — jewelry you can live in.",
+    stack: ["Shopify"],
+    image: "/stores/mejuri.webp",
+    focus: "20% 50%",
+  },
+  {
+    slug: "varley",
+    name: "Varley",
+    category: "Fashion",
+    platform: "Shopify Hydrogen",
+    url: "https://www.varley.com",
+    domain: "varley.com",
+    summary: "An elevated everyday wardrobe rooted in movement, sold through a headless storefront.",
+    stack: ["Shopify Hydrogen", "React"],
+    image: "/stores/varley.webp",
+    focus: "50% 50%",
+  },
+  {
+    slug: "curlsmith",
+    name: "Curlsmith",
+    category: "Haircare",
+    platform: "Shopify",
+    url: "https://curlsmith.com",
+    domain: "curlsmith.com",
+    summary: "The first gourmet haircare brand created specifically for curls.",
+    stack: ["Shopify"],
+    image: "/stores/curlsmith.webp",
+    focus: "90% 50%",
+  },
+  {
+    slug: "mous",
+    name: "Mous",
+    category: "Tech accessories",
+    platform: "Shopify",
+    url: "https://www.mous.co",
+    domain: "mous.co",
+    summary: "Protective phone cases, bags and device accessories — made to match, built to last.",
+    stack: ["Shopify"],
+    image: "/stores/mous.webp",
+    focus: "76% 50%",
+  },
+  {
+    slug: "shoplift",
+    name: "Shoplift",
+    category: "Shopify app",
+    platform: "Shopify",
+    url: "https://shoplift.ai",
+    domain: "shoplift.ai",
+    summary: "The CRO platform purpose-built for Shopify — A/B testing merchants can launch without a developer.",
+    stack: ["Shopify", "A/B testing"],
+    image: "/stores/shoplift.webp",
+    focus: "50% 50%",
+  },
+];
+
+// Ruth's Python work, as her résumé describes it, each linked to the case study it comes from.
+export const PYTHON_WORK: PythonService[] = [
+  {
+    title: "Real-time search indexing",
+    text: "Python services indexing product, price, and inventory changes from Kafka into Elasticsearch for real-time search and autocomplete.",
+    stack: ["Python", "Kafka", "Elasticsearch"],
+    project: "albertsons",
+  },
+  {
+    title: "Personalized offers",
+    text: "Personalized offers and product recommendations from Django and FastAPI services built on purchase and loyalty history, served to React pages through REST and GraphQL APIs.",
+    stack: ["Django", "FastAPI", "GraphQL"],
+    project: "albertsons",
+  },
+  {
+    title: "AI content generation",
+    text: "Automated product-description and category-content generation with Python services on the OpenAI API.",
+    stack: ["Python", "OpenAI API"],
+    project: "albertsons",
+  },
+  {
+    title: "Experimentation pipelines",
+    text: "Python ETL pipelines analyzing A/B tests behind an 8% conversion lift, 12% more engagement and 9% more revenue — with stronger ETL validation cutting production issues by 20%.",
+    stack: ["Python", "ETL", "A/B testing"],
+    project: "albertsons",
+  },
+  {
+    title: "Spreadsheet-app APIs",
+    text: "FastAPI services within reusable full-stack modules that accelerated spreadsheet-driven applications and web workflows.",
+    stack: ["FastAPI", "GraphQL", "MongoDB"],
+    project: "airrange",
+  },
+];
+
+const store = (slug: string): HeroSlide => {
+  const s = STOREFRONTS.find((item) => item.slug === slug) as Storefront;
+  return { key: s.slug, title: s.name, kind: "store", image: s.image, focus: s.focus };
+};
+const project = (slug: string): HeroSlide => {
+  const p = PROJECTS.find((item) => item.slug === slug) as Project;
+  return { key: p.slug, title: [p.title, p.titleItalic].filter(Boolean).join(" "), kind: "project", cover: p.cover, index: p.index };
+};
+
+/** The hero frame's rotation: product work interleaved with storefronts. */
+export const HERO_SLIDES: HeroSlide[] = [
+  store("mejuri"),
+  project("airrange"),
+  store("varley"),
+  project("albertsons"),
+  store("curlsmith"),
+  project("component-systems"),
+  store("mous"),
+  project("touch-interfaces"),
 ];
 
 export function getProject(slug: string): Project | undefined {

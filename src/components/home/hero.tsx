@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { ProjectCover } from "@/components/covers/project-cover";
+import { StoreShot } from "@/components/covers/store-shot";
 import { SplitText } from "@/components/motion/split-text";
-import { PROFILE, PROJECTS } from "@/data/content";
+import { HERO_SLIDES, PROFILE } from "@/data/content";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const INTERVAL = 3200;
@@ -15,22 +16,27 @@ export function Hero() {
     if (prefersReducedMotion()) return;
     const id = window.setInterval(() => {
       if (document.hidden) return;
-      setSlide(({ current }) => ({ current: (current + 1) % PROJECTS.length, previous: current }));
+      setSlide(({ current }) => ({ current: (current + 1) % HERO_SLIDES.length, previous: current }));
     }, INTERVAL);
     return () => window.clearInterval(id);
   }, []);
 
-  const showing = PROJECTS[slide.current] ?? PROJECTS[0];
+  const showing = HERO_SLIDES[slide.current] ?? HERO_SLIDES[0];
+  const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
     <section className="hero" data-theme="paper" aria-labelledby="hero-name">
       <div className="hero-frame">
-        {PROJECTS.map((project, i) => (
+        {HERO_SLIDES.map((item, i) => (
           <div
-            key={project.slug}
+            key={item.key}
             className={`hero-slide${i === slide.current ? " is-on" : ""}${i === slide.previous ? " is-was" : ""}`}
           >
-            <ProjectCover kind={project.cover} number={project.index} eager={i === 0} />
+            {item.kind === "store" ? (
+              <StoreShot image={item.image} focus={item.focus} eager={i === 0} />
+            ) : (
+              <ProjectCover kind={item.cover} number={item.index} />
+            )}
           </div>
         ))}
       </div>
@@ -43,11 +49,9 @@ export function Hero() {
 
       <p className="hero-now ui fade-in" aria-live="off">
         <span className="hero-now-index">
-          {showing?.index} / {String(PROJECTS.length).padStart(2, "0")}
+          {pad(slide.current + 1)} / {pad(HERO_SLIDES.length)}
         </span>
-        <span className="hero-now-title">
-          {showing?.title} {showing?.titleItalic}
-        </span>
+        <span className="hero-now-title">{showing?.title}</span>
         <span className="muted hero-now-tag">Now showing</span>
       </p>
 

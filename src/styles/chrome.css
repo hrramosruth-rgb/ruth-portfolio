@@ -172,6 +172,21 @@
   }
 }
 
+/* Modal dialogs sit in the top layer, above the custom cursor: give them the system cursor back. */
+.has-dialog .cursor {
+  opacity: 0;
+}
+
+.has-cursor dialog,
+.has-cursor dialog * {
+  cursor: auto;
+}
+
+.has-cursor dialog a,
+.has-cursor dialog button {
+  cursor: pointer;
+}
+
 /* ---------- loader ---------- */
 .loader {
   position: fixed;

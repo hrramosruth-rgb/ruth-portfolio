@@ -7,6 +7,11 @@ import { prefersReducedMotion } from "@/lib/motion";
 
 let lenis: Lenis | null = null;
 
+/** The running Lenis instance, or null under reduced motion. */
+export function getLenis() {
+  return lenis;
+}
+
 function scrollToHashOrTop() {
   const id = decodeURIComponent(window.location.hash.slice(1));
   const target = id ? document.getElementById(id) : null;

@@ -48,7 +48,7 @@ export function WorkIndex() {
 
   return (
     <section id="work" className="section work" data-theme="paper" aria-labelledby="work-title">
-      <div className="work-head">
+      <div className="section-head">
         <h2 id="work-title" className="display">
           Selected <em>work</em>
         </h2>

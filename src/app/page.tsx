@@ -2,6 +2,8 @@ import { About } from "@/components/home/about";
 import { Contact } from "@/components/home/contact";
 import { Hero } from "@/components/home/hero";
 import { Numbers } from "@/components/home/numbers";
+import { PythonWork } from "@/components/home/python-work";
+import { Storefronts } from "@/components/home/storefronts";
 import { WorkIndex } from "@/components/home/work-index";
 import { LINKS, PROFILE } from "@/data/content";
 import { SITE_URL } from "@/lib/site-url";
@@ -25,6 +27,8 @@ export default function Page() {
       <Hero />
       <About />
       <WorkIndex />
+      <Storefronts />
+      <PythonWork />
       <Numbers />
       <Contact />
     </main>
