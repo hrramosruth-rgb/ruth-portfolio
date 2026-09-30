@@ -1,1 +1,200 @@
-/* Case-study pages. */
+/* ---------- case hero ---------- */
+.case-hero {
+  padding: 150px var(--gut) 9vh;
+}
+
+.case-crumbs {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.case-title {
+  margin-top: 8vh;
+  font-size: clamp(72px, 13vw, 240px);
+  line-height: 0.84;
+  letter-spacing: -0.04em;
+}
+
+.case-title-italic {
+  padding-left: 8vw;
+  font-style: italic;
+}
+
+.case-summary {
+  max-width: 880px;
+  margin: 7vh 0 0 auto;
+  font-size: clamp(22px, 2.2vw, 34px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- cover ---------- */
+.case-cover {
+  position: relative;
+  margin: 0 var(--gut);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.case-cover .cover img {
+  filter: none;
+  object-position: 50% 0;
+}
+
+/* ---------- overview ---------- */
+.case-body {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 2fr;
+  gap: 6vw;
+  padding-top: 14vh;
+  padding-bottom: 20vh;
+}
+
+.case-meta {
+  align-self: start;
+  border-top: 1px solid var(--line);
+}
+
+.case-meta div {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-meta dd {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.case-description {
+  margin-top: 32px;
+  font-size: clamp(28px, 3vw, 50px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+/* ---------- what I built ---------- */
+.case-highlights {
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.case-highlights li {
+  display: grid;
+  grid-template-columns: 90px 1fr 1.4fr;
+  align-items: baseline;
+  gap: 24px;
+  padding: 34px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-highlights h3 {
+  font-size: clamp(26px, 2.6vw, 42px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.case-highlights p {
+  max-width: 620px;
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+.case-figures-title {
+  margin-top: 18vh;
+}
+
+/* ---------- next project ---------- */
+.next {
+  padding: 20vh var(--gut) 12vh;
+}
+
+.next-link {
+  display: block;
+}
+
+.next-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.next-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25em;
+  margin-top: 5vh;
+  font-size: clamp(64px, 12vw, 230px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  transition: transform 0.9s var(--ease);
+}
+
+.next-arrow {
+  margin-left: auto;
+  font-size: 0.5em;
+  transition: transform 0.9s var(--ease);
+}
+
+.next-link:hover .next-title {
+  transform: translateX(1.5vw);
+}
+
+.next-link:hover .next-arrow {
+  transform: translateX(-1.5vw) rotate(-45deg);
+}
+
+.case-foot {
+  margin: 0 var(--gut);
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- 404 ---------- */
+.lost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  min-height: 100svh;
+  padding: 120px var(--gut);
+}
+
+.lost-title {
+  font-size: clamp(120px, 26vw, 460px);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+}
+
+.lost-copy {
+  font-size: clamp(24px, 2.6vw, 40px);
+}
+
+@media (max-width: 860px) {
+  .case-cover {
+    aspect-ratio: 4 / 3;
+  }
+
+  .case-body {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+
+  .case-highlights li {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .next-meta {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .case-foot a:first-of-type {
+    display: none;
+  }
+}

@@ -128,7 +128,7 @@ em,
   white-space: nowrap;
 }
 
-/* ---------- reveals (html.is-ready is set once the loader has lifted) ---------- */
+/* ---------- reveals: .split--intro waits for html.is-ready (loader lifted); others for .is-in (InView) ---------- */
 .split {
   display: block;
   overflow: hidden;
@@ -141,7 +141,7 @@ em,
   transition: transform 1.4s var(--ease);
 }
 
-.is-ready .split .ch,
+.is-ready .split--intro .ch,
 .split.is-in .ch {
   transform: none;
 }

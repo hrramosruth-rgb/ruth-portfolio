@@ -37,8 +37,8 @@ export function Hero() {
 
       <h1 id="hero-name" className="hero-name display">
         <span className="sr-only">{PROFILE.name}</span>
-        <SplitText text={PROFILE.firstName} className="hero-first" delay={0.25} />
-        <SplitText text={PROFILE.lastName} className="hero-last" delay={0.37} />
+        <SplitText text={PROFILE.firstName} className="split--intro hero-first" delay={0.25} />
+        <SplitText text={PROFILE.lastName} className="split--intro hero-last" delay={0.37} />
       </h1>
 
       <p className="hero-now ui fade-in" aria-live="off">

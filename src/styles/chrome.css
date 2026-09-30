@@ -251,13 +251,20 @@
   animation: curtain-lift 1.1s 0.15s var(--ease-io) both;
 }
 
-.curtain .ui {
+.curtain-mark {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
   color: var(--ink);
-  animation: curtain-label 0.5s both;
+  animation: curtain-label 0.45s 0.1s both;
+}
+
+.curtain-mark svg {
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes curtain-lift {
