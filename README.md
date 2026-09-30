@@ -1,8 +1,8 @@
 # Ruth Ramos — Portfolio
 
-Portfolio for Ruth Ramos, Design Engineer and Full Stack Developer in Madrid: a home page
-(project index, Shopify storefront orbit, Python services, figures, experience, contact) and a
-case study per project.
+Portfolio for Ruth Ramos, Full Stack Developer in Madrid: a home page whose hero is a "world" of
+her projects orbiting the monogram (click one for its detail panel), followed by about, the project
+index, figures, experience and contact — plus a case study per project.
 
 ## Develop
 
@@ -14,15 +14,16 @@ Gates: `pnpm lint`, `pnpm typecheck`, `pnpm build`.
 
 ## Edit content
 
-All copy lives in `src/data/content.ts`. Facts come from Ruth's résumé; the Shopify storefronts
-were supplied separately and are marked as such. Don't add claims neither source makes.
+All copy lives in `src/data/content.ts`. Facts come from Ruth's résumé; projects marked
+`supplied: true` (Manhattan Associates, Shopify storefronts) were added separately and state only
+public facts about the product. Don't add claims neither source makes.
 
-- **Projects** — `PROJECTS` drives the index, the hero rotation and `/work/[slug]` pages.
-- **Storefronts** — `STOREFRONTS`; screenshots live in `public/stores/` (1440×900 WebP of each
-  public homepage).
-- **Python** — `PYTHON_WORK`, each entry linked to the case study it comes from.
-- **Covers** — `public/covers/airrange.webp` is a screenshot of airrange.io; the other covers are
-  drawn in CSS (`src/components/covers/project-cover.tsx`).
+- **Projects** — `PROJECTS` drives the orbit, the index and the `/work/[slug]` pages. The two Python
+  projects (real-time search, personalization & AI) come from the Albertsons work on the résumé.
+- **Storefronts** — `STOREFRONTS`, shown on the Shopify case study; screenshots live in
+  `public/stores/` (1440×900 WebP of each public homepage).
+- **Covers** — `public/covers/` holds screenshots of airrange.io and manh.com; the Shopify cover is a
+  collage of the stores; the rest are drawn in CSS (`src/components/covers/project-cover.tsx`).
 
 There is intentionally no résumé download (the PDF carries a phone number).
 

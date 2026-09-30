@@ -56,7 +56,7 @@ export async function GET() {
             paddingTop: 20,
           }}
         >
-          <span>Design Engineer · Full Stack</span>
+          <span>Full Stack Developer</span>
           <span>Madrid, Spain</span>
         </div>
       </div>

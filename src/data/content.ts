@@ -1,11 +1,20 @@
-// Single source of copy. Facts come from Ruth's résumé, except STOREFRONTS, which the requester
-// supplied (the Shopify work is not on the résumé). Do not add claims neither source makes.
+// Single source of copy. Facts come from Ruth's résumé, except where a project is marked
+// `supplied` (the requester's addition, not on the résumé): for those, only public facts about the
+// product are stated — no role, dates or results. Do not add claims neither source makes.
 
 export type Link = { label: string; href: string };
 export type Highlight = { lead: string; text: string };
 export type Figure = { value: number; prefix?: string; suffix?: string; label: string };
 export type Segment = { text: string; em?: boolean };
-export type CoverKind = "airrange" | "albertsons" | "components" | "touch";
+export type CoverKind =
+  | "airrange"
+  | "manhattan"
+  | "albertsons"
+  | "search"
+  | "personalization"
+  | "components"
+  | "touch"
+  | "shopify";
 
 export type Project = {
   slug: string;
@@ -13,11 +22,11 @@ export type Project = {
   title: string;
   titleItalic?: string;
   context: string;
-  company: string;
-  role: string;
-  period: string;
-  years: string;
-  location: string;
+  company?: string;
+  role?: string;
+  period?: string;
+  years?: string;
+  location?: string;
   summary: string;
   description: string;
   link?: Link;
@@ -25,6 +34,10 @@ export type Project = {
   highlights: Highlight[];
   figures: Figure[];
   cover: CoverKind;
+  /** Added by the requester; not on the résumé. */
+  supplied?: boolean;
+  /** Renders the storefront grid on the case study. */
+  stores?: boolean;
 };
 
 export type Storefront = {
@@ -35,17 +48,8 @@ export type Storefront = {
   url: string;
   domain: string;
   summary: string;
-  stack: string[];
   image: string;
-  /** object-position for portrait crops of the 1440×900 screenshot. */
-  focus: string;
 };
-
-export type PythonService = { title: string; text: string; stack: string[]; project: string };
-
-export type HeroSlide =
-  | { key: string; title: string; kind: "project"; cover: CoverKind; index: string }
-  | { key: string; title: string; kind: "store"; image: string; focus: string };
 
 export type Discipline = { index: string; title: string; items: string[] };
 export type Role = { period: string; org: string; role: string; location: string };
@@ -54,22 +58,22 @@ export const PROFILE = {
   name: "Ruth Ramos",
   firstName: "Ruth",
   lastName: "Ramos",
-  role: "Design Engineer",
-  stackLine: "Full stack — React, Node.js, Python",
-  title: "Ruth Ramos — Design Engineer & Full Stack Developer",
+  role: "Full Stack Developer",
+  stackLine: "React · Node.js · Python",
+  title: "Ruth Ramos — Full Stack Developer",
   description:
-    "Ruth Ramos is a design engineer and full stack developer in Madrid, crafting customer-facing products end to end — from React interfaces to the services that keep them fast.",
+    "Ruth Ramos is a full stack developer in Madrid building customer-facing products end to end — React and Next.js interfaces, Node.js and Python services, and the cloud that keeps them fast.",
   location: "Madrid, Spain",
   city: "Madrid",
   timeZone: "Europe/Madrid",
   availability: "Open to new roles",
   email: "hrramosruth@gmail.com",
   statement: [
-    { text: "I craft customer-facing products end to end — the " },
+    { text: "I build customer-facing products end to end — the " },
     { text: "interfaces", em: true },
     { text: " people touch, the " },
-    { text: "component systems", em: true },
-    { text: " teams build on, and the services that keep them fast. From a no-code SaaS platform to one of America's largest retailers" },
+    { text: "services", em: true },
+    { text: " and data behind them, and the cloud that keeps them fast. From a no-code SaaS platform to one of America's largest retailers" },
   ] satisfies Segment[],
 } as const;
 
@@ -82,23 +86,23 @@ export const LINKS = {
 export const DISCIPLINES: Discipline[] = [
   {
     index: "00 — 1",
-    title: "Interface engineering",
-    items: ["React, Next.js, Tailwind CSS", "Shopify & Hydrogen storefronts", "Responsive & touch interfaces", "User flows & UI consistency"],
+    title: "Frontend",
+    items: ["React, Next.js, Redux", "Tailwind CSS, Material UI", "Reusable component libraries", "Shopify & Hydrogen storefronts"],
   },
   {
     index: "00 — 2",
-    title: "Component systems",
-    items: ["Reusable React libraries", "Storybook & TypeScript patterns", "Adopted across the team"],
+    title: "Backend & Python",
+    items: ["Python — FastAPI, Django", "Node.js — Express, Nest.js", "REST & GraphQL APIs", "JWT & OAuth 2.0"],
   },
   {
     index: "00 — 3",
-    title: "Data visualization",
-    items: ["Three.js & D3.js", "Interactive dashboards", "A/B-tested experiences"],
+    title: "Data & search",
+    items: ["PostgreSQL, MongoDB, Redis", "Kafka & Elasticsearch", "Three.js & D3.js visualization"],
   },
   {
     index: "00 — 4",
-    title: "Full stack & cloud",
-    items: ["Python — FastAPI, Django", "Node.js, GraphQL, Kafka", "AWS, Docker, Kubernetes", "OpenAI API features"],
+    title: "Cloud & AI",
+    items: ["AWS, Docker, Kubernetes", "CI/CD, Datadog, Sentry", "OpenAI API features"],
   },
 ];
 
@@ -115,6 +119,17 @@ export const EXPERIENCE: Role[] = [
   { period: "2022 — 2023", org: "EXPIEY", role: "Web Developer", location: "Madrid · On-site" },
   { period: "2020 — 2022", org: "UNED", role: "Bachelor of Computer Science", location: "Madrid" },
 ];
+
+const ALBERTSONS_DESCRIPTION =
+  "Enterprise digital retail and e-commerce initiative for one of the largest food and drug retailers in the United States, spanning online grocery, loyalty, pharmacy, and in-store customer experiences.";
+const ALBERTSONS_LINK = { label: "albertsonscompanies.com", href: "https://www.albertsonscompanies.com" };
+const SCALATER = {
+  company: "Scalater Dev",
+  role: "Full Stack Developer",
+  period: "Sep 2023 — Jul 2024",
+  years: "2023 — 24",
+  location: "US · Remote",
+};
 
 export const PROJECTS: Project[] = [
   {
@@ -158,33 +173,37 @@ export const PROJECTS: Project[] = [
     cover: "airrange",
   },
   {
-    slug: "albertsons",
+    // Supplied by the requester. Only public facts about the product are stated.
+    slug: "manhattan-associates",
     index: "02",
+    title: "Manhattan",
+    titleItalic: "Associates",
+    context: "Warehouse management",
+    summary: "Work on the warehouse-management platform that runs distribution for global retailers and logistics providers.",
+    description:
+      "Manhattan Associates builds supply chain and commerce software. Manhattan Active® is its unified cloud platform, with warehouse management at its core for retailers, wholesalers and logistics providers.",
+    link: { label: "manh.com", href: "https://www.manh.com" },
+    stack: [],
+    highlights: [],
+    figures: [],
+    cover: "manhattan",
+    supplied: true,
+  },
+  {
+    slug: "albertsons",
+    index: "03",
     title: "Albertsons",
     context: "Retail e-commerce",
-    company: "Scalater Dev",
-    role: "Full Stack Developer",
-    period: "Sep 2023 — Jul 2024",
-    years: "2023 — 24",
-    location: "US · Remote",
+    ...SCALATER,
     summary:
-      "Catalog, search, checkout and personalised offers for one of the largest food and drug retailers in the United States — with query latency cut by two thirds.",
-    description:
-      "Enterprise digital retail and e-commerce initiative for one of the largest food and drug retailers in the United States, spanning online grocery, loyalty, pharmacy, and in-store customer experiences.",
-    link: { label: "albertsonscompanies.com", href: "https://www.albertsonscompanies.com" },
-    stack: ["React", "Next.js", "Node.js", "Django", "FastAPI", "Kafka", "Elasticsearch", "Redis", "PostgreSQL", "AWS"],
+      "Cart, checkout and digital coupons for one of the largest food and drug retailers in the United States — with query latency cut by two thirds.",
+    description: ALBERTSONS_DESCRIPTION,
+    link: ALBERTSONS_LINK,
+    stack: ["React", "Next.js", "Node.js", "Redis", "PostgreSQL", "MySQL", "AWS"],
     highlights: [
-      {
-        lead: "Catalog & search",
-        text: "Built product catalog, search, and category browsing in React and Next.js backed by Node.js (Express) APIs, with Python services indexing product, price, and inventory changes from Kafka into Elasticsearch for real-time search and autocomplete.",
-      },
       {
         lead: "Cart & checkout",
         text: "Developed cart, pricing, promotions, and digital-coupon (“clip to card”) flows as React storefront features on Node.js services, with Redis caching for cart state and store-level stock availability.",
-      },
-      {
-        lead: "Personalization",
-        text: "Delivered personalized offers and product recommendations with Python (Django, FastAPI) services built on purchase and loyalty history, served to React pages through REST and GraphQL APIs.",
       },
       {
         lead: "Performance",
@@ -193,10 +212,6 @@ export const PROJECTS: Project[] = [
       {
         lead: "Experimentation & impact",
         text: "Increased conversion by 8%, user engagement by 12%, and overall revenue by 9% by shipping A/B test variants in React and analyzing results with Python ETL pipelines, and reduced production issues by 20% through stronger ETL validation, UAT, and release-readiness practices.",
-      },
-      {
-        lead: "AI & operations",
-        text: "Automated product-description and category-content generation with Python services on the OpenAI API, and maintained deployments on AWS (EC2, S3, RDS, Lambda, EKS) with Docker and automated pipelines.",
       },
     ],
     figures: [
@@ -208,8 +223,54 @@ export const PROJECTS: Project[] = [
     cover: "albertsons",
   },
   {
+    slug: "realtime-search",
+    index: "04",
+    title: "Real-time",
+    titleItalic: "search",
+    context: "Python · Albertsons",
+    ...SCALATER,
+    summary:
+      "Python services streaming product, price and inventory changes from Kafka into Elasticsearch, so search and autocomplete stay current across the catalog.",
+    description: ALBERTSONS_DESCRIPTION,
+    link: ALBERTSONS_LINK,
+    stack: ["Python", "Kafka", "Elasticsearch", "Node.js", "Express", "React", "Next.js"],
+    highlights: [
+      {
+        lead: "Catalog & search",
+        text: "Built product catalog, search, and category browsing in React and Next.js backed by Node.js (Express) APIs, with Python services indexing product, price, and inventory changes from Kafka into Elasticsearch for real-time search and autocomplete.",
+      },
+    ],
+    figures: [],
+    cover: "search",
+  },
+  {
+    slug: "personalization-ai",
+    index: "05",
+    title: "Personalization",
+    titleItalic: "& AI",
+    context: "Python · Albertsons",
+    ...SCALATER,
+    summary:
+      "Django and FastAPI services turning purchase and loyalty history into personalized offers — and AI-generated product content on the OpenAI API.",
+    description: ALBERTSONS_DESCRIPTION,
+    link: ALBERTSONS_LINK,
+    stack: ["Python", "Django", "FastAPI", "REST", "GraphQL", "OpenAI API", "AWS"],
+    highlights: [
+      {
+        lead: "Personalization",
+        text: "Delivered personalized offers and product recommendations with Python (Django, FastAPI) services built on purchase and loyalty history, served to React pages through REST and GraphQL APIs.",
+      },
+      {
+        lead: "AI & operations",
+        text: "Automated product-description and category-content generation with Python services on the OpenAI API, and maintained deployments on AWS (EC2, S3, RDS, Lambda, EKS) with Docker and automated pipelines.",
+      },
+    ],
+    figures: [],
+    cover: "personalization",
+  },
+  {
     slug: "component-systems",
-    index: "03",
+    index: "06",
     title: "Component",
     titleItalic: "systems",
     context: "Platform craft",
@@ -237,7 +298,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "touch-interfaces",
-    index: "04",
+    index: "07",
     title: "Touch",
     titleItalic: "interfaces",
     context: "Web & touch",
@@ -271,6 +332,23 @@ export const PROJECTS: Project[] = [
     figures: [],
     cover: "touch",
   },
+  {
+    // Supplied by the requester. Only public facts about each store are stated.
+    slug: "shopify-storefronts",
+    index: "08",
+    title: "Shopify",
+    titleItalic: "storefronts",
+    context: "Commerce",
+    summary: "Storefronts on Shopify and Hydrogen for jewelry, fashion, haircare and tech-accessory brands.",
+    description:
+      "Five commerce brands on Shopify — including Varley's headless storefront on Shopify Hydrogen and React, and Shoplift, the conversion-optimization platform built for Shopify merchants.",
+    stack: ["Shopify", "Shopify Hydrogen", "React"],
+    highlights: [],
+    figures: [],
+    cover: "shopify",
+    supplied: true,
+    stores: true,
+  },
 ];
 
 // Supplied by the requester. Summaries describe each brand as its own site does; the platform line
@@ -284,21 +362,17 @@ export const STOREFRONTS: Storefront[] = [
     url: "https://mejuri.com",
     domain: "mejuri.com",
     summary: "Modern fine-jewelry e-commerce built around storytelling and everyday luxury — jewelry you can live in.",
-    stack: ["Shopify"],
     image: "/stores/mejuri.webp",
-    focus: "20% 50%",
   },
   {
     slug: "varley",
     name: "Varley",
     category: "Fashion",
-    platform: "Shopify Hydrogen",
+    platform: "Shopify Hydrogen · React",
     url: "https://www.varley.com",
     domain: "varley.com",
     summary: "An elevated everyday wardrobe rooted in movement, sold through a headless storefront.",
-    stack: ["Shopify Hydrogen", "React"],
     image: "/stores/varley.webp",
-    focus: "50% 50%",
   },
   {
     slug: "curlsmith",
@@ -308,9 +382,7 @@ export const STOREFRONTS: Storefront[] = [
     url: "https://curlsmith.com",
     domain: "curlsmith.com",
     summary: "The first gourmet haircare brand created specifically for curls.",
-    stack: ["Shopify"],
     image: "/stores/curlsmith.webp",
-    focus: "90% 50%",
   },
   {
     slug: "mous",
@@ -320,9 +392,7 @@ export const STOREFRONTS: Storefront[] = [
     url: "https://www.mous.co",
     domain: "mous.co",
     summary: "Protective phone cases, bags and device accessories — made to match, built to last.",
-    stack: ["Shopify"],
     image: "/stores/mous.webp",
-    focus: "76% 50%",
   },
   {
     slug: "shoplift",
@@ -332,66 +402,13 @@ export const STOREFRONTS: Storefront[] = [
     url: "https://shoplift.ai",
     domain: "shoplift.ai",
     summary: "The CRO platform purpose-built for Shopify — A/B testing merchants can launch without a developer.",
-    stack: ["Shopify", "A/B testing"],
     image: "/stores/shoplift.webp",
-    focus: "50% 50%",
   },
 ];
 
-// Ruth's Python work, as her résumé describes it, each linked to the case study it comes from.
-export const PYTHON_WORK: PythonService[] = [
-  {
-    title: "Real-time search indexing",
-    text: "Python services indexing product, price, and inventory changes from Kafka into Elasticsearch for real-time search and autocomplete.",
-    stack: ["Python", "Kafka", "Elasticsearch"],
-    project: "albertsons",
-  },
-  {
-    title: "Personalized offers",
-    text: "Personalized offers and product recommendations from Django and FastAPI services built on purchase and loyalty history, served to React pages through REST and GraphQL APIs.",
-    stack: ["Django", "FastAPI", "GraphQL"],
-    project: "albertsons",
-  },
-  {
-    title: "AI content generation",
-    text: "Automated product-description and category-content generation with Python services on the OpenAI API.",
-    stack: ["Python", "OpenAI API"],
-    project: "albertsons",
-  },
-  {
-    title: "Experimentation pipelines",
-    text: "Python ETL pipelines analyzing A/B tests behind an 8% conversion lift, 12% more engagement and 9% more revenue — with stronger ETL validation cutting production issues by 20%.",
-    stack: ["Python", "ETL", "A/B testing"],
-    project: "albertsons",
-  },
-  {
-    title: "Spreadsheet-app APIs",
-    text: "FastAPI services within reusable full-stack modules that accelerated spreadsheet-driven applications and web workflows.",
-    stack: ["FastAPI", "GraphQL", "MongoDB"],
-    project: "airrange",
-  },
-];
-
-const store = (slug: string): HeroSlide => {
-  const s = STOREFRONTS.find((item) => item.slug === slug) as Storefront;
-  return { key: s.slug, title: s.name, kind: "store", image: s.image, focus: s.focus };
-};
-const project = (slug: string): HeroSlide => {
-  const p = PROJECTS.find((item) => item.slug === slug) as Project;
-  return { key: p.slug, title: [p.title, p.titleItalic].filter(Boolean).join(" "), kind: "project", cover: p.cover, index: p.index };
-};
-
-/** The hero frame's rotation: product work interleaved with storefronts. */
-export const HERO_SLIDES: HeroSlide[] = [
-  store("mejuri"),
-  project("airrange"),
-  store("varley"),
-  project("albertsons"),
-  store("curlsmith"),
-  project("component-systems"),
-  store("mous"),
-  project("touch-interfaces"),
-];
+export function projectTitle(project: Project) {
+  return [project.title, project.titleItalic].filter(Boolean).join(" ");
+}
 
 export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((project) => project.slug === slug);

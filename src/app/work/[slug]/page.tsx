@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { NextProject } from "@/components/case/next-project";
+import { StoreGrid } from "@/components/case/store-grid";
 import { ProjectCover } from "@/components/covers/project-cover";
 import { Counter } from "@/components/motion/counter";
 import { InView } from "@/components/motion/in-view";
 import { SplitText } from "@/components/motion/split-text";
-import { LINKS, PROFILE, PROJECTS, getProject, nextProject } from "@/data/content";
+import { LINKS, PROFILE, PROJECTS, getProject, nextProject, projectTitle } from "@/data/content";
 import { OG_IMAGE } from "@/lib/og";
 import { SITE_URL } from "@/lib/site-url";
 
@@ -21,7 +22,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const project = getProject((await params).slug);
   if (!project) return {};
-  const title = [project.title, project.titleItalic].filter(Boolean).join(" ");
+  const title = projectTitle(project);
   const url = `${SITE_URL}/work/${project.slug}/`;
   return {
     title,
@@ -34,16 +35,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function CasePage({ params }: Params) {
   const project = getProject((await params).slug);
   if (!project) notFound();
-  const title = [project.title, project.titleItalic].filter(Boolean).join(" ");
   const total = String(PROJECTS.length).padStart(2, "0");
 
-  const meta: [string, React.ReactNode][] = [
-    ["Role", project.role],
-    ["Company", project.company],
-    ["Period", project.period],
-    ["Location", project.location],
-    ["Stack", project.stack.join(", ")],
-  ];
+  const meta: [string, React.ReactNode][] = [];
+  if (project.role) meta.push(["Role", project.role]);
+  if (project.company) meta.push(["Company", project.company]);
+  if (project.period) meta.push(["Period", project.period]);
+  if (project.location) meta.push(["Location", project.location]);
+  meta.push(["Focus", project.context]);
+  if (project.stack.length > 0) meta.push(["Stack", project.stack.join(", ")]);
   if (project.link) {
     meta.push([
       "Live",
@@ -52,6 +52,8 @@ export default async function CasePage({ params }: Params) {
       </a>,
     ]);
   }
+
+  const hasWork = project.highlights.length > 0 || project.figures.length > 0 || project.stores;
 
   return (
     <main id="main" className="case">
@@ -67,7 +69,7 @@ export default async function CasePage({ params }: Params) {
         </p>
         <InView>
           <h1 id="case-title" className="case-title display">
-            <span className="sr-only">{title}</span>
+            <span className="sr-only">{projectTitle(project)}</span>
             <SplitText text={project.title} delay={0.45} />
             {project.titleItalic ? <SplitText text={project.titleItalic} className="case-title-italic" delay={0.6} /> : null}
           </h1>
@@ -94,33 +96,47 @@ export default async function CasePage({ params }: Params) {
         </div>
       </section>
 
-      <section className="section case-work" data-theme="ink" aria-labelledby="case-work-title">
-        <h2 id="case-work-title" className="label ui">
-          What I built
-        </h2>
-        <ol className="case-highlights">
-          {project.highlights.map((highlight, i) => (
-            <li key={highlight.lead}>
-              <span className="ui muted">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="display">{highlight.lead}</h3>
-              <p className="muted">{highlight.text}</p>
-            </li>
-          ))}
-        </ol>
-        {project.figures.length > 0 ? (
-          <>
-            <h2 className="label ui case-figures-title">Impact</h2>
-            <ul className="figures">
-              {project.figures.map((figure) => (
-                <li key={figure.label}>
-                  <Counter figure={figure} className="display" />
-                  <span className="muted">{figure.label}</span>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : null}
-      </section>
+      {hasWork ? (
+        <section className="section case-work" data-theme="ink" aria-labelledby="case-work-title">
+          {project.stores ? (
+            <>
+              <h2 id="case-work-title" className="label ui">
+                The stores
+              </h2>
+              <StoreGrid />
+            </>
+          ) : null}
+          {project.highlights.length > 0 ? (
+            <>
+              <h2 id={project.stores ? undefined : "case-work-title"} className="label ui">
+                What I built
+              </h2>
+              <ol className="case-highlights">
+                {project.highlights.map((highlight, i) => (
+                  <li key={highlight.lead}>
+                    <span className="ui muted">{String(i + 1).padStart(2, "0")}</span>
+                    <h3 className="display">{highlight.lead}</h3>
+                    <p className="muted">{highlight.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </>
+          ) : null}
+          {project.figures.length > 0 ? (
+            <>
+              <h2 className="label ui case-figures-title">Impact</h2>
+              <ul className="figures">
+                {project.figures.map((figure) => (
+                  <li key={figure.label}>
+                    <Counter figure={figure} className="display" />
+                    <span className="muted">{figure.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+        </section>
+      ) : null}
 
       <NextProject project={nextProject(project.slug)} />
 

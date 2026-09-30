@@ -108,6 +108,57 @@
   margin-top: 18vh;
 }
 
+/* ---------- storefront grid (Shopify case) ---------- */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px 28px;
+  margin: 40px 0 14vh;
+}
+
+.store-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.store-tile-shot {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.store-tile-shot .cover img {
+  transition: transform 1.2s var(--ease);
+}
+
+.store-tile:hover .store-tile-shot .cover img {
+  transform: scale(1.04);
+}
+
+.store-tile-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.store-tile-name {
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.store-tile-summary {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.store-tile-visit {
+  align-self: flex-start;
+}
+
 /* ---------- next project ---------- */
 .next {
   padding: 20vh var(--gut) 12vh;
@@ -174,6 +225,12 @@
   font-size: clamp(24px, 2.6vw, 40px);
 }
 
+@media (min-width: 861px) and (max-width: 1180px) {
+  .store-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 860px) {
   .case-cover {
     aspect-ratio: 4 / 3;
@@ -187,6 +244,10 @@
   .case-highlights li {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .store-grid {
+    grid-template-columns: 1fr;
   }
 
   .next-meta {

@@ -1,9 +1,7 @@
 import { About } from "@/components/home/about";
 import { Contact } from "@/components/home/contact";
-import { Hero } from "@/components/home/hero";
 import { Numbers } from "@/components/home/numbers";
-import { PythonWork } from "@/components/home/python-work";
-import { Storefronts } from "@/components/home/storefronts";
+import { ProjectWorld } from "@/components/home/project-world";
 import { WorkIndex } from "@/components/home/work-index";
 import { LINKS, PROFILE } from "@/data/content";
 import { SITE_URL } from "@/lib/site-url";
@@ -12,7 +10,7 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: PROFILE.name,
-  jobTitle: "Design Engineer & Full Stack Developer",
+  jobTitle: PROFILE.role,
   url: `${SITE_URL}/`,
   email: LINKS.email.href,
   address: { "@type": "PostalAddress", addressLocality: "Madrid", addressCountry: "ES" },
@@ -24,11 +22,9 @@ export default function Page() {
   return (
     <main id="main">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
-      <Hero />
+      <ProjectWorld />
       <About />
       <WorkIndex />
-      <Storefronts />
-      <PythonWork />
       <Numbers />
       <Contact />
     </main>

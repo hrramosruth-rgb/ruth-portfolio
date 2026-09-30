@@ -72,7 +72,7 @@ export function WorkIndex() {
                 {project.titleItalic ? <em> {project.titleItalic}</em> : null}
               </span>
               <span className="ui muted work-context">{project.context}</span>
-              <span className="ui muted work-years">{project.years}</span>
+              <span className="ui muted work-years">{project.years ?? ""}</span>
               <span className="work-thumb">
                 <ProjectCover kind={project.cover} number={project.index} />
               </span>

@@ -5,5 +5,5 @@ export const OG_IMAGE = {
   url: `${SITE_URL}/og.png`,
   width: 1200,
   height: 630,
-  alt: "Ruth Ramos — Design Engineer & Full Stack Developer, Madrid",
+  alt: "Ruth Ramos — Full Stack Developer, Madrid",
 };
