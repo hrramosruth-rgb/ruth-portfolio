@@ -7,6 +7,7 @@ import { Counter } from "@/components/motion/counter";
 import { InView } from "@/components/motion/in-view";
 import { SplitText } from "@/components/motion/split-text";
 import { LINKS, PROFILE, PROJECTS, getProject, nextProject } from "@/data/content";
+import { OG_IMAGE } from "@/lib/og";
 import { SITE_URL } from "@/lib/site-url";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title,
     description: project.summary,
     alternates: { canonical: url },
-    openGraph: { title: `${title} — ${PROFILE.name}`, description: project.summary, url, type: "article" },
+    openGraph: { title: `${title} — ${PROFILE.name}`, description: project.summary, url, type: "article", images: [OG_IMAGE] },
   };
 }
 

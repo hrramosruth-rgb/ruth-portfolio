@@ -1,11 +1,13 @@
 import { ImageResponse } from "next/og";
 import { MONOGRAM_MIRROR, MONOGRAM_PATH } from "@/components/brand/monogram-paths";
 
-export const size = { width: 64, height: 64 };
-export const contentType = "image/png";
+// Served as a plain /icon.png file (not the `icon.tsx` convention), so the static export keeps
+// the GitHub Pages base path in its URL. Linked from the root layout's metadata.
 export const dynamic = "force-static";
 
-export default function Icon() {
+const size = { width: 64, height: 64 };
+
+export function GET() {
   return new ImageResponse(
     (
       <div

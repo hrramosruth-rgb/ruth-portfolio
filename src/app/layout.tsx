@@ -6,6 +6,8 @@ import { Loader } from "@/components/motion/loader";
 import { SectionTheme } from "@/components/motion/section-theme";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { PROFILE } from "@/data/content";
+import { asset } from "@/lib/asset";
+import { OG_IMAGE } from "@/lib/og";
 import { SITE_URL } from "@/lib/site-url";
 import "@/styles/tokens.css";
 import "@/styles/chrome.css";
@@ -28,11 +30,12 @@ const inter = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  // Origin only: Next adds the deploy base path to metadata images itself.
+  // Origin only; the icon and share-image URLs below carry the deploy base path themselves.
   metadataBase: new URL(new URL(SITE_URL).origin),
   title: { default: PROFILE.title, template: `%s — ${PROFILE.name}` },
   description: PROFILE.description,
   alternates: { canonical: `${SITE_URL}/` },
+  icons: { icon: [{ url: asset("/icon.png"), type: "image/png", sizes: "64x64" }] },
   openGraph: {
     title: PROFILE.title,
     description: PROFILE.description,
@@ -40,8 +43,9 @@ export const metadata: Metadata = {
     siteName: PROFILE.name,
     locale: "en_US",
     type: "profile",
+    images: [OG_IMAGE],
   },
-  twitter: { card: "summary_large_image", title: PROFILE.title, description: PROFILE.description },
+  twitter: { card: "summary_large_image", title: PROFILE.title, description: PROFILE.description, images: [OG_IMAGE] },
   robots: { index: true, follow: true },
 };
 

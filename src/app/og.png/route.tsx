@@ -3,14 +3,15 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { MONOGRAM_MIRROR, MONOGRAM_PATH } from "@/components/brand/monogram-paths";
 
-export const alt = "Ruth Ramos — Design Engineer & Full Stack Developer, Madrid";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+// Served as a plain /og.png file (not the `opengraph-image.tsx` convention), so the static export
+// keeps the GitHub Pages base path in its URL. Referenced through OG_IMAGE in src/lib/og.ts.
 export const dynamic = "force-static";
+
+const size = { width: 1200, height: 630 };
 
 const font = (file: string) => readFile(join(process.cwd(), "assets/fonts", file));
 
-export default async function OpengraphImage() {
+export async function GET() {
   const [roman, italic] = await Promise.all([
     font("BodoniModa-96-Regular.ttf"),
     font("BodoniModa-96-Italic.ttf"),

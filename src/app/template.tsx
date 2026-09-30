@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Monogram } from "@/components/brand/monogram";
 
@@ -10,10 +11,12 @@ declare global {
 }
 
 /**
- * Re-mounts on every navigation. After the first page (which has the loader), each client-side
- * navigation reveals the new page by lifting a paper curtain.
+ * After the first page (which has the loader), every client-side navigation reveals the new page
+ * by lifting a paper curtain. The curtain is keyed on the pathname because this root template is
+ * not re-mounted between pages that share a segment (e.g. /work/a → /work/b).
  */
 export default function Template({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const curtain = typeof window !== "undefined" && window.__rrHydrated === true;
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
       {curtain ? (
-        <div className="curtain" aria-hidden="true">
+        <div key={pathname} className="curtain" aria-hidden="true">
           <span className="curtain-mark">
             <Monogram />
           </span>
