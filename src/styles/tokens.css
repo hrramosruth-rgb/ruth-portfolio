@@ -1,0 +1,176 @@
+/* Design tokens. Sections switch the page between paper and ink (see SectionTheme). */
+:root {
+  --paper: #f1eee8;
+  --ink: #111010;
+  --rouge: #8c1c2b;
+  --muted-paper: #6e6963;
+  --muted-ink: #8e8984;
+  --ease: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+  --gut: clamp(18px, 3vw, 48px);
+  --display: var(--font-bodoni), "Bodoni 72", Didot, serif;
+  --sans: var(--font-inter), system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--paper);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --mu: var(--muted-paper);
+  --line: rgba(17, 16, 16, 0.14);
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  transition:
+    background-color 1s var(--ease),
+    color 1s var(--ease);
+}
+
+body.is-ink {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --mu: var(--muted-ink);
+  --line: rgba(241, 238, 232, 0.14);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--rouge);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 6px;
+}
+
+/* ---------- type ---------- */
+.ui {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+
+.muted {
+  color: var(--mu);
+}
+
+.rouge {
+  color: var(--rouge);
+}
+
+em,
+.italic {
+  font-style: italic;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--mu);
+}
+
+.label::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- reveals (html.is-ready is set once the loader has lifted) ---------- */
+.split {
+  display: block;
+  overflow: hidden;
+  padding: 0 0.04em 0.07em;
+}
+
+.split .ch {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform 1.4s var(--ease);
+}
+
+.is-ready .split .ch,
+.split.is-in .ch {
+  transform: none;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 1.2s 0.7s var(--ease),
+    transform 1.2s 0.7s var(--ease);
+}
+
+.is-ready .fade-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .split .ch,
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
