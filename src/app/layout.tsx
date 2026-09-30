@@ -57,7 +57,7 @@ export const viewport: Viewport = {
 const BOOT = `(function(){var d=document.documentElement;try{if(sessionStorage.getItem("rr-loaded")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("is-loaded","is-ready")}catch(e){d.classList.add("is-loaded","is-ready")}})();`;
 
 // Without JavaScript every reveal is shown in its final state.
-const NO_SCRIPT = `.loader{display:none}.split .ch,.fade-in,.word,.frame,.slide:first-child{opacity:1!important;transform:none!important;clip-path:none!important}`;
+const NO_SCRIPT = `.loader{display:none}.split .ch,.fade-in,.word,.hero-frame{opacity:1!important;transform:none!important;clip-path:none!important}.hero-frame{transform:translate(-50%,-50%)!important}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
