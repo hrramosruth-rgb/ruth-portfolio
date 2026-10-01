@@ -94,7 +94,8 @@
 }
 
 .cover--albertsons {
-  background: var(--ink);
+  --cover-bg: var(--ink);
+  background: var(--cover-bg);
   color: var(--paper);
 }
 
@@ -138,7 +139,8 @@
 }
 
 .cover--search {
-  background: var(--paper);
+  --cover-bg: var(--paper);
+  background: var(--cover-bg);
   color: var(--ink);
 }
 
@@ -203,7 +205,8 @@
 }
 
 .cover--personalization {
-  background: #2a1418;
+  --cover-bg: #2a1418;
+  background: var(--cover-bg);
   color: var(--paper);
 }
 
@@ -268,7 +271,8 @@
 }
 
 .cover--components {
-  background: #e6e1d9;
+  --cover-bg: #e6e1d9;
+  background: var(--cover-bg);
   color: var(--ink);
 }
 
@@ -357,7 +361,8 @@
 }
 
 .cover--touch {
-  background: #5e1420;
+  --cover-bg: #5e1420;
+  background: var(--cover-bg);
   color: var(--paper);
 }
 

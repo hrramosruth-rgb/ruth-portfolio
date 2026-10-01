@@ -1,53 +1,195 @@
 /* ==========================================================================
-   Showcase — the landing carousel
+   Showcase — the landing page: full-screen project pictures, story in front
    ========================================================================== */
 
 @property --tone {
   syntax: "<color>";
   inherits: true;
-  initial-value: #3a55d6;
+  initial-value: #2b3f9e;
 }
 
 .sc {
-  --stage-h: min(60vh, 600px);
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 24px;
   min-height: 100svh;
-  padding: 100px var(--gut) 28px;
+  padding: 100px var(--gut) 26px;
   overflow: hidden;
   background: var(--ink);
   color: var(--paper);
-  transition: --tone 1.6s var(--ease);
+  transition: --tone 1.8s var(--ease);
 }
 
 .sc .muted {
-  color: var(--muted-ink);
+  color: rgba(241, 238, 232, 0.6);
 }
 
-/* ---------- atmosphere ---------- */
-.sc-glow {
+/* ---------- full-screen pictures ---------- */
+.sc-bg {
   position: absolute;
-  inset: -20%;
-  background:
-    radial-gradient(38% 42% at 60% 52%, color-mix(in srgb, var(--tone) 30%, transparent), transparent 70%),
-    radial-gradient(28% 32% at 18% 82%, color-mix(in srgb, var(--tone) 12%, transparent), transparent 70%);
-  filter: blur(48px);
-  pointer-events: none;
-  animation: sc-breathe 14s ease-in-out infinite alternate;
+  inset: 0;
+  z-index: 0;
 }
 
-@keyframes sc-breathe {
+.sc-bg-inner {
+  position: absolute;
+  inset: 0;
+  transform: translateX(calc(var(--drag, 0px) * 0.12));
+  transition: transform 0.9s var(--ease);
+}
+
+.sc.is-dragging .sc-bg-inner {
+  transition: none;
+}
+
+.sc-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(0 0 0 100%);
+}
+
+.sc[data-dir="prev"] .sc-slide:not(.is-current, .is-leaving) {
+  clip-path: inset(0 100% 0 0);
+}
+
+.sc-slide.is-current {
+  z-index: 2;
+  clip-path: inset(0);
+  transition: clip-path 1.5s var(--ease-io);
+}
+
+.sc-slide.is-leaving {
+  z-index: 1;
+  clip-path: inset(0);
+}
+
+/* Enter: settle from a zoom. Leave: recede into the dark. */
+.sc-media {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.24);
+  transition: transform 2.2s var(--ease);
+}
+
+.sc-slide.is-current .sc-media {
+  transform: scale(1);
+}
+
+html:not(.is-ready) .sc-slide .sc-media {
+  transform: scale(1.24);
+}
+
+.sc-slide.is-leaving .sc-media {
+  transform: scale(0.9);
+  filter: brightness(0.25);
+  transition:
+    transform 1.5s var(--ease-io),
+    filter 1.5s var(--ease-io);
+}
+
+/* While shown: a slow drift (frozen as the slide leaves, so it never jumps). */
+.sc-drift {
+  position: absolute;
+  inset: 0;
+  transform-origin: 62% 46%;
+}
+
+.sc-slide.is-current .sc-drift,
+.sc-slide.is-leaving .sc-drift {
+  animation: sc-drift calc(var(--slide-ms, 7000ms) + 4s) linear both;
+}
+
+.sc-slide.is-leaving .sc-drift,
+.is-paused .sc-slide.is-current .sc-drift {
+  animation-play-state: paused;
+}
+
+@keyframes sc-drift {
   to {
-    transform: translate3d(-2%, 1.5%, 0) scale(1.06);
+    transform: scale(1.1) translate3d(-1.4%, -0.8%, 0);
   }
+}
+
+.sc-parallax {
+  position: absolute;
+  inset: -3%;
+  transform: translate3d(calc(var(--mx, 0) * -1%), calc(var(--my, 0) * -1%), 0);
+  transition: transform 1.4s var(--ease);
+}
+
+/* Screenshots fill the screen and dissolve into the dark behind the text; their own site menus are
+   cropped off the top so they never compete with ours. */
+.sc-bg .cover img {
+  object-position: 50% 0%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 44%, #000 78%);
+  mask-image: linear-gradient(90deg, transparent 44%, #000 78%);
+}
+
+.sc-bg .cover--shot img {
+  position: absolute;
+  left: 0;
+  top: -12%;
+  height: 114%;
+  filter: brightness(0.86) saturate(0.95);
+}
+
+.sc-bg .cover--shot,
+.sc-bg .cover--shopify {
+  background: var(--ink);
+}
+
+/* The storefront collage is framed on the right, like the posters. */
+.sc-bg .cover--shopify {
+  background: #141213;
+}
+
+.sc-bg .cover-collage {
+  inset: 16% 8vw 13% 42%;
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.75);
+}
+
+.sc-bg .cover-collage img {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Drawn covers become lit posters on the right; the screen stays dark around them. */
+.sc-bg .cover:has(> .cover-art) {
+  background: #141213;
+}
+
+.sc-bg .cover-art {
+  inset: 16% 8vw 13% auto;
+  height: auto;
+  margin: 0;
+  background: var(--cover-bg);
+  outline: 1px solid rgba(241, 238, 232, 0.08);
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.75);
+}
+
+.sc-bg .cover-number {
+  display: none;
+}
+
+.sc-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 70% at 0% 62%, color-mix(in srgb, var(--tone) 38%, transparent), transparent 72%),
+    linear-gradient(90deg, rgba(17, 16, 16, 0.94) 0%, rgba(17, 16, 16, 0.8) 26%, rgba(17, 16, 16, 0.38) 50%, rgba(17, 16, 16, 0) 70%),
+    linear-gradient(0deg, rgba(17, 16, 16, 0.92) 0%, rgba(17, 16, 16, 0) 30%),
+    linear-gradient(180deg, rgba(17, 16, 16, 0.85) 0%, rgba(17, 16, 16, 0.4) 14%, rgba(17, 16, 16, 0) 28%);
 }
 
 .sc-grain {
   position: absolute;
   inset: -50%;
-  opacity: 0.055;
+  z-index: 4;
+  opacity: 0.05;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: sc-grain 1.2s steps(6) infinite;
@@ -71,13 +213,13 @@
 /* ---------- caption ---------- */
 .sc-caption {
   position: relative;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
   align-items: baseline;
   gap: 24px;
   padding-bottom: 18px;
-  border-bottom: 1px solid rgba(241, 238, 232, 0.12);
+  border-bottom: 1px solid rgba(241, 238, 232, 0.14);
 }
 
 .sc-caption-name {
@@ -86,32 +228,22 @@
 }
 
 .sc-caption-status {
-  justify-self: end;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-/* ---------- layout ---------- */
-.sc-main {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  display: grid;
-  grid-template-columns: minmax(300px, 0.78fr) 1.5fr minmax(140px, 0.3fr);
-  align-items: center;
-  gap: 3vw;
-}
-
-/* No z-index or transform here: the title must blend with the stage behind it. */
+/* ---------- the story in front ---------- */
 .sc-copy {
+  position: relative;
+  z-index: 5;
+  align-self: center;
   display: flex;
   flex-direction: column;
   gap: 22px;
-  min-width: 0;
+  max-width: 620px;
 }
 
-/* ---------- rolling counter ---------- */
 .sc-count {
   display: flex;
   align-items: baseline;
@@ -140,18 +272,20 @@
   height: 1em;
 }
 
-/* ---------- title: letters rise in, the old ones rise out ---------- */
+.sc-meta {
+  margin-left: 14px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(241, 238, 232, 0.3);
+}
+
+/* Title: letters rise in, the old ones rise out. */
 .sc-title {
   position: relative;
-  z-index: 5;
-  color: var(--paper);
-  mix-blend-mode: difference;
-  font-size: clamp(52px, 5.8vw, 112px);
+  font-size: clamp(60px, 7.2vw, 138px);
   font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
-  pointer-events: none;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.25);
 }
 
 .sc-title-layer {
@@ -164,7 +298,6 @@
   top: 0;
 }
 
-/* Lines size to their text, so long titles run out over the stage (where the blend inverts them). */
 .sc-line {
   display: block;
   width: max-content;
@@ -173,7 +306,7 @@
 }
 
 .sc-line-italic {
-  padding-left: 0.5em;
+  padding-left: 0.6em;
   font-style: italic;
 }
 
@@ -188,7 +321,7 @@
 }
 
 .is-ready .sc-title-layer.is-in .ch {
-  animation: sc-letter-in 1.25s var(--ease) calc(0.28s + var(--i, 0) * 0.034s) both;
+  animation: sc-letter-in 1.3s var(--ease) calc(0.3s + var(--i, 0) * 0.034s) both;
 }
 
 .sc-title-layer.is-out .ch {
@@ -211,17 +344,27 @@
   }
 }
 
-/* ---------- meta, summary, peek label: rise on each change ---------- */
-.sc-meta {
-  color: var(--muted-ink);
+.sc-summary {
+  max-width: 480px;
+  color: rgba(241, 238, 232, 0.86);
+  font-size: 16.5px;
+  line-height: 1.65;
 }
 
-.sc-summary {
-  max-width: 380px;
-  min-height: calc(1.7em * 3);
-  color: rgba(241, 238, 232, 0.78);
-  font-size: 15px;
-  line-height: 1.7;
+.sc-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 520px;
+}
+
+.sc-stack li {
+  padding: 7px 13px;
+  border: 1px solid rgba(241, 238, 232, 0.24);
+  border-radius: 99px;
+  background: rgba(17, 16, 16, 0.28);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .sc-rise {
@@ -248,8 +391,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 26px;
-  margin-top: 6px;
+  gap: 24px;
+  margin-top: 4px;
 }
 
 .sc-cta {
@@ -322,13 +465,15 @@
 .sc-arrow {
   width: 54px;
   height: 54px;
-  border: 1px solid rgba(241, 238, 232, 0.28);
+  border: 1px solid rgba(241, 238, 232, 0.3);
   border-radius: 50%;
-  background: none;
+  background: rgba(17, 16, 16, 0.2);
   color: var(--paper);
   font: inherit;
   font-size: 18px;
   cursor: inherit;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   transition:
     background-color 0.45s var(--ease),
     color 0.45s var(--ease),
@@ -341,174 +486,64 @@
   color: var(--ink);
 }
 
-.sc-visit {
-  color: rgba(241, 238, 232, 0.78);
-}
-
-/* ---------- stage: wipe in, zoom settle; the old slide sinks back ---------- */
-.sc-stage {
-  position: relative;
-  height: var(--stage-h);
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
-  clip-path: inset(50% 0 50% 0);
-  transition: clip-path 1.6s var(--ease-io) 0.15s;
-}
-
-.is-ready .sc-stage {
-  clip-path: inset(0);
-}
-
-.sc-stage-inner {
-  position: absolute;
-  inset: 0;
-  transform: translateX(calc(var(--drag, 0px) * 0.25));
-  transition: transform 0.9s var(--ease);
-}
-
-.sc-stage.is-dragging .sc-stage-inner {
-  transition: none;
-}
-
-.sc-slide {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  clip-path: inset(0 0 0 100%);
-}
-
-.sc-stage[data-dir="prev"] .sc-slide:not(.is-current, .is-leaving) {
-  clip-path: inset(0 100% 0 0);
-}
-
-.sc-slide.is-current {
-  z-index: 2;
-  clip-path: inset(0);
-  transition: clip-path 1.4s var(--ease-io);
-}
-
-.sc-slide.is-leaving {
-  z-index: 1;
-  clip-path: inset(0);
-}
-
-.sc-media {
-  position: absolute;
-  inset: 0;
-  transform: scale(1.28);
-  transition: transform 1.9s var(--ease);
-}
-
-.sc-slide.is-current .sc-media {
-  transform: scale(1.04);
-}
-
-html:not(.is-ready) .sc-slide .sc-media {
-  transform: scale(1.28);
-}
-
-.sc-slide.is-leaving .sc-media {
-  transform: scale(0.9);
-  filter: brightness(0.3);
-  transition:
-    transform 1.4s var(--ease-io),
-    filter 1.4s var(--ease-io);
-}
-
-.sc-parallax {
-  position: absolute;
-  inset: 0;
-  transform: translate3d(calc(var(--mx, 0) * -1.2%), calc(var(--my, 0) * -1.2%), 0);
-  transition: transform 1.2s var(--ease);
-}
-
-.sc-stage-drag {
-  position: absolute;
-  left: 18px;
-  bottom: 16px;
-  z-index: 3;
-  color: var(--paper);
-  mix-blend-mode: difference;
-  opacity: 0.8;
-}
-
-/* ---------- next-project peek ---------- */
-.sc-peek {
-  align-self: end;
+.sc-links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 1vh;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--paper);
-  font: inherit;
-  text-align: left;
-  cursor: inherit;
+  gap: 10px;
 }
 
-.sc-peek-frame {
-  position: relative;
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-}
-
-.sc-peek-media {
-  position: absolute;
-  inset: 0;
-  animation: sc-peek 1.3s var(--ease-io) 0.1s both;
-}
-
-.sc-peek-media .cover {
-  filter: grayscale(1) brightness(0.7);
-  transition: filter 0.6s var(--ease);
-}
-
-.sc-peek:hover .sc-peek-media .cover {
-  filter: none;
-}
-
-@keyframes sc-peek {
-  from {
-    clip-path: inset(100% 0 0 0);
-  }
-  to {
-    clip-path: inset(0);
-  }
-}
-
-.sc-peek-label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* ---------- rail: every project, with the autoplay progress line ---------- */
+/* ---------- rail: a thumbnail for every project, with the progress line ---------- */
 .sc-rail {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 18px;
+  gap: 14px;
 }
 
 .sc-rail button {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px 10px;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 10px 12px;
   width: 100%;
-  padding: 0 0 4px;
+  padding: 0 0 2px;
   border: 0;
   background: none;
-  color: rgba(241, 238, 232, 0.45);
+  color: rgba(241, 238, 232, 0.5);
   font: inherit;
   text-align: left;
   cursor: inherit;
   transition: color 0.4s var(--ease);
+}
+
+.sc-thumb {
+  position: relative;
+  display: block;
+  width: 64px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  filter: grayscale(1) brightness(0.6);
+  transition: filter 0.5s var(--ease);
+}
+
+.sc-thumb .cover-number {
+  display: none;
+}
+
+.sc-rail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sc-rail-title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.35;
 }
 
 .sc-rail button:hover,
@@ -516,15 +551,9 @@ html:not(.is-ready) .sc-slide .sc-media {
   color: var(--paper);
 }
 
-.sc-rail button .muted {
-  color: inherit;
-  opacity: 0.6;
-}
-
-.sc-rail-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.sc-rail button:hover .sc-thumb,
+.sc-rail button.is-active .sc-thumb {
+  filter: none;
 }
 
 .sc-rail-line {
@@ -533,7 +562,7 @@ html:not(.is-ready) .sc-slide .sc-media {
   display: block;
   height: 1px;
   overflow: hidden;
-  background: rgba(241, 238, 232, 0.16);
+  background: rgba(241, 238, 232, 0.18);
 }
 
 .sc-progress {
@@ -541,9 +570,7 @@ html:not(.is-ready) .sc-slide .sc-media {
   inset: 0;
   background: var(--paper);
   transform-origin: left;
-  animation-name: sc-progress;
-  animation-timing-function: linear;
-  animation-fill-mode: both;
+  animation: sc-progress var(--slide-ms, 7000ms) linear both;
 }
 
 .is-paused .sc-progress,
@@ -560,16 +587,8 @@ html:not(.is-ready) .sc-progress {
   }
 }
 
-/* ---------- small screens ---------- */
-@media (max-width: 1100px) {
-  .sc-main {
-    grid-template-columns: minmax(280px, 0.9fr) 1.5fr;
-  }
-
-  .sc-peek {
-    display: none;
-  }
-
+/* ---------- smaller screens ---------- */
+@media (max-width: 1180px) {
   .sc-rail {
     grid-template-columns: repeat(4, 1fr);
     row-gap: 14px;
@@ -578,57 +597,79 @@ html:not(.is-ready) .sc-progress {
 
 @media (max-width: 760px) {
   .sc {
-    gap: 22px;
+    gap: 18px;
     padding-top: 84px;
   }
 
   .sc-caption {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 6px;
   }
 
-  .sc-caption-mid {
-    display: none;
+  .sc-copy {
+    align-self: end;
+    gap: 16px;
   }
 
-  .sc-caption-status {
-    justify-self: start;
+  .sc-bg .cover img {
+    object-position: 84% 0%;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
-  .sc-main {
-    grid-template-columns: 1fr;
-    gap: 26px;
+  .sc-bg .cover--shot img {
+    filter: brightness(0.7);
   }
 
-  .sc-stage {
-    order: -1;
-    height: auto;
-    aspect-ratio: 4 / 3;
+  .sc-bg .cover-collage {
+    inset: 19% 6% auto;
+    height: 30%;
+  }
+
+  .sc-bg .cover-art {
+    inset: 19% 0 auto;
+    height: 30%;
+    margin: 0 auto;
+  }
+
+  .sc-shade {
+    background:
+      radial-gradient(80% 50% at 0% 100%, color-mix(in srgb, var(--tone) 40%, transparent), transparent 72%),
+      linear-gradient(0deg, rgba(17, 16, 16, 0.96) 0%, rgba(17, 16, 16, 0.82) 42%, rgba(17, 16, 16, 0.1) 72%),
+      linear-gradient(180deg, rgba(17, 16, 16, 0.85) 0%, rgba(17, 16, 16, 0.35) 12%, rgba(17, 16, 16, 0) 22%);
   }
 
   .sc-title {
-    font-size: clamp(40px, 12vw, 64px);
+    font-size: clamp(44px, 12vw, 64px);
   }
 
   .sc-summary {
-    min-height: 0;
+    font-size: 15px;
+  }
+
+  .sc-stack li:nth-child(n + 5) {
+    display: none;
   }
 
   .sc-cta {
-    width: 100px;
-    height: 100px;
+    width: 96px;
+    height: 96px;
+  }
+
+  .sc-links {
+    display: none;
   }
 
   .sc-rail {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 6px;
+    padding-bottom: 4px;
   }
 
   .sc-rail li {
-    flex: 0 0 150px;
+    flex: 0 0 168px;
     scroll-snap-align: start;
   }
 }
