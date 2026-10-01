@@ -17,8 +17,8 @@ export type GlobeHandle = {
 };
 
 /**
- * A pearl globe with dotted continents (orthographic projection on a canvas). It turns slowly,
- * keeps a rose marker on Madrid, and can ease round to face Madrid on request.
+ * An Earth-blue globe with dotted continents (orthographic projection on a canvas). It turns slowly,
+ * keeps a green marker on Madrid, and can ease round to face Madrid on request.
  */
 export const Globe = forwardRef<GlobeHandle, { className?: string }>(function Globe({ className }, ref) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -60,18 +60,18 @@ export const Globe = forwardRef<GlobeHandle, { className?: string }>(function Gl
 
       // Atmosphere halo.
       const halo = ctx.createRadialGradient(c, c, r * 0.9, c, c, r * 1.16);
-      halo.addColorStop(0, "rgba(192, 80, 106, 0.22)");
-      halo.addColorStop(1, "rgba(192, 80, 106, 0)");
+      halo.addColorStop(0, "rgba(110, 170, 255, 0.28)");
+      halo.addColorStop(1, "rgba(110, 170, 255, 0)");
       ctx.fillStyle = halo;
       ctx.beginPath();
       ctx.arc(c, c, r * 1.16, 0, Math.PI * 2);
       ctx.fill();
 
-      // Pearl sphere: lit from the upper left.
+      // Ocean sphere: lit from the upper left, falling into night on the far side.
       const body = ctx.createRadialGradient(c - r * 0.38, c - r * 0.42, r * 0.08, c, c, r);
-      body.addColorStop(0, "#ffffff");
-      body.addColorStop(0.45, "#fbeef0");
-      body.addColorStop(1, "#e9c4cc");
+      body.addColorStop(0, "#3d7fb8");
+      body.addColorStop(0.5, "#174a78");
+      body.addColorStop(1, "#06172a");
       ctx.fillStyle = body;
       ctx.beginPath();
       ctx.arc(c, c, r, 0, Math.PI * 2);
@@ -93,8 +93,8 @@ export const Globe = forwardRef<GlobeHandle, { className?: string }>(function Gl
         const y = y0 * cosPhi - z0 * sinPhi;
         const z = y0 * sinPhi + z0 * cosPhi;
         if (z <= 0) continue;
-        ctx.globalAlpha = 0.25 + 0.7 * z;
-        ctx.fillStyle = "#5a2338";
+        ctx.globalAlpha = 0.2 + 0.8 * z;
+        ctx.fillStyle = "#e4efdc";
         ctx.fillRect(c + x * r - dot / 2, c - y * r - dot / 2, dot, dot);
       }
       ctx.globalAlpha = 1;
@@ -113,12 +113,12 @@ export const Globe = forwardRef<GlobeHandle, { className?: string }>(function Gl
           const px = c + x * r;
           const py = c - y * r;
           const pulse = (t % 120) / 120;
-          ctx.strokeStyle = `rgba(192, 80, 106, ${0.6 * (1 - pulse) * z})`;
+          ctx.strokeStyle = `rgba(61, 220, 132, ${0.7 * (1 - pulse) * z})`;
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.arc(px, py, dot * 3 + pulse * dot * 9, 0, Math.PI * 2);
           ctx.stroke();
-          ctx.fillStyle = `rgba(192, 80, 106, ${z})`;
+          ctx.fillStyle = `rgba(61, 220, 132, ${z})`;
           ctx.beginPath();
           ctx.arc(px, py, dot * 2.6, 0, Math.PI * 2);
           ctx.fill();
@@ -128,7 +128,7 @@ export const Globe = forwardRef<GlobeHandle, { className?: string }>(function Gl
       // Specular rim.
       const rim = ctx.createRadialGradient(c, c, r * 0.82, c, c, r);
       rim.addColorStop(0, "rgba(255, 255, 255, 0)");
-      rim.addColorStop(1, "rgba(255, 255, 255, 0.45)");
+      rim.addColorStop(1, "rgba(170, 210, 255, 0.35)");
       ctx.fillStyle = rim;
       ctx.beginPath();
       ctx.arc(c, c, r, 0, Math.PI * 2);

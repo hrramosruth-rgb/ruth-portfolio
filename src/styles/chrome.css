@@ -23,11 +23,20 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 20px var(--gut);
-  color: var(--fg);
-  background: linear-gradient(var(--bg) 55%, color-mix(in srgb, var(--bg) 0%, transparent));
-  transition:
-    color 1s var(--ease),
-    background 1s var(--ease);
+  --nav-bg: 251, 245, 243;
+  color: var(--wine);
+  background: linear-gradient(rgba(var(--nav-bg), 1) 55%, rgba(var(--nav-bg), 0));
+  transition: color 0.6s var(--ease);
+}
+
+/* The nav takes the colours of the section directly beneath it (see SectionTheme). */
+.nav-ink .nav {
+  --nav-bg: 241, 220, 220;
+}
+
+.nav-night .nav {
+  --nav-bg: 0, 0, 0;
+  color: #f4f1ec;
 }
 
 .nav-mark {

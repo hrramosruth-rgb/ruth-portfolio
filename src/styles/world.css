@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Ruth's World — the home page: projects orbiting a pearl globe
+   Ruth's World — the home page: projects orbiting a globe, in Eli's World colours
+   (black sky, white type). The rest of the site keeps the Blush Light palette.
    ========================================================================== */
 
 .rw {
@@ -12,10 +13,8 @@
   min-height: 100svh;
   padding: 96px var(--gut) 26px;
   overflow: hidden;
-  background:
-    radial-gradient(60% 55% at 50% 52%, #fff8f7 0%, rgba(255, 248, 247, 0) 70%),
-    radial-gradient(120% 90% at 50% 40%, #f6e4e4 0%, #efd5d8 55%, #e7c6cc 100%);
-  color: var(--wine);
+  background: #000;
+  color: #f4f1ec;
 }
 
 /* ---------- stardust ---------- */
@@ -28,15 +27,13 @@
 .rw-sky i {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.25;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  opacity: 0.35;
   animation: rw-twinkle 5.5s ease-in-out infinite;
 }
 
 @keyframes rw-twinkle {
   50% {
-    opacity: 0.95;
-    transform: scale(1.4);
+    opacity: 0.9;
   }
 }
 
@@ -57,12 +54,12 @@
 }
 
 .rw-title .italic {
-  color: var(--rouge);
+  color: #f4f1ec;
 }
 
 .rw-hint {
   margin-top: 12px;
-  color: var(--muted-ink);
+  color: #8a8a8a;
   font-size: 10px;
   letter-spacing: 0.22em;
 }
@@ -108,7 +105,7 @@
   border-radius: 50%;
   background: none;
   cursor: inherit;
-  filter: drop-shadow(0 30px 50px rgba(90, 35, 56, 0.18));
+  filter: drop-shadow(0 0 40px rgba(80, 140, 230, 0.18));
   transition: transform 1.2s var(--ease);
 }
 
@@ -132,10 +129,10 @@
   padding: 0;
   border: 0;
   background: none;
-  color: var(--wine);
+  color: #f4f1ec;
   font: inherit;
   cursor: inherit;
-  opacity: calc(0.45 + var(--depth, 1) * 0.55);
+  opacity: calc(0.4 + var(--depth, 1) * 0.6);
   will-change: transform;
 }
 
@@ -146,8 +143,8 @@
   border-radius: 8px;
   background: #fff;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.9),
-    0 26px 50px -24px rgba(90, 35, 56, 0.45);
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 30px 60px -24px rgba(0, 0, 0, 0.9);
   transition: box-shadow 0.5s var(--ease);
 }
 
@@ -158,8 +155,8 @@
 .rw-card:hover .rw-card-shot,
 .rw-card:focus-visible .rw-card-shot {
   box-shadow:
-    0 0 0 2px var(--rouge),
-    0 30px 60px -24px rgba(90, 35, 56, 0.55);
+    0 0 0 2px #f4f1ec,
+    0 30px 60px -24px rgba(0, 0, 0, 0.9);
 }
 
 .rw-card:focus-visible {
@@ -172,8 +169,8 @@
   top: 8px;
   padding: 4px 8px;
   border-radius: 99px;
-  background: rgba(251, 245, 243, 0.92);
-  color: var(--wine);
+  background: rgba(0, 0, 0, 0.72);
+  color: #f4f1ec;
   font-size: 8.5px;
 }
 
@@ -197,10 +194,10 @@
   gap: 10px;
   width: min(360px, calc(100vw - 40px));
   padding: 22px 22px 18px;
-  border: 1px solid rgba(90, 35, 56, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 18px;
-  background: rgba(251, 245, 243, 0.94);
-  box-shadow: 0 40px 80px -40px rgba(90, 35, 56, 0.5);
+  background: rgba(16, 16, 16, 0.86);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transform: translate(-50%, -78%);
@@ -234,9 +231,22 @@
   align-items: center;
   gap: 8px;
   padding: 7px 12px;
+  border: 1px solid rgba(61, 220, 132, 0.45);
   border-radius: 99px;
-  background: rgba(192, 80, 106, 0.12);
-  color: var(--wine);
+  background: rgba(61, 220, 132, 0.1);
+  color: #9af0c1;
+}
+
+.rw-green-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3ddc84;
+  box-shadow: 0 0 8px #3ddc84;
+}
+
+.rw-place .muted {
+  color: #9a9a9a;
 }
 
 .rw-place-copy {
@@ -257,21 +267,21 @@
 
 .rw-place-primary {
   margin-top: 4px;
-  background: var(--wine);
-  color: var(--paper);
+  background: #f4f1ec;
+  color: #000;
 }
 
 .rw-place-primary:hover {
-  background: var(--rouge);
+  background: #fff;
 }
 
 .rw-place-secondary {
-  border: 1px solid rgba(90, 35, 56, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .rw-place-secondary:hover {
-  background: var(--wine);
-  color: var(--paper);
+  background: #f4f1ec;
+  color: #000;
 }
 
 /* ---------- footer line ---------- */
@@ -282,7 +292,15 @@
   justify-content: space-between;
   gap: 20px;
   padding-top: 16px;
-  border-top: 1px solid rgba(90, 35, 56, 0.14);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rw-foot .muted {
+  color: #8a8a8a;
+}
+
+.rw-foot .status-dot {
+  background: #3ddc84;
 }
 
 .rw-foot span {
@@ -303,11 +321,11 @@
   border: 0;
   overflow: auto;
   background: transparent;
-  color: var(--wine);
+  color: #f4f1ec;
 }
 
 .rw-panel::backdrop {
-  background: rgba(241, 220, 220, 0.72);
+  background: rgba(0, 0, 0, 0.78);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 }
@@ -339,7 +357,7 @@
 
 .rw-kicker,
 .rw-label {
-  color: var(--muted-ink);
+  color: #9a9a9a;
 }
 
 .rw-label {
@@ -354,7 +372,7 @@
 }
 
 .rw-panel-title em {
-  color: var(--rouge);
+  color: #f4f1ec;
 }
 
 .rw-panel-summary {
@@ -371,8 +389,9 @@
 
 .rw-chips li {
   padding: 6px 11px;
-  border: 1px solid rgba(90, 35, 56, 0.25);
+  border: 1px solid rgba(214, 180, 120, 0.55);
   border-radius: 99px;
+  color: #efe6d6;
 }
 
 .rw-tags {
@@ -381,8 +400,9 @@
 
 .rw-tags li {
   padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 99px;
-  background: rgba(192, 80, 106, 0.12);
+  color: #cfcfcf;
 }
 
 .rw-highlights li {
@@ -400,7 +420,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--rouge);
+  background: #f4f1ec;
 }
 
 .rw-actions {
@@ -420,22 +440,22 @@
 }
 
 .rw-primary {
-  background: var(--wine);
-  color: var(--paper);
+  background: #f4f1ec;
+  color: #000;
 }
 
 .rw-primary:hover {
-  background: var(--rouge);
+  background: #fff;
 }
 
 .rw-secondary {
-  border: 1px solid rgba(90, 35, 56, 0.3);
-  background: rgba(251, 245, 243, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #f4f1ec;
 }
 
 .rw-secondary:hover {
-  background: var(--wine);
-  color: var(--paper);
+  background: #f4f1ec;
+  color: #000;
 }
 
 .rw-browser {
@@ -451,29 +471,29 @@
   height: 38px;
   padding: 0 14px;
   border-radius: 12px 12px 0 0;
-  background: #fbf3f2;
-  border-bottom: 1px solid rgba(90, 35, 56, 0.08);
+  background: #1c1c1e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .rw-browser-bar i {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #e7b8be;
+  background: #ff5f57;
 }
 
 .rw-browser-bar i:nth-child(2) {
-  background: #d9b08c;
+  background: #febc2e;
 }
 
 .rw-browser-bar i:nth-child(3) {
-  background: #c9d6b8;
+  background: #28c840;
 }
 
 .rw-browser-bar span {
   flex: 1;
   margin-left: 10px;
-  color: var(--muted-paper);
+  color: #a0a0a0;
   text-transform: none;
   letter-spacing: 0.04em;
 }
@@ -484,13 +504,13 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--wine);
+  color: #f4f1ec;
   font: inherit;
   cursor: pointer;
 }
 
 .rw-close:hover {
-  background: rgba(90, 35, 56, 0.08);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .rw-browser-view {
@@ -500,7 +520,7 @@
   overflow: hidden;
   border-radius: 0 0 12px 12px;
   background: #fff;
-  box-shadow: 0 60px 100px -50px rgba(90, 35, 56, 0.55);
+  box-shadow: 0 60px 100px -50px rgba(0, 0, 0, 0.9);
 }
 
 .rw-browser-view .cover-number {
@@ -509,6 +529,7 @@
 
 .rw-browser figcaption {
   font-size: 10px;
+  color: #8a8a8a;
 }
 
 /* ---------- small screens ---------- */
@@ -560,5 +581,5 @@
 /* Without JavaScript the canvas can't draw: show a plain pearl sphere in its place. */
 html:not(.js) .rw-globe-canvas {
   border-radius: 50%;
-  background: radial-gradient(circle at 38% 34%, #fff 0%, #fbeef0 30%, #e9c4cc 86%, transparent 86.5%);
+  background: radial-gradient(circle at 38% 34%, #3d7fb8 0%, #174a78 40%, #06172a 86%, transparent 86.5%);
 }

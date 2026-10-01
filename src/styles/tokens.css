@@ -47,6 +47,14 @@ body {
     color 1s var(--ease);
 }
 
+/* The first page only: Eli's World colours — black sky, white type. */
+body.is-night {
+  --bg: #000;
+  --fg: #f4f1ec;
+  --mu: #9a9a9a;
+  --line: rgba(255, 255, 255, 0.12);
+}
+
 body.is-ink {
   --bg: var(--blush);
   --fg: var(--wine);

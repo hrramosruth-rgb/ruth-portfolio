@@ -29,7 +29,7 @@ function placement(i: number, angle: number) {
 }
 
 /** Deterministic specks of stardust (same on server and client). */
-const DUST = Array.from({ length: 90 }, (_, i) => {
+const DUST = Array.from({ length: 220 }, (_, i) => {
   const rand = (n: number) => {
     const v = Math.sin(i * 12.9898 + n * 78.233) * 43758.5453;
     return v - Math.floor(v);
@@ -37,9 +37,9 @@ const DUST = Array.from({ length: 90 }, (_, i) => {
   return {
     left: `${(rand(1) * 100).toFixed(2)}%`,
     top: `${(rand(2) * 100).toFixed(2)}%`,
-    size: 1 + Math.round(rand(3) * 2),
+    size: rand(3) > 0.9 ? 2 : 1,
     delay: `${(rand(4) * 6).toFixed(2)}s`,
-    tone: ["#ffffff", "#e7b8be", "#d9b08c"][Math.floor(rand(5) * 3)] as string,
+    tone: rand(5) > 0.85 ? "#cfe0ff" : "#ffffff",
   };
 });
 
@@ -205,7 +205,7 @@ export function RuthWorld() {
   const project = PROJECTS[open] ?? PROJECTS[0];
 
   return (
-    <section className={`rw${home ? " is-home" : ""}`} data-theme="ink" aria-labelledby="rw-title">
+    <section className={`rw${home ? " is-home" : ""}`} data-theme="night" aria-labelledby="rw-title">
       <div className="rw-sky" aria-hidden="true">
         {DUST.map((d, i) => (
           <i
@@ -285,7 +285,7 @@ export function RuthWorld() {
             Central European Time · <Clock city="Madrid" timeZone={PROFILE.timeZone} />
           </p>
           <p className="rw-place-status ui">
-            <i className="status-dot" aria-hidden="true" />
+            <i className="rw-green-dot" aria-hidden="true" />
             {PROFILE.availability}
           </p>
           <p className="rw-place-copy muted">{PROFILE.role} — React, Node.js and Python, end to end.</p>
