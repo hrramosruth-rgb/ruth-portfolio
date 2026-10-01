@@ -65,6 +65,8 @@ export type Role = {
   description: string;
   /** Slugs of the projects that came out of this role. */
   projects: string[];
+  /** The résumé's "Key project" for this role, if it names one. */
+  keyProject?: string;
 };
 
 export const PROFILE = {
@@ -134,6 +136,7 @@ export const CAREER: Role[] = [
     location: "UK · Remote",
     description: "Software development company building cloud-native web applications and backend services.",
     projects: ["airrange", "component-systems"],
+    keyProject: "airrange",
   },
   {
     period: "2023 — 2024",
@@ -142,6 +145,7 @@ export const CAREER: Role[] = [
     location: "US · Remote",
     description: "Software company delivering e-commerce and data-intensive platforms for enterprise retail clients.",
     projects: ["albertsons", "realtime-search", "personalization-ai"],
+    keyProject: "albertsons",
   },
   {
     period: "2022 — 2023",

@@ -778,6 +778,117 @@
   color: var(--muted-paper);
 }
 
+/* Each role's detail: key project, results, what she did, stack, projects. */
+.career-block {
+  margin-top: 36px;
+}
+
+.career-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.career-label::after {
+  content: "";
+  width: 120px;
+  height: 1px;
+  background: var(--line);
+}
+
+.career-key p {
+  max-width: 660px;
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+.career-key-name {
+  font-size: 30px;
+  letter-spacing: -0.01em;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.6s var(--ease);
+}
+
+.career-key-name:hover {
+  background-size: 0 1px;
+  background-position: 100% 100%;
+}
+
+.career-figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 48px;
+  margin-top: 36px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.career-figures li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.career-figures b {
+  font-size: clamp(38px, 3.4vw, 60px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.career-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 44px;
+}
+
+.career-highlights li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  transition:
+    opacity 0.9s var(--ease) calc(0.2s + var(--h, 0) * 0.07s),
+    transform 1s var(--ease) calc(0.2s + var(--h, 0) * 0.07s);
+}
+
+.js .career-item:not(.is-in) .career-highlights li {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.career-highlights h4 {
+  margin-bottom: 8px;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.career-highlights p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.career-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.career-stack li {
+  padding: 7px 13px;
+  border: 1px solid rgba(241, 238, 232, 0.2);
+  border-radius: 99px;
+}
+
+.career-block .career-work {
+  margin-top: 0;
+}
+
 /* ---------- small screens ---------- */
 @media (max-width: 860px) {
   .work-row {
@@ -834,6 +945,10 @@
   .career-item {
     opacity: 1;
   }
+
+  .career-highlights {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Reduced motion: nothing waits to be revealed. */
@@ -846,6 +961,7 @@
   .js .work-item:not(.is-in) .work-cell > span,
   .js .figure:not(.is-in) > *,
   .js .career-item:not(.is-in) > *,
+  .js .career-item:not(.is-in) .career-highlights li,
   .js .wg-card:not(.is-in) .wg-media,
   .js .wg-card:not(.is-in) .wg-meta,
   .js .wg-card:not(.is-in) .wg-sub {

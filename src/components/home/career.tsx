@@ -6,10 +6,21 @@ import { Counter } from "@/components/motion/counter";
 import { InView } from "@/components/motion/in-view";
 import { SplitText } from "@/components/motion/split-text";
 import { useReveal } from "@/components/motion/use-reveal";
+import type { Figure, Highlight, Project, Role } from "@/data/content";
 import { CAREER, CRAFT_MARQUEE, FIGURES, STACK_MARQUEE, getProject, projectTitle } from "@/data/content";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const pad = (n: number) => String(n).padStart(2, "0");
+
+/** Everything a role produced, gathered from its projects (each holds its résumé bullets). */
+function roleDetail(role: Role) {
+  const projects = role.projects.map(getProject).filter((p): p is Project => Boolean(p));
+  const highlights: Highlight[] = projects.flatMap((p) => p.highlights);
+  const figures: Figure[] = projects.flatMap((p) => p.figures).filter((f, i, all) => all.findIndex((g) => g.label === f.label) === i);
+  const stack = [...new Set(projects.flatMap((p) => p.stack))].slice(0, 12);
+  const key = role.keyProject ? getProject(role.keyProject) : undefined;
+  return { projects, highlights, figures, stack, key };
+}
 
 function Marquee({ items, className }: { items: string[]; className?: string }) {
   const doubled = [...items, ...items];
@@ -153,27 +164,87 @@ export function Career() {
           <ol className="career-list">
             {CAREER.map((item, i) => (
               <li key={item.org} className={`career-item rv${i === active ? " is-active" : ""}`}>
-                <span className="ui muted career-period">{item.period}</span>
-                <h3 className="career-org display">{item.org}</h3>
-                <p className="career-role">
-                  {item.role} <span className="muted">· {item.location}</span>
-                </p>
-                <p className="career-desc muted">{item.description}</p>
-                {item.projects.length > 0 ? (
-                  <ul className="career-work">
-                    {item.projects.map((slug) => {
-                      const project = getProject(slug);
-                      if (!project) return null;
-                      return (
-                        <li key={slug}>
-                          <Link href={`/work/${slug}/`} className="ui" data-cursor="View">
-                            <span className="muted">{project.index}</span> {projectTitle(project)} →
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                ) : null}
+                {(() => {
+                  const detail = roleDetail(item);
+                  return (
+                    <>
+                      <span className="ui muted career-period">{item.period}</span>
+                      <h3 className="career-org display">{item.org}</h3>
+                      <p className="career-role">
+                        {item.role} <span className="muted">· {item.location}</span>
+                      </p>
+                      <p className="career-desc muted">{item.description}</p>
+
+                      {detail.key ? (
+                        <div className="career-block career-key">
+                          <span className="ui muted career-label">Key project</span>
+                          <p>
+                            <Link href={`/work/${detail.key.slug}/`} className="career-key-name display" data-cursor="View">
+                              {projectTitle(detail.key)}
+                            </Link>{" "}
+                            <span className="muted">— {detail.key.description}</span>
+                          </p>
+                        </div>
+                      ) : null}
+
+                      {detail.figures.length > 0 ? (
+                        <ul className="career-figures">
+                          {detail.figures.map((figure) => (
+                            <li key={figure.label}>
+                              <Counter figure={figure} className="display" />
+                              <span className="ui muted">{figure.label}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+
+                      {detail.highlights.length > 0 ? (
+                        <div className="career-block">
+                          <span className="ui muted career-label">What I did</span>
+                          <ol className="career-highlights">
+                            {detail.highlights.map((highlight, h) => (
+                              <li key={highlight.lead} style={{ "--h": h } as React.CSSProperties}>
+                                <span className="ui muted">{pad(h + 1)}</span>
+                                <div>
+                                  <h4 className="display">{highlight.lead}</h4>
+                                  <p className="muted">{highlight.text}</p>
+                                </div>
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                      ) : null}
+
+                      {detail.stack.length > 0 ? (
+                        <div className="career-block">
+                          <span className="ui muted career-label">Stack</span>
+                          <ul className="career-stack">
+                            {detail.stack.map((tech) => (
+                              <li key={tech} className="ui">
+                                {tech}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+
+                      {detail.projects.length > 0 ? (
+                        <div className="career-block">
+                          <span className="ui muted career-label">Projects</span>
+                          <ul className="career-work">
+                            {detail.projects.map((project) => (
+                              <li key={project.slug}>
+                                <Link href={`/work/${project.slug}/`} className="ui" data-cursor="View">
+                                  <span className="muted">{project.index}</span> {projectTitle(project)} →
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+                    </>
+                  );
+                })()}
               </li>
             ))}
           </ol>
