@@ -13,9 +13,10 @@ const personJsonLd = {
   jobTitle: PROFILE.role,
   url: `${SITE_URL}/`,
   email: LINKS.email.href,
+  telephone: PROFILE.phone,
   address: { "@type": "PostalAddress", addressLocality: "Madrid", addressCountry: "ES" },
   alumniOf: "National University of Distance Education (UNED)",
-  sameAs: [LINKS.linkedin.href, LINKS.github.href],
+  sameAs: [LINKS.linkedin.href],
 };
 
 export default function Page() {

@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { InView } from "@/components/motion/in-view";
 import { SplitText } from "@/components/motion/split-text";
-import { LINKS, PROFILE } from "@/data/content";
+import { useReveal } from "@/components/motion/use-reveal";
+import { CONTACTS, PROFILE } from "@/data/content";
 
 export function Contact() {
+  const list = useReveal<HTMLUListElement>(".contact-item", 0.3);
+
   return (
     <section id="contact" className="section contact" data-theme="paper" aria-labelledby="contact-title">
       <p className="label ui">Contact</p>
@@ -15,19 +20,30 @@ export function Contact() {
         </h2>
       </InView>
 
-      <div className="contact-links">
-        <a href={LINKS.email.href} className="contact-email display" data-cursor="Write">
-          {LINKS.email.label}
-        </a>
-        <span className="contact-social ui">
-          <a href={LINKS.linkedin.href} className="u-line" data-cursor="Open" target="_blank" rel="noreferrer">
-            {LINKS.linkedin.label}
-          </a>
-          <a href={LINKS.github.href} className="u-line" data-cursor="Open" target="_blank" rel="noreferrer">
-            {LINKS.github.label}
-          </a>
-        </span>
-      </div>
+      <ul ref={list} className="contact-list">
+        {CONTACTS.map((item, i) => (
+          <li key={item.kind} className="contact-item rv" style={{ "--row": i } as React.CSSProperties}>
+            <a
+              href={item.link.href}
+              className="contact-row"
+              data-cursor={item.cursor}
+              {...(item.external ? { target: "_blank", rel: "noreferrer" } : {})}
+            >
+              <span className="contact-fill" aria-hidden="true" />
+              <span className="ui muted contact-kind">
+                {String(i + 1).padStart(2, "0")} — {item.kind}
+              </span>
+              <span className="contact-value display">{item.link.label}</span>
+              <span className="contact-arrow" aria-hidden="true">
+                {item.external ? "↗" : "→"}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p className="contact-where ui muted">
+        {PROFILE.location} · {PROFILE.availability}
+      </p>
 
       <footer className="footer">
         <div className="footer-bar ui muted">

@@ -85,6 +85,7 @@ export const PROFILE = {
   timeZone: "Europe/Madrid",
   availability: "Open to new roles",
   email: "hrramosruth@gmail.com",
+  phone: "+34 602 37 57 51",
   statement: [
     { text: "I build customer-facing products end to end — the " },
     { text: "interfaces", em: true },
@@ -95,10 +96,17 @@ export const PROFILE = {
 } as const;
 
 export const LINKS = {
+  phone: { label: PROFILE.phone, href: `tel:${PROFILE.phone.replace(/\s/g, "")}` },
   email: { label: PROFILE.email, href: `mailto:${PROFILE.email}` },
-  linkedin: { label: "LinkedIn", href: "https://www.linkedin.com/in/ruth-ramos-0771153b8" },
-  github: { label: "GitHub", href: "https://github.com/hrramosruth-rgb" },
+  linkedin: { label: "linkedin.com/in/ruth-ramos-0771153b8", href: "https://www.linkedin.com/in/ruth-ramos-0771153b8/" },
 } satisfies Record<string, Link>;
+
+/** Contact rows, in the résumé's order. */
+export const CONTACTS: { kind: string; link: Link; cursor: string; external?: boolean }[] = [
+  { kind: "Phone", link: LINKS.phone, cursor: "Call" },
+  { kind: "Email", link: LINKS.email, cursor: "Write" },
+  { kind: "LinkedIn", link: LINKS.linkedin, cursor: "Open", external: true },
+];
 
 export const DISCIPLINES: Discipline[] = [
   {

@@ -27,7 +27,7 @@ public facts about the product. Don't add claims neither source makes.
   library, touch kiosk). Illustrations are brand-neutral and labelled "Illustration" on the site.
   Edit them in `design/illustrations/index.html`, then run `pnpm illustrations` to re-render.
 
-There is intentionally no résumé download (the PDF carries a phone number).
+Contact shows the phone, email and LinkedIn exactly as the résumé lists them (`PROFILE`, `CONTACTS`). There is no GitHub link and no résumé download.
 
 ## Brand
 
