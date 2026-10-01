@@ -12,7 +12,8 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "monogram": "node scripts/monogram.mjs",
-    "illustrations": "node scripts/render-illustrations.mjs"
+    "illustrations": "node scripts/render-illustrations.mjs",
+    "globe-points": "node scripts/globe-points.mjs"
   },
   "dependencies": {
     "lenis": "1.3.26",
@@ -24,10 +25,13 @@
     "@types/node": "^24.19.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "d3-geo": "^3.1.1",
     "eslint": "^9.39.5",
     "eslint-config-next": "16.3.8",
     "opentype.js": "^1.3.4",
     "playwright": "1.62.1",
-    "typescript": "~5.9.3"
+    "topojson-client": "^3.1.0",
+    "typescript": "~5.9.3",
+    "world-atlas": "^2.0.2"
   }
 }

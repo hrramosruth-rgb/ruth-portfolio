@@ -1,8 +1,8 @@
 import { About } from "@/components/home/about";
 import { Career } from "@/components/home/career";
 import { Contact } from "@/components/home/contact";
-import { Showcase } from "@/components/home/showcase";
 import { WorkIndex } from "@/components/home/work-index";
+import { RuthWorld } from "@/components/world/ruth-world";
 import { LINKS, PROFILE } from "@/data/content";
 import { SITE_URL } from "@/lib/site-url";
 
@@ -23,7 +23,7 @@ export default function Page() {
   return (
     <main id="main">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
-      <Showcase />
+      <RuthWorld />
       <About />
       <WorkIndex />
       <Career />

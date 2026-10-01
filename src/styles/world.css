@@ -1,0 +1,564 @@
+/* ==========================================================================
+   Ruth's World — the home page: projects orbiting a pearl globe
+   ========================================================================== */
+
+.rw {
+  --w: clamp(150px, 16vw, 270px);
+  --r: calc(var(--w) * 2.05);
+  --cy: 44%; /* vertical centre of the ring */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  padding: 96px var(--gut) 26px;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 55% at 50% 52%, #fff8f7 0%, rgba(255, 248, 247, 0) 70%),
+    radial-gradient(120% 90% at 50% 40%, #f6e4e4 0%, #efd5d8 55%, #e7c6cc 100%);
+  color: var(--wine);
+}
+
+/* ---------- stardust ---------- */
+.rw-sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.rw-sky i {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.25;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  animation: rw-twinkle 5.5s ease-in-out infinite;
+}
+
+@keyframes rw-twinkle {
+  50% {
+    opacity: 0.95;
+    transform: scale(1.4);
+  }
+}
+
+/* ---------- title ---------- */
+.rw-head {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+}
+
+.rw-title {
+  display: flex;
+  justify-content: center;
+  gap: 0.22em;
+  font-size: clamp(44px, 5.4vw, 92px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.rw-title .italic {
+  color: var(--rouge);
+}
+
+.rw-hint {
+  margin-top: 12px;
+  color: var(--muted-ink);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+}
+
+/* ---------- the orbit ---------- */
+.rw-stage {
+  position: relative;
+  flex: 1;
+  min-height: calc(var(--w) * 2.6);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Cards are direct children, so they share this one perspective; z-index does the depth sort. */
+.rw-orbit {
+  position: absolute;
+  inset: 0;
+  perspective: 1800px;
+  perspective-origin: 50% 12%;
+  opacity: 0;
+  transform: scale(0.94);
+  transition:
+    opacity 1.6s var(--ease) 0.5s,
+    transform 2s var(--ease) 0.5s;
+}
+
+.is-ready .rw-orbit {
+  opacity: 1;
+  transform: none;
+}
+
+.rw-globe {
+  position: absolute;
+  left: 50%;
+  top: var(--cy);
+  z-index: 200;
+  width: calc(var(--w) * 1.5);
+  aspect-ratio: 1;
+  margin: calc(var(--w) * -0.75) 0 0 calc(var(--w) * -0.75);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: inherit;
+  filter: drop-shadow(0 30px 50px rgba(90, 35, 56, 0.18));
+  transition: transform 1.2s var(--ease);
+}
+
+.rw-globe:hover {
+  transform: scale(1.03);
+}
+
+.rw-globe-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rw-card {
+  position: absolute;
+  left: 50%;
+  top: var(--cy);
+  width: var(--w);
+  aspect-ratio: 16 / 10;
+  margin: calc(var(--w) * -0.3125) 0 0 calc(var(--w) / -2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--wine);
+  font: inherit;
+  cursor: inherit;
+  opacity: calc(0.45 + var(--depth, 1) * 0.55);
+  will-change: transform;
+}
+
+.rw-card-shot {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 26px 50px -24px rgba(90, 35, 56, 0.45);
+  transition: box-shadow 0.5s var(--ease);
+}
+
+.rw-card-shot .cover-number {
+  display: none;
+}
+
+.rw-card:hover .rw-card-shot,
+.rw-card:focus-visible .rw-card-shot {
+  box-shadow:
+    0 0 0 2px var(--rouge),
+    0 30px 60px -24px rgba(90, 35, 56, 0.55);
+}
+
+.rw-card:focus-visible {
+  outline: none;
+}
+
+.rw-card-badge {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 4px 8px;
+  border-radius: 99px;
+  background: rgba(251, 245, 243, 0.92);
+  color: var(--wine);
+  font-size: 8.5px;
+}
+
+.rw-card-label {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: clamp(0, calc((var(--depth, 1) - 0.6) * 4), 1);
+}
+
+/* ---------- "based in" card over the globe ---------- */
+.rw-place {
+  position: absolute;
+  left: 50%;
+  top: var(--cy);
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(360px, calc(100vw - 40px));
+  padding: 22px 22px 18px;
+  border: 1px solid rgba(90, 35, 56, 0.12);
+  border-radius: 18px;
+  background: rgba(251, 245, 243, 0.94);
+  box-shadow: 0 40px 80px -40px rgba(90, 35, 56, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transform: translate(-50%, -78%);
+  animation: rw-place-in 0.8s var(--ease) both;
+}
+
+.rw-place[hidden] {
+  display: none;
+}
+
+@keyframes rw-place-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -70%) scale(0.96);
+  }
+}
+
+.rw-place-city {
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.rw-place-time .nav-clock {
+  opacity: 1;
+}
+
+.rw-place-status {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 99px;
+  background: rgba(192, 80, 106, 0.12);
+  color: var(--wine);
+}
+
+.rw-place-copy {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.rw-place-primary,
+.rw-place-secondary {
+  display: grid;
+  place-items: center;
+  height: 44px;
+  border-radius: 99px;
+  transition:
+    background-color 0.4s var(--ease),
+    color 0.4s var(--ease);
+}
+
+.rw-place-primary {
+  margin-top: 4px;
+  background: var(--wine);
+  color: var(--paper);
+}
+
+.rw-place-primary:hover {
+  background: var(--rouge);
+}
+
+.rw-place-secondary {
+  border: 1px solid rgba(90, 35, 56, 0.3);
+}
+
+.rw-place-secondary:hover {
+  background: var(--wine);
+  color: var(--paper);
+}
+
+/* ---------- footer line ---------- */
+.rw-foot {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(90, 35, 56, 0.14);
+}
+
+.rw-foot span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- project panel ---------- */
+.rw-panel {
+  position: fixed;
+  inset: 0;
+  width: min(1320px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  overflow: auto;
+  background: transparent;
+  color: var(--wine);
+}
+
+.rw-panel::backdrop {
+  background: rgba(241, 220, 220, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.rw-panel[open] {
+  animation: rw-panel-in 0.8s var(--ease) both;
+}
+
+@keyframes rw-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.rw-panel-inner {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.62fr) 1.5fr;
+  align-items: center;
+  gap: 36px;
+  padding: 24px;
+}
+
+.rw-panel-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rw-kicker,
+.rw-label {
+  color: var(--muted-ink);
+}
+
+.rw-label {
+  margin-top: 10px;
+}
+
+.rw-panel-title {
+  font-size: clamp(36px, 3.6vw, 60px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+.rw-panel-title em {
+  color: var(--rouge);
+}
+
+.rw-panel-summary {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.rw-chips,
+.rw-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.rw-chips li {
+  padding: 6px 11px;
+  border: 1px solid rgba(90, 35, 56, 0.25);
+  border-radius: 99px;
+}
+
+.rw-tags {
+  margin-top: 6px;
+}
+
+.rw-tags li {
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: rgba(192, 80, 106, 0.12);
+}
+
+.rw-highlights li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.rw-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--rouge);
+}
+
+.rw-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.rw-primary,
+.rw-secondary {
+  padding: 13px 20px;
+  border-radius: 99px;
+  transition:
+    background-color 0.4s var(--ease),
+    color 0.4s var(--ease);
+}
+
+.rw-primary {
+  background: var(--wine);
+  color: var(--paper);
+}
+
+.rw-primary:hover {
+  background: var(--rouge);
+}
+
+.rw-secondary {
+  border: 1px solid rgba(90, 35, 56, 0.3);
+  background: rgba(251, 245, 243, 0.6);
+}
+
+.rw-secondary:hover {
+  background: var(--wine);
+  color: var(--paper);
+}
+
+.rw-browser {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rw-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 12px 12px 0 0;
+  background: #fbf3f2;
+  border-bottom: 1px solid rgba(90, 35, 56, 0.08);
+}
+
+.rw-browser-bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e7b8be;
+}
+
+.rw-browser-bar i:nth-child(2) {
+  background: #d9b08c;
+}
+
+.rw-browser-bar i:nth-child(3) {
+  background: #c9d6b8;
+}
+
+.rw-browser-bar span {
+  flex: 1;
+  margin-left: 10px;
+  color: var(--muted-paper);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.rw-close {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--wine);
+  font: inherit;
+  cursor: pointer;
+}
+
+.rw-close:hover {
+  background: rgba(90, 35, 56, 0.08);
+}
+
+.rw-browser-view {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  margin-top: -12px;
+  overflow: hidden;
+  border-radius: 0 0 12px 12px;
+  background: #fff;
+  box-shadow: 0 60px 100px -50px rgba(90, 35, 56, 0.55);
+}
+
+.rw-browser-view .cover-number {
+  display: none;
+}
+
+.rw-browser figcaption {
+  font-size: 10px;
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 860px) {
+  .rw {
+    --w: clamp(130px, 42vw, 210px);
+    --r: calc(var(--w) * 1.38);
+    --cy: 48%;
+    padding-top: 92px;
+  }
+
+  .rw-hint {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .rw-foot {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .rw-card-badge {
+    font-size: 7.5px;
+    padding: 3px 6px;
+  }
+
+  .rw-panel-inner {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 16px;
+  }
+
+  .rw-browser {
+    order: -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rw-sky i {
+    animation: none;
+  }
+
+  .rw-orbit {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Without JavaScript the canvas can't draw: show a plain pearl sphere in its place. */
+html:not(.js) .rw-globe-canvas {
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #fff 0%, #fbeef0 30%, #e9c4cc 86%, transparent 86.5%);
+}

@@ -1,8 +1,9 @@
 # Ruth Ramos — Portfolio
 
-Portfolio for Ruth Ramos, Full Stack Developer in Madrid: a home page that opens on a cinematic
-carousel of all her projects (`src/components/home/showcase.tsx`), followed by about, the project
-index, figures, experience and contact — plus a case study per project.
+Portfolio for Ruth Ramos, Full Stack Developer in Madrid. The home page opens on "Ruth's World"
+(`src/components/world/`): her projects orbit a pearl globe; click a project for its panel, or the
+globe to see where she's based. Then about, the project gallery, career and contact — plus a case
+study per project.
 
 ## Develop
 
@@ -18,7 +19,7 @@ All copy lives in `src/data/content.ts`. Facts come from Ruth's résumé; projec
 `supplied: true` (Manhattan Associates, Shopify storefronts) were added separately and state only
 public facts about the product. Don't add claims neither source makes.
 
-- **Projects** — `PROJECTS` drives the carousel, the index and the `/work/[slug]` pages. The two Python
+- **Projects** — `PROJECTS` drives the orbit, the gallery and the `/work/[slug]` pages. The two Python
   projects (real-time search, personalization & AI) come from the Albertsons work on the résumé.
 - **Storefronts** — `STOREFRONTS`, shown on the Shopify case study; screenshots live in
   `public/stores/` (1440×900 WebP of each public homepage).
@@ -28,6 +29,11 @@ public facts about the product. Don't add claims neither source makes.
   Edit them in `design/illustrations/index.html`, then run `pnpm illustrations` to re-render.
 
 Contact shows the phone, email and LinkedIn exactly as the résumé lists them (`PROFILE`, `CONTACTS`). There is no GitHub link and no résumé download.
+
+## Globe
+
+The globe's dotted continents come from Natural Earth (via `world-atlas`); `pnpm globe-points`
+regenerates `src/components/world/land-points.ts`.
 
 ## Brand
 
