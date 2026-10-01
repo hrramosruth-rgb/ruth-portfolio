@@ -732,7 +732,7 @@
   transition: opacity 0.9s var(--ease);
 }
 
-.career-item.is-active {
+.career-item[data-active="true"] {
   opacity: 1;
 }
 

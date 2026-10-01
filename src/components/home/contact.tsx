@@ -7,7 +7,7 @@ import { useReveal } from "@/components/motion/use-reveal";
 import { CONTACTS, PROFILE } from "@/data/content";
 
 export function Contact() {
-  const list = useReveal<HTMLUListElement>(".contact-item", 0.3);
+  const list = useReveal<HTMLUListElement>(".contact-item");
 
   return (
     <section id="contact" className="section contact" data-theme="paper" aria-labelledby="contact-title">

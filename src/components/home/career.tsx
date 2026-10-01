@@ -44,7 +44,7 @@ function Marquee({ items, className }: { items: string[]; className?: string }) 
  * view while a rule fills with progress.
  */
 export function Career() {
-  const root = useReveal<HTMLElement>(".rv", 0.2);
+  const root = useReveal<HTMLElement>(".rv");
   const timeline = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
@@ -163,7 +163,7 @@ export function Career() {
           </h2>
           <ol className="career-list">
             {CAREER.map((item, i) => (
-              <li key={item.org} className={`career-item rv${i === active ? " is-active" : ""}`}>
+              <li key={item.org} className="career-item rv" data-active={i === active}>
                 {(() => {
                   const detail = roleDetail(item);
                   return (
