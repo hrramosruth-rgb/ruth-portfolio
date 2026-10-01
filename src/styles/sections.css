@@ -727,16 +727,16 @@
   padding-bottom: 10vh;
 }
 
-/* The role in view is fully lit; the others dim only their header, never their details. */
+/* The role in view is fully lit; the others dim only their header, never their details.
+   (Only with JavaScript, which is what tracks the role in view.) */
 .career-period,
 .career-org,
 .career-role {
-  opacity: 0.4;
   transition: opacity 0.9s var(--ease);
 }
 
-.career-item[data-active="true"] :is(.career-period, .career-org, .career-role) {
-  opacity: 1;
+.js .career-item:not([data-active="true"]) :is(.career-period, .career-org, .career-role) {
+  opacity: 0.4;
 }
 
 .career-item > * {
@@ -973,9 +973,7 @@
     gap: 10vh;
   }
 
-  .career-period,
-  .career-org,
-  .career-role {
+  .js .career-item:not([data-active="true"]) :is(.career-period, .career-org, .career-role) {
     opacity: 1;
   }
 
