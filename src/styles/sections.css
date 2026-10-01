@@ -491,3 +491,18 @@
     opacity: 1;
   }
 }
+
+/* Reduced motion: nothing waits to be revealed. */
+@media (prefers-reduced-motion: reduce) {
+  .js .work-item:not(.is-in)::before,
+  .js .figure:not(.is-in)::before {
+    transform: none;
+  }
+
+  .js .work-item:not(.is-in) .work-cell > span,
+  .js .figure:not(.is-in) > *,
+  .js .career-item:not(.is-in) > * {
+    opacity: 1;
+    transform: none;
+  }
+}
