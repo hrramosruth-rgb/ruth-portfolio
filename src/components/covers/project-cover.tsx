@@ -4,30 +4,25 @@ import { asset } from "@/lib/asset";
 
 type ProjectCoverProps = { kind: CoverKind; number: string; eager?: boolean };
 
-const SCREENSHOTS: Partial<Record<CoverKind, string>> = {
+/**
+ * Project pictures. Airrange and Manhattan are screenshots of the public product sites; the Shopify
+ * cover is a collage of the storefronts. The rest are illustrations of the system Ruth built (no
+ * client branding), rendered from design/illustrations/index.html with `pnpm illustrations`.
+ */
+const IMAGES: Record<Exclude<CoverKind, "shopify">, string> = {
   airrange: "/covers/airrange.webp",
   manhattan: "/covers/manhattan.webp",
+  albertsons: "/covers/albertsons.webp",
+  search: "/covers/search.webp",
+  personalization: "/covers/personalization.webp",
+  components: "/covers/components.webp",
+  touch: "/covers/touch.webp",
 };
 
-/**
- * Art-directed project covers. Airrange and Manhattan are screenshots of the public product sites and
- * the Shopify cover is a collage of the storefronts; the rest are compositions (Albertsons' sites block
- * automated capture, and the others are bodies of work rather than public products). Compositions are
- * 3:4 posters sized with container query units, centred in any frame.
- */
+const ILLUSTRATIONS: CoverKind[] = ["albertsons", "search", "personalization", "components", "touch"];
+
 export function ProjectCover({ kind, number, eager = false }: ProjectCoverProps) {
   const loading = eager ? "eager" : "lazy";
-  const screenshot = SCREENSHOTS[kind];
-
-  if (screenshot) {
-    return (
-      <div className={`cover cover--shot cover--${kind}`} aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element -- static export: no image optimizer */}
-        <img src={asset(screenshot)} alt="" width={1440} height={900} loading={loading} draggable={false} />
-        <span className="cover-number">{number}</span>
-      </div>
-    );
-  }
 
   if (kind === "shopify") {
     return (
@@ -43,85 +38,12 @@ export function ProjectCover({ kind, number, eager = false }: ProjectCoverProps)
     );
   }
 
+  const illustration = ILLUSTRATIONS.includes(kind);
   return (
-    <div className={`cover cover--${kind}`} aria-hidden="true">
-      <span className="cover-art">
-        {kind === "albertsons" ? (
-          <>
-            <span className="cover-kicker">
-              Clip<i>to card</i>
-            </span>
-            <span className="cover-coupon">
-              <span>Digital coupons</span>
-              <b>+8%</b>
-            </span>
-          </>
-        ) : null}
-        {kind === "search" ? (
-          <span className="cover-search">
-            <span className="search-field">
-              straw<i />
-            </span>
-            <span className="search-list">
-              <span>
-                <b>straw</b>berries
-              </span>
-              <span>
-                <b>straw</b>berry jam
-              </span>
-              <span>
-                <b>straw</b>s, paper
-              </span>
-            </span>
-            <span className="search-flow">Kafka → Elasticsearch</span>
-          </span>
-        ) : null}
-        {kind === "personalization" ? (
-          <span className="cover-foryou">
-            <b>
-              For <i>you</i>
-            </b>
-            <span className="foryou-card">
-              <i />
-              <span />
-              <span />
-            </span>
-            <span className="foryou-card">
-              <i />
-              <span />
-              <span />
-            </span>
-            <span className="foryou-ai">✦ Generated description</span>
-          </span>
-        ) : null}
-        {kind === "components" ? (
-          <>
-            <span className="cover-aa">
-              A<i>a</i>
-            </span>
-            <span className="cover-kit">
-              <span className="kit-primary">Continue</span>
-              <span className="kit-secondary">Preview</span>
-              <span className="kit-toggle" />
-              <span className="kit-swatches">
-                <i />
-                <i />
-                <i />
-              </span>
-            </span>
-          </>
-        ) : null}
-        {kind === "touch" ? (
-          <span className="cover-screen">
-            <b>Welcome</b>
-            <i>Start</i>
-            <i>Browse</i>
-            <i>Help</i>
-            <i>Account</i>
-          </span>
-        ) : null}
-        <span className="cover-number">{number}</span>
-      </span>
+    <div className={`cover cover--shot cover--${kind}${illustration ? " cover--illustration" : ""}`} aria-hidden="true">
+      {/* eslint-disable-next-line @next/next/no-img-element -- static export: no image optimizer */}
+      <img src={asset(IMAGES[kind])} alt="" width={1440} height={900} loading={loading} draggable={false} />
+      <span className="cover-number">{number}</span>
     </div>
   );
 }

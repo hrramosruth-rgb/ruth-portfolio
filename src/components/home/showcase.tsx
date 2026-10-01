@@ -279,7 +279,7 @@ export function Showcase() {
               </div>
             ))}
           </div>
-          <span className="sc-stage-drag ui">Drag</span>
+          <span className="sc-stage-drag ui">{current.illustration ? "Illustration · Drag" : "Drag"}</span>
         </div>
 
         <button type="button" className="sc-peek" onClick={() => step(1)} data-cursor="Next" aria-label={`Next: ${projectTitle(upcoming)}`}>

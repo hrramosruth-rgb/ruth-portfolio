@@ -41,6 +41,8 @@ export type Project = {
   tags: WorkTag[];
   /** Added by the requester; not on the résumé. */
   supplied?: boolean;
+  /** The picture is an illustration of the system, not a screenshot of the client's product. */
+  illustration?: boolean;
   /** Renders the storefront grid on the case study. */
   stores?: boolean;
 };
@@ -292,6 +294,7 @@ export const PROJECTS: Project[] = [
       { value: 9, prefix: "+", suffix: "%", label: "Revenue" },
     ],
     cover: "albertsons",
+    illustration: true,
     tags: ["Commerce"],
   },
   {
@@ -314,6 +317,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "search",
+    illustration: true,
     tags: ["Commerce", "Python"],
   },
   {
@@ -340,6 +344,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "personalization",
+    illustration: true,
     tags: ["Commerce", "Python"],
   },
   {
@@ -369,6 +374,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "components",
+    illustration: true,
     tags: ["Interfaces"],
   },
   {
@@ -406,6 +412,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "touch",
+    illustration: true,
     tags: ["Interfaces"],
   },
   {

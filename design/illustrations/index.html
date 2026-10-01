@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Project illustrations</title>
+<!--
+  Source for the project pictures that have no public screenshot. Each scene is an illustration of
+  the system Ruth built (brand-neutral, no client logos). Render with `pnpm illustrations`, which
+  opens ?scene=<name> at 1440×900 and writes public/covers/<name>.webp.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{font-family:"Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#1b1f1d;background:#fff}
+.scene{display:none;width:1440px;height:900px;position:relative;overflow:hidden}
+body[data-scene="albertsons"] #albertsons,
+body[data-scene="search"] #search,
+body[data-scene="personalization"] #personalization,
+body[data-scene="components"] #components,
+body[data-scene="touch"] #touch{display:block}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.serif{font-family:"Bodoni Moda",serif;font-weight:400}
+svg.p{display:block;width:100%;height:100%}
+
+/* =================== 1. Grocery storefront (Albertsons) =================== */
+#albertsons{background:#f4f5f1}
+.sf-top{height:76px;display:flex;align-items:center;gap:28px;padding:0 40px;background:#fff;border-bottom:1px solid #e7e9e3}
+.sf-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:21px;letter-spacing:-.02em;color:#17482f}
+.sf-brand i{width:30px;height:30px;border-radius:50% 50% 50% 6px;background:linear-gradient(135deg,#3fae6b,#17643c);transform:rotate(-45deg)}
+.sf-search{flex:1;max-width:560px;height:46px;display:flex;align-items:center;gap:12px;padding:0 18px;border-radius:999px;background:#f1f3ee;color:#7b8178;font-size:15px}
+.sf-search kbd{margin-left:auto;font:500 12px "Inter Tight";padding:3px 8px;border-radius:6px;background:#fff;border:1px solid #e1e4dc;color:#8a9087}
+.sf-slot{display:flex;flex-direction:column;font-size:12px;color:#7b8178;line-height:1.3}
+.sf-slot b{font-size:14px;color:#1b1f1d}
+.sf-icons{margin-left:auto;display:flex;gap:14px;align-items:center}
+.sf-ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#f1f3ee;position:relative}
+.sf-ico em{position:absolute;top:-2px;right:-2px;min-width:20px;height:20px;border-radius:10px;background:#d64545;color:#fff;font:600 11px/20px "Inter Tight";text-align:center;font-style:normal}
+.sf-cats{display:flex;gap:10px;padding:18px 40px;background:#fff;border-bottom:1px solid #e7e9e3}
+.sf-cats span{padding:9px 16px;border-radius:999px;font-size:14px;font-weight:500;color:#3d433b;background:#f4f5f1}
+.sf-cats span.on{background:#17482f;color:#fff}
+.sf-main{display:grid;grid-template-columns:1fr 380px;gap:28px;padding:26px 40px}
+.sf-hero{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;align-items:center;padding:28px 30px;border-radius:24px;background:linear-gradient(120deg,#e3f2e6,#f6f0dc)}
+.sf-hero .eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#2f7a4f}
+.sf-hero h1{margin:8px 0 8px;font-family:"Bodoni Moda",serif;font-weight:400;font-size:46px;line-height:1;letter-spacing:-.02em;color:#123b26}
+.sf-hero p{font-size:14px;line-height:1.5;color:#4d5a4f}
+.sf-coupons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cp{position:relative;padding:16px 14px 14px;border-radius:16px;background:#fff;border:1.5px dashed #c9d8c9;display:flex;flex-direction:column;gap:6px}
+.cp b{font-size:22px;letter-spacing:-.02em;color:#123b26}
+.cp span{font-size:12.5px;color:#5c665d}
+.cp em{margin-top:6px;align-self:flex-start;font-style:normal;font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;background:#17482f;color:#fff}
+.cp.clipped{border-style:solid;border-color:#3fae6b;background:#f3fbf5}
+.cp.clipped em{background:#3fae6b}
+.sf-rowhead{display:flex;justify-content:space-between;align-items:baseline;margin:26px 2px 14px}
+.sf-rowhead h2{font-size:22px;letter-spacing:-.02em}
+.sf-rowhead span{font-size:14px;color:#2f7a4f;font-weight:600}
+.sf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pc{background:#fff;border-radius:20px;padding:12px 12px 14px;box-shadow:0 1px 0 #e7e9e3}
+.pc .tile{height:150px;border-radius:14px;display:grid;place-items:center;position:relative}
+.pc .tile svg{width:96px;height:96px;filter:drop-shadow(0 10px 12px rgba(0,0,0,.12))}
+.pc .badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;padding:5px 9px;border-radius:999px;background:#d64545;color:#fff}
+.pc .badge.green{background:#3fae6b}
+.pc h4{margin:12px 2px 2px;font-size:15px;font-weight:600}
+.pc small{display:block;margin:0 2px;font-size:12.5px;color:#7b8178}
+.pc .buy{display:flex;align-items:center;justify-content:space-between;margin:12px 2px 0}
+.pc .price{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.pc .price s{font-size:12px;font-weight:500;color:#9aa096;margin-left:6px}
+.pc .add{width:36px;height:36px;border-radius:50%;background:#17482f;color:#fff;display:grid;place-items:center;font-size:20px;line-height:1}
+.pc .qty{display:flex;align-items:center;gap:10px;padding:5px 6px;border-radius:999px;background:#f1f3ee;font-weight:600;font-size:14px}
+.pc .qty i{width:26px;height:26px;border-radius:50%;background:#fff;display:grid;place-items:center;font-style:normal}
+.usuals{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+.us{display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:#fff}
+.us span{width:52px;height:52px;border-radius:14px;display:grid;place-items:center}
+.us span svg{width:38px;height:38px}
+.us b{display:block;font-size:14px}
+.us small{font-size:12px;color:#7b8178}
+.us em{margin-left:auto;font-style:normal;font-size:12px;font-weight:600;color:#2f7a4f}
+.cart{background:#fff;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 60px -40px rgba(23,72,47,.45)}
+.cart-head{display:flex;justify-content:space-between;align-items:baseline}
+.cart-head h3{font-size:22px;letter-spacing:-.02em}
+.cart-head span{font-size:13px;color:#7b8178}
+.ci{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #eef0ea}
+.ci .th{width:56px;height:56px;border-radius:14px;display:grid;place-items:center}
+.ci .th svg{width:40px;height:40px}
+.ci b{font-size:14px;font-weight:600;display:block}
+.ci small{font-size:12px;color:#7b8178}
+.ci .cl{display:inline-block;margin-top:4px;font-size:11px;font-weight:600;color:#2f7a4f;background:#e8f5ec;padding:3px 8px;border-radius:999px}
+.ci .pr{font-weight:700;font-size:15px}
+.cline{display:flex;justify-content:space-between;font-size:14px;color:#4d5a4f}
+.cline.coupon b{color:#2f7a4f}
+.cline.total{font-size:17px;color:#1b1f1d;font-weight:700;padding-top:10px;border-top:1px solid #eef0ea}
+.cart-slot{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:#f4f5f1;font-size:13px;color:#3d433b}
+.cart-slot i{width:10px;height:10px;border-radius:50%;background:#3fae6b;box-shadow:0 0 0 4px #d8efdf}
+.cart-cta{height:54px;border-radius:999px;background:#17482f;color:#fff;font-weight:600;font-size:16px;display:grid;place-items:center}
+
+/* =================== 2. Real-time search + indexing (Python) =================== */
+#search{background:radial-gradient(70% 90% at 15% 20%,#1d2433 0%,#0d1017 60%);color:#e8ecf3}
+.se{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;height:100%;padding:56px 56px}
+.se-card{background:#fff;color:#1b1f1d;border-radius:26px;padding:22px;box-shadow:0 60px 120px -50px rgba(0,0,0,.8)}
+.se-field{height:62px;display:flex;align-items:center;gap:14px;padding:0 22px;border-radius:18px;border:2px solid #2b5cff;box-shadow:0 0 0 6px rgba(43,92,255,.12);font-size:22px;font-weight:500}
+.se-field .caret{width:2px;height:28px;background:#2b5cff;margin-left:-10px}
+.se-field kbd{margin-left:auto;font:500 13px "Inter Tight";padding:4px 9px;border-radius:7px;background:#f2f4f8;color:#7a8396}
+.se-label{margin:20px 6px 8px;font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#8a93a6}
+.se-row{display:grid;grid-template-columns:58px 1fr auto auto;gap:14px;align-items:center;padding:10px 10px;border-radius:14px}
+.se-row.on{background:#f2f5ff}
+.se-row .th{width:58px;height:58px;border-radius:14px;display:grid;place-items:center}
+.se-row .th svg{width:42px;height:42px}
+.se-row b{font-size:16px;font-weight:500;display:block}
+.se-row b mark{background:none;color:#2b5cff;font-weight:700}
+.se-row small{font-size:12.5px;color:#7a8396}
+.se-row .pr{font-size:16px;font-weight:700}
+.stock{font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:#e7f7ee;color:#1d7a46;white-space:nowrap}
+.stock.low{background:#fff3e0;color:#b4610a}
+.se-sugg{display:flex;flex-wrap:wrap;gap:8px;padding:0 6px}
+.se-sugg span{padding:9px 14px;border-radius:999px;background:#f2f4f8;font-size:14px}
+.se-sugg mark{background:none;font-weight:700;color:#1b1f1d}
+.se-right{display:flex;flex-direction:column;gap:18px}
+.se-right .chart svg{height:230px}
+.chart .mark{position:absolute;left:52%;top:58px;font-size:13px;color:#9aa6bd}
+.se-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 6px}
+.se-cats div{padding:14px;border-radius:14px;border:1px solid #e8ebf2;font-size:14px}
+.se-cats b{display:block;font-size:22px;letter-spacing:-.02em}
+.se-cats small{color:#7a8396}
+.panel{border-radius:22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:20px 22px}
+.panel h5{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9aa6bd}
+.panel h5 i{width:8px;height:8px;border-radius:50%;background:#35d07f;box-shadow:0 0 0 4px rgba(53,208,127,.18)}
+.pipe{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:center;margin-top:18px}
+.node{padding:16px 14px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.node .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8d98ae}
+.node b{display:block;margin-top:6px;font-size:16px}
+.node small{display:block;margin-top:4px;font-size:12px;color:#8d98ae}
+.node.k1{box-shadow:inset 0 0 0 1px rgba(255,159,67,.35)}
+.node.k2{box-shadow:inset 0 0 0 1px rgba(82,139,255,.45);background:rgba(82,139,255,.1)}
+.node.k3{box-shadow:inset 0 0 0 1px rgba(53,208,127,.35)}
+.arrow{height:2px;background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(255,255,255,.5));position:relative}
+.arrow::after{content:"";position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left-color:rgba(255,255,255,.6)}
+.arrow::before{content:"";position:absolute;left:40%;top:-3px;width:8px;height:8px;border-radius:50%;background:#52a0ff;box-shadow:0 0 12px #52a0ff}
+.log{margin-top:16px;display:flex;flex-direction:column;gap:9px;font-size:12.5px;color:#b9c3d6}
+.log div{display:grid;grid-template-columns:96px 132px 1fr auto;gap:12px;align-items:center}
+.log .t{color:#6f7a90}
+.log .ev{color:#ffb86b}
+.log .ok{color:#35d07f}
+.chart{position:relative}
+.chart svg{width:100%;height:200px;display:block;margin-top:10px}
+.chart .legend{display:flex;justify-content:space-between;font-size:12.5px;color:#9aa6bd;margin-top:6px}
+.chart .legend b{color:#e8ecf3;font-size:22px;font-weight:600;letter-spacing:-.02em;margin-right:8px}
+
+/* =================== 3. Personalization + AI content =================== */
+#personalization{background:linear-gradient(135deg,#f8f1f4 0%,#efe6f3 100%)}
+.pz{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;height:100%;padding:48px 52px}
+.pz-head{display:flex;justify-content:space-between;align-items:flex-end}
+.pz-head small{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9a5f78}
+.pz-head h1{margin-top:6px;font-family:"Bodoni Moda",serif;font-weight:400;font-size:58px;line-height:.95;letter-spacing:-.02em;color:#3a1426}
+.pz-head h1 i{color:#a2394c}
+.loyal{display:flex;align-items:center;gap:14px;padding:12px 16px 12px 12px;border-radius:999px;background:#fff;box-shadow:0 20px 40px -30px rgba(122,35,64,.6)}
+.ring{width:52px;height:52px;border-radius:50%;background:conic-gradient(#a2394c 0 72%,#f1e3ea 72% 100%);display:grid;place-items:center}
+.ring::after{content:"";width:40px;height:40px;border-radius:50%;background:#fff}
+.loyal b{display:block;font-size:17px;color:#3a1426}
+.loyal span{font-size:12px;color:#8b6b7a}
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.of{border-radius:22px;background:#fff;padding:14px 14px 16px;box-shadow:0 30px 60px -45px rgba(58,20,38,.5)}
+.of .tile{height:150px;border-radius:16px;display:grid;place-items:center;position:relative}
+.of .tile svg{width:92px;height:92px;filter:drop-shadow(0 12px 14px rgba(0,0,0,.14))}
+.of .tag{position:absolute;top:10px;right:10px;padding:6px 10px;border-radius:999px;background:#3a1426;color:#fff;font-weight:700;font-size:13px}
+.of .why{margin:12px 2px 4px;font-size:12px;color:#9a5f78;display:flex;gap:6px;align-items:center}
+.of .why::before{content:"";width:6px;height:6px;border-radius:50%;background:#a2394c}
+.of h4{margin:0 2px;font-size:16px;color:#2a1520}
+.of .clip{margin:12px 2px 0;height:40px;border-radius:999px;border:1.5px solid #3a1426;display:grid;place-items:center;font-size:13px;font-weight:600;color:#3a1426}
+.of .clip.on{background:#3a1426;color:#fff}
+.recs{margin-top:22px;padding:18px 20px;border-radius:22px;background:rgba(255,255,255,.6);border:1px solid rgba(162,57,76,.12)}
+.recs p{font-size:13px;font-weight:600;color:#6d4859;margin-bottom:12px}
+.recs div{display:flex;gap:10px;flex-wrap:wrap}
+.recs span{display:flex;align-items:center;gap:8px;padding:7px 14px 7px 7px;border-radius:999px;background:#fff;font-size:13.5px;color:#3a1426}
+.recs span i{width:28px;height:28px;border-radius:50%;display:block}
+.basket{margin-top:16px;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:22px;background:#3a1426;color:#f6eef2}
+.basket .thumbs{display:flex}
+.basket .thumbs span{width:44px;height:44px;border-radius:50%;background:#f6eef2;display:grid;place-items:center;margin-right:-10px;border:2px solid #3a1426}
+.basket .thumbs svg{width:30px;height:30px}
+.basket div b{display:block;font-size:15px}
+.basket div small{font-size:12px;color:#d7b3c3}
+.basket em{margin-left:auto;font-style:normal;padding:10px 16px;border-radius:999px;background:#e7b8be;color:#2a1520;font-weight:600;font-size:13px}
+.queue{display:flex;flex-direction:column;gap:8px}
+.qbar{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.qbar i{display:block;height:100%;width:78%;background:linear-gradient(90deg,#e7b8be,#a2394c)}
+.queue p{display:flex;justify-content:space-between;font-size:12.5px;color:#d9c3cd}
+.ai{border-radius:28px;background:#2a1520;color:#f6eef2;padding:26px;display:flex;flex-direction:column;gap:16px;box-shadow:0 60px 100px -50px rgba(42,21,32,.9)}
+.ai-top{display:flex;justify-content:space-between;align-items:center}
+.ai-top h3{font-size:18px;font-weight:600}
+.ai-top span{font-size:12px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:#e3c5d2}
+.ai-prod{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;padding:14px;border-radius:18px;background:rgba(255,255,255,.05)}
+.ai-prod .th{height:120px;border-radius:14px;background:linear-gradient(140deg,#e9f3dd,#cfe3b5);display:grid;place-items:center}
+.ai-prod .th svg{width:86px;height:86px}
+.field small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#b48a9c}
+.field b{display:block;margin-top:6px;font-size:18px}
+.gen{position:relative;padding:18px;border-radius:18px;background:linear-gradient(180deg,rgba(231,184,190,.12),rgba(231,184,190,.04));border:1px solid rgba(231,184,190,.25);font-family:"Bodoni Moda",serif;font-size:21px;line-height:1.45;color:#f6eef2}
+.gen .caret{display:inline-block;width:2px;height:22px;background:#e7b8be;vertical-align:-3px;margin-left:2px}
+.gen .badge{position:absolute;top:-12px;left:16px;font-family:"Inter Tight";font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:#e7b8be;color:#2a1520}
+.ai-opts{display:flex;gap:8px;flex-wrap:wrap}
+.ai-opts span{padding:8px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.16);font-size:13px;color:#e8d6de}
+.ai-opts span.on{background:#f6eef2;color:#2a1520;border-color:#f6eef2}
+.ai-act{display:flex;gap:10px;margin-top:auto}
+.ai-act div{flex:1;height:50px;border-radius:999px;display:grid;place-items:center;font-weight:600;font-size:15px}
+.ai-act .a{background:#e7b8be;color:#2a1520}
+.ai-act .b{border:1.5px solid rgba(255,255,255,.25)}
+.ai-list{display:flex;flex-direction:column;gap:8px}
+.ai-list div{display:flex;justify-content:space-between;font-size:13px;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.04);color:#d9c3cd}
+.ai-list div em{font-style:normal;color:#9fe3b9}
+
+/* =================== 4. Component library (Storybook-style) =================== */
+#components{background:#f6f6f7}
+.cs{display:grid;grid-template-columns:260px 1fr;height:100%}
+.cs-side{background:#fff;border-right:1px solid #ebebee;padding:22px 18px;font-size:14px}
+.cs-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;margin-bottom:20px}
+.cs-logo i{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 210deg,#ff4f7b,#7b5cff,#2bc6ff,#ff4f7b)}
+.cs-find{height:36px;border-radius:10px;background:#f3f3f5;display:flex;align-items:center;padding:0 12px;color:#9a9aa6;font-size:13px;margin-bottom:18px}
+.cs-group{margin-bottom:14px}
+.cs-group p{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a0a0ab;margin:8px 8px 6px}
+.cs-group span{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;color:#3b3b45}
+.cs-group span::before{content:"";width:12px;height:12px;border-radius:3px;border:1.5px solid #c4c4cf}
+.cs-group span.on{background:#efeafe;color:#4a2fd1;font-weight:600}
+.cs-group span.on::before{border-color:#7b5cff;background:#7b5cff}
+.cs-main{display:flex;flex-direction:column}
+.cs-top{height:60px;display:flex;align-items:center;gap:16px;padding:0 26px;background:#fff;border-bottom:1px solid #ebebee;font-size:14px;color:#6b6b77}
+.cs-top b{color:#1b1b22}
+.cs-tabs{display:flex;gap:6px;margin-left:24px}
+.cs-tabs span{padding:7px 14px;border-radius:8px}
+.cs-tabs span.on{background:#1b1b22;color:#fff}
+.cs-top .tools{margin-left:auto;display:flex;gap:8px}
+.cs-top .tools i{width:32px;height:32px;border-radius:8px;background:#f3f3f5}
+.cs-body{flex:1;display:grid;grid-template-columns:1fr 340px;gap:22px;padding:22px 26px}
+.cs-canvas{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:18px}
+.cs-card{background:#fff;border-radius:18px;padding:20px;border:1px solid #ececf0}
+.cs-card h6{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9a9aa6;margin-bottom:16px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bt{height:42px;padding:0 18px;border-radius:12px;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
+.bt.p{background:#1b1b22;color:#fff}
+.bt.s{background:#fff;border:1.5px solid #d9d9e0;color:#1b1b22}
+.bt.g{color:#4a2fd1;background:#efeafe}
+.bt.d{background:#ffe8ee;color:#c4224f}
+.bt.sm{height:32px;padding:0 12px;font-size:12.5px;border-radius:9px}
+.bt.lg{height:52px;padding:0 24px;font-size:15.5px;border-radius:14px}
+.inp{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.inp label{font-size:12.5px;font-weight:600;color:#3b3b45}
+.inp div{height:44px;border-radius:12px;border:1.5px solid #d9d9e0;display:flex;align-items:center;padding:0 14px;font-size:14px;color:#3b3b45;background:#fff}
+.inp.focus div{border-color:#7b5cff;box-shadow:0 0 0 4px rgba(123,92,255,.15)}
+.inp.err div{border-color:#e5486f}
+.inp.err small{font-size:12px;color:#e5486f}
+.tg-row{display:flex;gap:18px;align-items:center;margin-top:6px}
+.tg{width:46px;height:26px;border-radius:999px;background:#d9d9e0;position:relative}
+.tg::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tg.on{background:#7b5cff}
+.tg.on::after{left:23px}
+.chk{width:22px;height:22px;border-radius:6px;background:#7b5cff;display:grid;place-items:center;color:#fff;font-size:13px}
+.tokens{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.tokens div{display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:#6b6b77}
+.tokens i{height:48px;border-radius:12px;display:block}
+.type{display:flex;align-items:baseline;gap:18px;margin-top:16px;color:#1b1b22}
+.type .serif{font-size:54px;line-height:1}
+.type span{font-size:13px;color:#6b6b77}
+.viz{position:relative;height:200px;perspective:600px}
+.bars{position:absolute;left:50%;bottom:24px;transform:translateX(-50%) rotateX(58deg) rotateZ(-40deg);transform-style:preserve-3d;display:grid;grid-template-columns:repeat(4,34px);gap:14px}
+.bar{width:34px;height:34px;position:relative;transform-style:preserve-3d;background:#7b5cff}
+.bar::before,.bar::after{content:"";position:absolute;left:0;bottom:0}
+.bar span{position:absolute;inset:0;background:inherit;transform:translateZ(var(--h));filter:brightness(1.25)}
+.bar::before{width:34px;height:var(--h);background:#5b3fe0;transform-origin:bottom;transform:rotateX(-90deg)}
+.bar::after{width:var(--h);height:34px;background:#4026b8;transform-origin:left;transform:rotateY(-90deg)}
+.cs-right{display:flex;flex-direction:column;gap:18px}
+.spin{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff}
+.bt.dis{background:#ececf0;color:#a0a0ab}
+.sel{height:44px;border-radius:12px;border:1.5px solid #d9d9e0;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:14px;color:#3b3b45;margin-top:14px}
+.space{display:flex;align-items:flex-end;gap:10px;margin-top:18px}
+.space i{display:block;width:22px;border-radius:5px;background:#e3dcff}
+.space span{font-size:12px;color:#6b6b77;margin-left:6px}
+.dt{width:100%;border-collapse:collapse;font-size:13px}
+.dt th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#a0a0ab;font-weight:600;padding:0 0 8px}
+.dt td{padding:9px 0;border-top:1px solid #f0f0f3;color:#3b3b45}
+.dt .up{color:#1d9a5b;font-weight:600}
+.dt .dn{color:#e5486f;font-weight:600}
+.props{width:100%;border-collapse:collapse;font-size:13px}
+.props td{padding:10px 0;border-bottom:1px solid #f0f0f3;color:#3b3b45}
+.props td:first-child{font-weight:600;color:#1b1b22}
+.props code{font:500 12px "JetBrains Mono";padding:3px 7px;border-radius:6px;background:#f3f3f5;color:#4a2fd1}
+.code{background:#14141b;color:#d6d6e7;border-radius:18px;padding:18px 20px;font-size:13px;line-height:1.75}
+.code .k{color:#ff79c6}.code .t{color:#7bd3ff}.code .a{color:#ffd479}.code .s{color:#a6e3a1}.code .c{color:#6a6a80}
+
+/* =================== 5. Touchscreen kiosk =================== */
+#touch{background:radial-gradient(80% 90% at 70% 30%,#5e1420 0%,#2a0d14 55%,#140609 100%)}
+.tc-glow{position:absolute;inset:0;background:radial-gradient(40% 50% at 50% 100%,rgba(231,184,190,.18),transparent 70%)}
+.tablet{position:absolute;left:50%;top:50%;width:1080px;height:740px;transform:translate(-50%,-50%) rotate(-2deg);border-radius:46px;background:#0f0f12;padding:26px;box-shadow:0 80px 120px -40px rgba(0,0,0,.8),inset 0 0 0 2px #2a2a30}
+.screen{width:100%;height:100%;border-radius:24px;overflow:hidden;background:#f7f2ec;display:grid;grid-template-columns:1.25fr 1fr}
+.k-left{padding:38px 40px;display:flex;flex-direction:column}
+.k-top{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:#6b5a50}
+.k-top b{color:#2a1418;font-size:16px}
+.k-left h1{margin-top:30px;font-family:"Bodoni Moda",serif;font-weight:400;font-size:76px;line-height:.9;letter-spacing:-.03em;color:#2a1418}
+.k-left h1 i{color:#8c1c2b}
+.k-left p{margin-top:12px;font-size:19px;color:#6b5a50}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:auto}
+.tl{height:128px;border-radius:24px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;font-size:21px;font-weight:600;color:#2a1418;background:#fff;box-shadow:0 1px 0 #ebe2d8}
+.tl i{width:44px;height:44px;border-radius:14px;background:#f1e7dd;display:grid;place-items:center}
+.tl i svg{width:24px;height:24px;stroke:#8c1c2b;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tl.on i svg{stroke:#fff}
+.tl.on{background:#8c1c2b;color:#fff}
+.tl.on i{background:rgba(255,255,255,.18)}
+.tl.pressed{transform:scale(.97);box-shadow:inset 0 0 0 3px #8c1c2b}
+.k-right{background:#2a1418;color:#f7f2ec;padding:38px 36px;display:flex;flex-direction:column;gap:18px}
+.k-right small{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#d7a9b1}
+.k-num{font-size:40px;letter-spacing:.06em;font-weight:500;padding-bottom:14px;border-bottom:2px solid rgba(247,242,236,.2)}
+.k-num i{color:rgba(247,242,236,.35);font-style:normal}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pad span{height:70px;border-radius:20px;background:rgba(247,242,236,.08);display:grid;place-items:center;font-size:28px;font-weight:500}
+.pad span.ok{background:#e7b8be;color:#2a1418;font-size:18px;font-weight:700}
+.pad span.hit{background:rgba(247,242,236,.24)}
+.steps{display:flex;gap:10px;margin-top:auto;font-size:13px;color:#d7a9b1}
+.steps span{flex:1;padding-top:10px;border-top:3px solid rgba(247,242,236,.15)}
+.steps span.on{border-color:#e7b8be;color:#fff}
+.touch-ring{position:absolute;width:74px;height:74px;border-radius:50%;border:3px solid rgba(255,255,255,.85);box-shadow:0 0 0 10px rgba(255,255,255,.18)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="g-straw" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#ff7a7a"/><stop offset=".55" stop-color="#e2324a"/><stop offset="1" stop-color="#a5142f"/></radialGradient>
+    <radialGradient id="g-avo" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#e8f3a8"/><stop offset="1" stop-color="#b5d36a"/></radialGradient>
+    <radialGradient id="g-lemon" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#fff7a1"/><stop offset="1" stop-color="#f2c21b"/></radialGradient>
+    <radialGradient id="g-tom" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#ff8a6a"/><stop offset="1" stop-color="#d4321f"/></radialGradient>
+    <linearGradient id="g-bread" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9a95c"/><stop offset="1" stop-color="#b8692a"/></linearGradient>
+    <radialGradient id="g-blue" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#7d8fe0"/><stop offset="1" stop-color="#26357d"/></radialGradient>
+  </defs>
+  <symbol id="strawberry" viewBox="0 0 100 100">
+    <path d="M50 94C27 82 13 62 15 44c2-15 16-21 35-17 19-4 33 2 35 17 2 18-12 38-35 50z" fill="url(#g-straw)"/>
+    <g fill="#ffd9a6" opacity=".85"><ellipse cx="34" cy="48" rx="1.6" ry="2.4"/><ellipse cx="48" cy="44" rx="1.6" ry="2.4"/><ellipse cx="63" cy="48" rx="1.6" ry="2.4"/><ellipse cx="40" cy="60" rx="1.6" ry="2.4"/><ellipse cx="56" cy="60" rx="1.6" ry="2.4"/><ellipse cx="70" cy="58" rx="1.6" ry="2.4"/><ellipse cx="30" cy="62" rx="1.6" ry="2.4"/><ellipse cx="48" cy="73" rx="1.6" ry="2.4"/><ellipse cx="62" cy="72" rx="1.6" ry="2.4"/><ellipse cx="40" cy="80" rx="1.4" ry="2"/></g>
+    <path d="M50 30 36 18l11 6-1-15 6 14 9-10-3 13 13-2-14 9z" fill="#2f9e5a"/>
+  </symbol>
+  <symbol id="avocado" viewBox="0 0 100 100">
+    <path d="M50 6c16 0 22 22 30 40 9 22-6 48-30 48S11 68 20 46C28 28 34 6 50 6z" fill="#355e2a"/>
+    <path d="M50 14c12 0 17 19 24 35 7 18-5 38-24 38S19 67 26 49c7-16 12-35 24-35z" fill="url(#g-avo)"/>
+    <circle cx="50" cy="60" r="16" fill="#8a5a2b"/><circle cx="45" cy="55" r="5" fill="#b07a42"/>
+  </symbol>
+  <symbol id="lemon" viewBox="0 0 100 100">
+    <ellipse cx="50" cy="52" rx="36" ry="28" fill="url(#g-lemon)" transform="rotate(-20 50 52)"/>
+    <path d="M80 34c5-3 8-3 10-1-2 3-5 5-9 6zM20 70c-5 3-8 3-10 1 2-3 5-5 9-6z" fill="#e8b417"/>
+    <path d="M70 20c4-6 12-8 16-6-3 6-10 9-16 6z" fill="#3a9a55"/>
+  </symbol>
+  <symbol id="tomato" viewBox="0 0 100 100">
+    <circle cx="50" cy="56" r="36" fill="url(#g-tom)"/>
+    <path d="M50 22l-6 10-12-4 8 10-12 4 14 2-2 10 10-8 10 8-2-10 14-2-12-4 8-10-12 4z" fill="#2f8f4e"/>
+  </symbol>
+  <symbol id="bread" viewBox="0 0 100 100">
+    <path d="M10 62c0-20 18-34 40-34s40 14 40 34v12c0 6-4 10-10 10H20c-6 0-10-4-10-10z" fill="url(#g-bread)"/>
+    <path d="M30 46l8 10M46 40l8 12M62 44l8 10" stroke="#f6d39b" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="milk" viewBox="0 0 100 100">
+    <path d="M30 30l10-16h20l10 16v58c0 3-2 5-5 5H35c-3 0-5-2-5-5z" fill="#fbfbf8"/>
+    <path d="M30 30l10-16h20l10 16z" fill="#e6e8e3"/>
+    <rect x="30" y="46" width="40" height="26" fill="#3b6fd4"/>
+    <path d="M38 62c6-8 18-8 24 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="blueberries" viewBox="0 0 100 100">
+    <circle cx="36" cy="58" r="17" fill="url(#g-blue)"/><circle cx="62" cy="54" r="18" fill="url(#g-blue)"/><circle cx="50" cy="76" r="16" fill="url(#g-blue)"/><circle cx="48" cy="40" r="14" fill="url(#g-blue)"/>
+    <g fill="#1a2457"><circle cx="62" cy="48" r="3"/><circle cx="36" cy="52" r="2.6"/><circle cx="50" cy="71" r="2.6"/><circle cx="48" cy="35" r="2.4"/></g>
+  </symbol>
+</svg>
+
+<!-- 1. Grocery storefront: catalog, clip-to-card coupons, cart -->
+<section class="scene" id="albertsons">
+  <header class="sf-top">
+    <div class="sf-brand"><i></i>Market</div>
+    <div class="sf-search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7b8178" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      Search groceries, pharmacy, deals<kbd>/</kbd>
+    </div>
+    <div class="sf-slot"><span>Pickup · Store 1042</span><b>Today, 4–5 pm</b></div>
+    <div class="sf-icons">
+      <span class="sf-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b1f1d" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6C19 16.5 12 21 12 21z"/></svg></span>
+      <span class="sf-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b1f1d" stroke-width="1.8"><path d="M5 7h14l-1.5 12h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><em>4</em></span>
+    </div>
+  </header>
+  <nav class="sf-cats"><span class="on">Weekly deals</span><span>Produce</span><span>Dairy &amp; eggs</span><span>Bakery</span><span>Pantry</span><span>Frozen</span><span>Pharmacy</span><span>Household</span></nav>
+  <div class="sf-main">
+    <div>
+      <div class="sf-hero">
+        <div>
+          <p class="eyebrow">Digital coupons</p>
+          <h1>Clip it.<br>Save at checkout.</h1>
+          <p>Clipped offers apply automatically — online and in store.</p>
+        </div>
+        <div class="sf-coupons">
+          <div class="cp clipped"><b>$1 off</b><span>Strawberries, 1 lb</span><em>✓ Clipped</em></div>
+          <div class="cp"><b>2 for $5</b><span>Sourdough loaf</span><em>Clip to card</em></div>
+          <div class="cp"><b>20% off</b><span>Whole milk</span><em>Clip to card</em></div>
+        </div>
+      </div>
+      <div class="sf-rowhead"><h2>Fresh picks for you</h2><span>See all →</span></div>
+      <div class="sf-grid">
+        <div class="pc"><div class="tile" style="background:#fdeaea"><span class="badge">$1 off</span><svg><use href="#strawberry"/></svg></div><h4>Strawberries</h4><small>1 lb · $3.99/lb</small><div class="buy"><span class="price">$2.99<s>$3.99</s></span><span class="qty"><i>−</i>2<i>+</i></span></div></div>
+        <div class="pc"><div class="tile" style="background:#eef5df"><svg><use href="#avocado"/></svg></div><h4>Hass avocados</h4><small>4 ct · $0.87 each</small><div class="buy"><span class="price">$3.49</span><span class="add">+</span></div></div>
+        <div class="pc"><div class="tile" style="background:#f7ecdc"><span class="badge green">2 for $5</span><svg><use href="#bread"/></svg></div><h4>Sourdough loaf</h4><small>24 oz · baked today</small><div class="buy"><span class="price">$2.50</span><span class="add">+</span></div></div>
+        <div class="pc"><div class="tile" style="background:#e9eefb"><svg><use href="#blueberries"/></svg></div><h4>Blueberries</h4><small>18 oz · in stock</small><div class="buy"><span class="price">$4.99</span><span class="add">+</span></div></div>
+      </div>
+      <div class="sf-rowhead"><h2>Your usuals</h2><span>Reorder all →</span></div>
+      <div class="usuals">
+        <div class="us"><span style="background:#eef3fb"><svg><use href="#milk"/></svg></span><div><b>Whole milk</b><small>Every week</small></div><em>Add</em></div>
+        <div class="us"><span style="background:#fdece6"><svg><use href="#tomato"/></svg></span><div><b>Vine tomatoes</b><small>Every 2 weeks</small></div><em>Add</em></div>
+        <div class="us"><span style="background:#fff5d6"><svg><use href="#lemon"/></svg></span><div><b>Lemons</b><small>In cart</small></div><em>✓</em></div>
+        <div class="us"><span style="background:#eef5df"><svg><use href="#avocado"/></svg></span><div><b>Avocados</b><small>Every week</small></div><em>Add</em></div>
+      </div>
+    </div>
+    <aside class="cart">
+      <div class="cart-head"><h3>Your cart</h3><span>4 items</span></div>
+      <div class="ci"><span class="th" style="background:#fdeaea"><svg><use href="#strawberry"/></svg></span><div><b>Strawberries, 1 lb</b><small>Qty 2</small><br><span class="cl">Coupon −$2.00</span></div><span class="pr">$5.98</span></div>
+      <div class="ci"><span class="th" style="background:#eef3fb"><svg><use href="#milk"/></svg></span><div><b>Whole milk, ½ gal</b><small>Qty 1</small></div><span class="pr">$3.29</span></div>
+      <div class="ci"><span class="th" style="background:#fff5d6"><svg><use href="#lemon"/></svg></span><div><b>Lemons</b><small>Qty 3 · $0.79 each</small></div><span class="pr">$2.37</span></div>
+      <div class="cline"><span>Items</span><b>$13.63</b></div>
+      <div class="cline coupon"><span>Digital coupons</span><b>−$2.00</b></div>
+      <div class="cline total"><span>Subtotal</span><span>$11.63</span></div>
+      <div class="cart-slot"><i></i>Store pickup · Today 4–5 pm · In stock</div>
+      <div class="cart-cta">Checkout · $11.63</div>
+    </aside>
+  </div>
+</section>
+
+<!-- 2. Real-time search: autocomplete + Kafka → Python → Elasticsearch -->
+<section class="scene" id="search">
+  <div class="se">
+    <div class="se-card">
+      <div class="se-field">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2b5cff" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        straw<span class="caret"></span><kbd>Esc</kbd>
+      </div>
+      <p class="se-label">Products</p>
+      <div class="se-row on"><span class="th" style="background:#fdeaea"><svg><use href="#strawberry"/></svg></span><div><b><mark>Straw</mark>berries, 1 lb</b><small>Produce · price updated just now</small></div><span class="stock">32 in store</span><span class="pr">$2.99</span></div>
+      <div class="se-row"><span class="th" style="background:#fdeaea"><svg><use href="#strawberry"/></svg></span><div><b>Organic <mark>straw</mark>berries, 2 lb</b><small>Produce</small></div><span class="stock low">Only 4 left</span><span class="pr">$7.49</span></div>
+      <div class="se-row"><span class="th" style="background:#f7ecdc"><svg><use href="#bread"/></svg></span><div><b><mark>Straw</mark>berry shortcake</b><small>Bakery · fresh today</small></div><span class="stock">12 in store</span><span class="pr">$5.99</span></div>
+      <div class="se-row"><span class="th" style="background:#e9eefb"><svg><use href="#blueberries"/></svg></span><div><b>Berry medley, <mark>straw</mark>berry &amp; blueberry</b><small>Frozen</small></div><span class="stock">In stock</span><span class="pr">$4.29</span></div>
+      <p class="se-label">Suggestions</p>
+      <div class="se-sugg"><span><mark>straw</mark>berries organic</span><span><mark>straw</mark>berry jam</span><span>paper <mark>straw</mark>s</span><span><mark>straw</mark>berry yogurt</span></div>
+      <p class="se-label">In categories</p>
+      <div class="se-cats"><div><b>12</b><small>in Produce</small></div><div><b>5</b><small>in Frozen</small></div><div><b>3</b><small>in Bakery</small></div></div>
+    </div>
+    <div class="se-right">
+      <div class="panel">
+        <h5><i></i>Search indexing · live</h5>
+        <div class="pipe">
+          <div class="node k1"><span class="k">Kafka</span><b>inventory.events</b><small>price · stock · catalog</small></div>
+          <div class="arrow"></div>
+          <div class="node k2"><span class="k">Python</span><b>Indexer</b><small>transform &amp; enrich</small></div>
+          <div class="arrow"></div>
+          <div class="node k3"><span class="k">Elasticsearch</span><b>products</b><small>search &amp; autocomplete</small></div>
+        </div>
+        <div class="log mono">
+          <div><span class="t">12:04:31.102</span><span class="ev">price.updated</span><span>sku 40112 · $3.99 → $2.99</span><span class="ok">indexed</span></div>
+          <div><span class="t">12:04:31.240</span><span class="ev">stock.changed</span><span>sku 40112 · store 1042 · 32</span><span class="ok">indexed</span></div>
+          <div><span class="t">12:04:31.517</span><span class="ev">catalog.upsert</span><span>sku 77841 · shortcake</span><span class="ok">indexed</span></div>
+          <div><span class="t">12:04:32.006</span><span class="ev">stock.changed</span><span>sku 40115 · store 1042 · 4</span><span class="ok">indexed</span></div>
+          <div><span class="t">12:04:32.390</span><span class="ev">price.updated</span><span>sku 51207 · $4.49 → $4.29</span><span class="ok">indexed</span></div>
+        </div>
+      </div>
+      <div class="panel chart">
+        <h5>Query latency</h5>
+        <span class="mark">indexing + caching</span>
+        <svg viewBox="0 0 560 200" preserveAspectRatio="none">
+          <defs><linearGradient id="lat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#52a0ff" stop-opacity=".35"/><stop offset="1" stop-color="#52a0ff" stop-opacity="0"/></linearGradient></defs>
+          <g stroke="rgba(255,255,255,.07)"><path d="M0 40H560M0 90H560M0 140H560"/></g>
+          <path d="M0 30 C60 34 110 26 160 36 S250 40 280 60 S330 150 380 150 S470 146 560 148 L560 200 L0 200Z" fill="url(#lat)"/>
+          <path d="M0 30 C60 34 110 26 160 36 S250 40 280 60 S330 150 380 150 S470 146 560 148" fill="none" stroke="#52a0ff" stroke-width="3"/>
+          <path d="M280 0V200" stroke="rgba(255,255,255,.25)" stroke-dasharray="4 6"/>
+        </svg>
+        <div class="legend"><span><b>1,500 ms</b>before</span><span><b>&lt; 500 ms</b>after</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Personalized offers + AI-generated product content -->
+<section class="scene" id="personalization">
+  <div class="pz">
+    <div>
+      <div class="pz-head">
+        <div><small>Good morning</small><h1>Offers picked<br><i>for you</i></h1></div>
+        <div class="loyal"><span class="ring"></span><div><b>1,240 points</b><span>Rewards · 260 to next reward</span></div></div>
+      </div>
+      <div class="offers">
+        <div class="of"><div class="tile" style="background:#eef3fb"><span class="tag">20% off</span><svg><use href="#milk"/></svg></div><p class="why">You buy milk weekly</p><h4>Whole milk, ½ gal</h4><div class="clip on">✓ Clipped</div></div>
+        <div class="of"><div class="tile" style="background:#fdece6"><span class="tag">$1.50 off</span><svg><use href="#tomato"/></svg></div><p class="why">Pairs with your basil</p><h4>Vine tomatoes</h4><div class="clip">Clip offer</div></div>
+        <div class="of"><div class="tile" style="background:#f7ecdc"><span class="tag">2 for $5</span><svg><use href="#bread"/></svg></div><p class="why">Back in stock near you</p><h4>Sourdough loaf</h4><div class="clip">Clip offer</div></div>
+      </div>
+      <div class="recs">
+        <p>Because of your last order</p>
+        <div>
+          <span><i style="background:linear-gradient(135deg,#ff8a8a,#d4324a)"></i>Raspberries</span>
+          <span><i style="background:linear-gradient(135deg,#d8ec9a,#6f9a3a)"></i>Baby spinach</span>
+          <span><i style="background:linear-gradient(135deg,#ffe58a,#f2b21b)"></i>Greek yogurt</span>
+          <span><i style="background:linear-gradient(135deg,#c9b2ff,#6a4cd6)"></i>Granola</span>
+        </div>
+      </div>
+      <div class="basket">
+        <span class="thumbs"><span><svg><use href="#milk"/></svg></span><span><svg><use href="#avocado"/></svg></span><span><svg><use href="#tomato"/></svg></span><span><svg><use href="#bread"/></svg></span></span>
+        <div><b>Your weekly basket</b><small>Built from what you buy most</small></div>
+        <em>Reorder</em>
+      </div>
+    </div>
+    <div class="ai">
+      <div class="ai-top"><h3>Product content</h3><span>✦ AI draft · needs review</span></div>
+      <div class="ai-prod"><span class="th"><svg><use href="#avocado"/></svg></span><div class="field"><small>Product</small><b>Hass avocados, 4 ct</b><small style="margin-top:10px">Category</small><b style="font-size:15px;font-weight:500">Produce › Fruit</b></div></div>
+      <div class="gen"><span class="badge">✦ Generated with the OpenAI API</span>Creamy, buttery and ripe for tonight — these Hass avocados mash into silky guacamole or slice beautifully over toast<span class="caret"></span></div>
+      <div class="ai-opts"><span class="on">Tone: warm</span><span>Length: short</span><span>Include serving ideas</span><span>SEO keywords</span></div>
+      <div class="queue"><p><span>Content queue · Produce</span><span>78% reviewed</span></p><div class="qbar"><i></i></div></div>
+      <div class="ai-list">
+        <div><span>Produce › Fruit · category intro</span><em>approved</em></div>
+        <div><span>Bakery · product descriptions</span><em>approved</em></div>
+        <div><span>Dairy · product descriptions</span><em style="color:#e7b8be">in review</em></div>
+      </div>
+      <div class="ai-act"><div class="a">Approve &amp; publish</div><div class="b">✦ Regenerate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Component library -->
+<section class="scene" id="components"><div class="cs">
+  <aside class="cs-side">
+    <div class="cs-logo"><i></i>UI kit</div>
+    <div class="cs-find">Find components</div>
+    <div class="cs-group"><p>Foundations</p><span>Color</span><span>Typography</span><span>Spacing</span></div>
+    <div class="cs-group"><p>Components</p><span class="on">Button</span><span>Input</span><span>Select</span><span>Toggle</span><span>Card</span><span>Modal</span><span>Data table</span></div>
+    <div class="cs-group"><p>Data</p><span>useQuery hooks</span><span>3D chart</span></div>
+  </aside>
+  <div class="cs-main">
+    <div class="cs-top">Components / <b>Button</b><div class="cs-tabs"><span class="on">Canvas</span><span>Docs</span><span>Tests</span></div><div class="tools"><i></i><i></i><i></i></div></div>
+    <div class="cs-body">
+      <div class="cs-canvas">
+        <div class="cs-card"><h6>Variants</h6>
+          <div class="btns"><span class="bt p">Continue</span><span class="bt s">Preview</span><span class="bt g">Share</span><span class="bt d">Delete</span></div>
+          <h6 style="margin-top:22px">Sizes</h6>
+          <div class="btns"><span class="bt p sm">Small</span><span class="bt p">Medium</span><span class="bt p lg">Large →</span></div>
+          <h6 style="margin-top:22px">States</h6>
+          <div class="btns"><span class="bt p"><i class="spin"></i>Saving</span><span class="bt dis">Disabled</span><span class="bt s">Focus ring</span></div>
+        </div>
+        <div class="cs-card"><h6>Form controls</h6>
+          <div class="inp focus"><label>Workbook name</label><div>Pricing model v2</div></div>
+          <div class="inp err"><label>Email</label><div>hello@</div><small>Enter a valid email address</small></div>
+          <div class="tg-row"><span class="tg on"></span><span class="tg"></span><span class="chk">✓</span><span style="font-size:13px;color:#6b6b77">Toggle · Checkbox</span></div>
+          <div class="sel"><span>Region: Europe</span><span>▾</span></div>
+        </div>
+        <div class="cs-card"><h6>Tokens</h6>
+          <div class="tokens">
+            <div><i style="background:#1b1b22"></i>ink</div><div><i style="background:#7b5cff"></i>accent</div><div><i style="background:#2bc6ff"></i>info</div><div><i style="background:#35d07f"></i>success</div><div><i style="background:#e5486f"></i>danger</div><div><i style="background:#f3f3f5;border:1px solid #e4e4ea"></i>surface</div>
+          </div>
+          <div class="type"><span class="serif">Aa</span><div><b style="font-size:20px">Display 48 / 56</b><br><span>Body 16 / 26 · Caption 12 / 16</span></div></div>
+          <div class="space"><i style="height:8px"></i><i style="height:16px"></i><i style="height:24px"></i><i style="height:32px"></i><i style="height:48px"></i><i style="height:64px"></i><span>Spacing 4 · 8 · 12 · 16 · 24 · 32</span></div>
+        </div>
+        <div class="cs-card"><h6>Three.js chart · revenue by region</h6>
+          <div class="viz"><div class="bars">
+            <div class="bar" style="--h:60px"><span></span></div><div class="bar" style="--h:110px"><span></span></div><div class="bar" style="--h:84px"><span></span></div><div class="bar" style="--h:140px"><span></span></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="cs-right">
+        <div class="cs-card"><h6>Props</h6>
+          <table class="props">
+            <tr><td>variant</td><td><code>primary</code> <code>secondary</code></td></tr>
+            <tr><td>size</td><td><code>sm</code> <code>md</code> <code>lg</code></td></tr>
+            <tr><td>loading</td><td><code>boolean</code></td></tr>
+            <tr><td>asChild</td><td><code>boolean</code></td></tr>
+          </table>
+        </div>
+        <div class="code mono"><span class="c">// Button.tsx</span><br><span class="k">export function</span> <span class="t">Button</span>({ variant = <span class="s">"primary"</span>, size = <span class="s">"md"</span>, ...props }) {<br>&nbsp;&nbsp;<span class="k">return</span> &lt;<span class="t">button</span> <span class="a">className</span>={button({ variant, size })} {...props} /&gt;;<br>}<br><br><span class="c">// usage</span><br>&lt;<span class="t">Button</span> <span class="a">size</span>=<span class="s">"lg"</span>&gt;Continue&lt;/<span class="t">Button</span>&gt;</div>
+        <div class="cs-card"><h6>Data table</h6>
+          <table class="dt"><tr><th>Region</th><th>Orders</th><th>Change</th></tr>
+            <tr><td>Europe</td><td>Data from API</td><td class="up">▲</td></tr>
+            <tr><td>Americas</td><td>Data from API</td><td class="up">▲</td></tr>
+            <tr><td>Asia Pacific</td><td>Data from API</td><td class="dn">▼</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 5. Touchscreen kiosk -->
+<section class="scene" id="touch">
+  <div class="tc-glow"></div>
+  <div class="tablet"><div class="screen">
+    <div class="k-left">
+      <div class="k-top"><b>Self-service</b><span>Tap anywhere to begin</span></div>
+      <h1>Welcome.<br><i>How can we help?</i></h1>
+      <p>Large targets, clear steps, one task per screen.</p>
+      <div class="tiles">
+        <div class="tl on"><i><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 12h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></i>New order</div>
+        <div class="tl pressed"><i><svg viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></i>Pick up</div>
+        <div class="tl"><i><svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg></i>Returns</div>
+        <div class="tl"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/></svg></i>Get help</div>
+      </div>
+    </div>
+    <div class="k-right">
+      <small>Your phone number</small>
+      <div class="k-num">(555) 014<i>–____</i></div>
+      <div class="pad"><span>1</span><span>2</span><span>3</span><span>4</span><span class="hit">5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>⌫</span><span>0</span><span class="ok">Next</span></div>
+      <div class="steps"><span class="on">1 · Start</span><span class="on">2 · Details</span><span>3 · Confirm</span></div>
+    </div>
+  </div></div>
+  <span class="touch-ring" style="left:1018px;top:470px"></span>
+</section>
+
+<script>
+  document.body.dataset.scene = new URLSearchParams(location.search).get("scene") || "albertsons";
+</script>
+</body>
+</html>

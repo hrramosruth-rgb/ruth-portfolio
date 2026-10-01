@@ -22,8 +22,10 @@ public facts about the product. Don't add claims neither source makes.
   projects (real-time search, personalization & AI) come from the Albertsons work on the résumé.
 - **Storefronts** — `STOREFRONTS`, shown on the Shopify case study; screenshots live in
   `public/stores/` (1440×900 WebP of each public homepage).
-- **Covers** — `public/covers/` holds screenshots of airrange.io and manh.com; the Shopify cover is a
-  collage of the stores; the rest are drawn in CSS (`src/components/covers/project-cover.tsx`).
+- **Pictures** — `public/covers/` holds screenshots of airrange.io and manh.com, and illustrations
+  of the other systems (storefront, search indexing, personalization & AI content, component
+  library, touch kiosk). Illustrations are brand-neutral and labelled "Illustration" on the site.
+  Edit them in `design/illustrations/index.html`, then run `pnpm illustrations` to re-render.
 
 There is intentionally no résumé download (the PDF carries a phone number).
 

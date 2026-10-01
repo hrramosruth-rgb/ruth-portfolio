@@ -346,9 +346,11 @@
 }
 
 /* ---------- stage: wipe in, zoom settle; the old slide sinks back ---------- */
+/* The stage has the pictures' own 16:10 shape, so nothing is cropped. */
 .sc-stage {
   position: relative;
-  height: var(--stage-h);
+  aspect-ratio: 16 / 10;
+  max-height: var(--stage-h);
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
@@ -401,7 +403,11 @@
 }
 
 .sc-slide.is-current .sc-media {
-  transform: scale(1.04);
+  transform: scale(1.015);
+}
+
+.sc-stage .cover-number {
+  display: none;
 }
 
 html:not(.is-ready) .sc-slide .sc-media {
@@ -579,7 +585,7 @@ html:not(.is-ready) .sc-progress {
 @media (max-width: 760px) {
   .sc {
     gap: 22px;
-    padding-top: 84px;
+    padding-top: 96px;
   }
 
   .sc-caption {
@@ -603,7 +609,8 @@ html:not(.is-ready) .sc-progress {
   .sc-stage {
     order: -1;
     height: auto;
-    aspect-ratio: 4 / 3;
+    max-height: none;
+    aspect-ratio: 16 / 10;
   }
 
   .sc-title {

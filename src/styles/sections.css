@@ -411,6 +411,20 @@
   transform: scale(1.05);
 }
 
+.wg-note {
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  z-index: 1;
+  padding: 6px 11px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--ink);
+  font-size: 10px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
 .wg-view {
   position: absolute;
   left: 20px;

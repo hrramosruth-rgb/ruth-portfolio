@@ -33,13 +33,22 @@
 .case-cover {
   position: relative;
   margin: 0 var(--gut);
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
+}
+
+.case-cover .cover-number {
+  display: none;
 }
 
 .case-cover .cover img {
   filter: none;
   object-position: 50% 0;
+}
+
+.case-cover-note {
+  margin: 14px var(--gut) 0;
+  text-align: right;
 }
 
 /* ---------- overview ---------- */
@@ -233,7 +242,7 @@
 
 @media (max-width: 860px) {
   .case-cover {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
   }
 
   .case-body {

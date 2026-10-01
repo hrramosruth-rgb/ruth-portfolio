@@ -80,6 +80,9 @@ export default async function CasePage({ params }: Params) {
       <div className={`case-cover case-cover--${project.cover}`}>
         <ProjectCover kind={project.cover} number={project.index} eager />
       </div>
+      {project.illustration ? (
+        <p className="case-cover-note ui muted">Illustration of the system — not a screenshot of the client&apos;s product</p>
+      ) : null}
 
       <section className="section case-body" data-theme="paper" aria-label="Overview">
         <dl className="case-meta">

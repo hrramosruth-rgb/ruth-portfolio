@@ -51,13 +51,14 @@ function GridCard({ project, order }: { project: Project; order: number }) {
                 <i />
                 <i />
                 <i />
-                <span>{project.link?.label ?? title}</span>
+                <span>{project.illustration ? title : (project.link?.label ?? title)}</span>
               </span>
               <span className="wg-screen">
                 <ProjectCover kind={project.cover} number={project.index} />
               </span>
             </span>
           </span>
+          {project.illustration ? <span className="wg-note ui">Illustration</span> : null}
           <span className="wg-view ui" aria-hidden="true">
             View case study <span>→</span>
           </span>
