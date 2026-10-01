@@ -189,6 +189,350 @@
   }
 }
 
+/* ==========================================================================
+   Selected work — gallery (default view), filters and view toggle
+   ========================================================================== */
+
+.work-lede {
+  max-width: 360px;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: right;
+}
+
+.wf-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin: 8px 0 64px;
+}
+
+.wf-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Pills fill with ink from below on hover and when active. */
+.wf-pill {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 22px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: none;
+  color: var(--fg);
+  cursor: inherit;
+  transition:
+    color 0.5s var(--ease),
+    border-color 0.5s var(--ease);
+}
+
+.wf-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--ink);
+  transform: translateY(101%);
+  transition: transform 0.6s var(--ease-io);
+}
+
+.wf-pill:hover,
+.wf-pill.is-active {
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.wf-pill:hover::before,
+.wf-pill.is-active::before {
+  transform: none;
+}
+
+.wf-pill sup {
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+.wf-views {
+  display: flex;
+  gap: 6px;
+}
+
+.wf-view {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--fg);
+  cursor: inherit;
+  transition:
+    background-color 0.4s var(--ease),
+    color 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.wf-view svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.wf-view:hover,
+.wf-view.is-active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Staggered two-column gallery. */
+.wg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12vh 4vw;
+  padding-bottom: 14vh;
+}
+
+.wg-card:nth-child(even) {
+  margin-top: 18vh;
+}
+
+.wg-link {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* The frame wipes up as the card arrives; the screen settles from a zoom. */
+.wg-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--tone) 16%, var(--paper));
+  transition: clip-path 1.5s var(--ease-io) calc(var(--order, 0) * 0.14s);
+}
+
+.wg-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(75% 60% at 50% 115%, color-mix(in srgb, var(--tone) 42%, transparent), transparent 72%);
+}
+
+.js .wg-card:not(.is-in) .wg-frame {
+  clip-path: inset(100% 0 0 0);
+}
+
+.wg-media {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: transform 1.9s var(--ease) calc(var(--order, 0) * 0.14s);
+}
+
+.js .wg-card:not(.is-in) .wg-media {
+  transform: scale(1.3);
+}
+
+/* The browser window drifts against the scroll and lifts on hover. */
+.wg-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow:
+    0 50px 90px -40px color-mix(in srgb, var(--tone) 60%, rgba(0, 0, 0, 0.7)),
+    0 2px 8px rgba(17, 16, 16, 0.08);
+  transform: translateY(calc(var(--py, 0) * 1%));
+  transition: transform 0.9s var(--ease);
+}
+
+.wg-link:hover .wg-window,
+.wg-link:focus-visible .wg-window {
+  transform: translateY(calc(var(--py, 0) * 1% - 10px)) scale(1.035);
+}
+
+.wg-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 10px;
+  border-bottom: 1px solid rgba(17, 16, 16, 0.08);
+  background: #fbfaf7;
+}
+
+.wg-bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(17, 16, 16, 0.16);
+}
+
+.wg-bar span {
+  margin: 0 auto;
+  color: var(--muted-paper);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  transform: translateX(-12px);
+}
+
+.wg-screen {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.wg-screen .cover img {
+  transition: transform 1.2s var(--ease);
+}
+
+.wg-screen .cover-number {
+  display: none;
+}
+
+.wg-link:hover .wg-screen .cover img {
+  transform: scale(1.05);
+}
+
+.wg-view {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  display: inline-flex;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 99px;
+  background: var(--ink);
+  color: var(--paper);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+.wg-link:hover .wg-view,
+.wg-link:focus-visible .wg-view {
+  opacity: 1;
+  transform: none;
+}
+
+.wg-meta,
+.wg-sub {
+  transition:
+    opacity 1.1s var(--ease) calc(0.35s + var(--order, 0) * 0.14s),
+    transform 1.1s var(--ease) calc(0.35s + var(--order, 0) * 0.14s);
+}
+
+.js .wg-card:not(.is-in) .wg-meta,
+.js .wg-card:not(.is-in) .wg-sub {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.wg-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.wg-title {
+  font-size: clamp(30px, 2.8vw, 50px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+/* Title underline draws on hover. */
+.wg-title > span {
+  padding-bottom: 3px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.8s var(--ease);
+}
+
+.wg-link:hover .wg-title > span {
+  background-size: 100% 1px;
+}
+
+.wg-context {
+  flex-shrink: 0;
+}
+
+.wg-sub {
+  display: flex;
+  gap: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.wg-tags {
+  margin-left: auto;
+}
+
+@media (max-width: 860px) {
+  .work-lede {
+    text-align: left;
+  }
+
+  .wf-bar {
+    margin-bottom: 40px;
+  }
+
+  .wf-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .wf-pill {
+    flex-shrink: 0;
+    padding: 11px 18px;
+  }
+
+  .wg-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+
+  .wg-card:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .wg-frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .wg-meta {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .wg-view {
+    opacity: 1;
+    transform: none;
+    left: 12px;
+    bottom: 12px;
+    padding: 9px 14px;
+  }
+}
+
 /* ---------- career (ink) ---------- */
 /* clip, not hidden: hidden would make this a scroll container and break the sticky year. */
 .career {
@@ -501,8 +845,15 @@
 
   .js .work-item:not(.is-in) .work-cell > span,
   .js .figure:not(.is-in) > *,
-  .js .career-item:not(.is-in) > * {
+  .js .career-item:not(.is-in) > *,
+  .js .wg-card:not(.is-in) .wg-media,
+  .js .wg-card:not(.is-in) .wg-meta,
+  .js .wg-card:not(.is-in) .wg-sub {
     opacity: 1;
     transform: none;
+  }
+
+  .js .wg-card:not(.is-in) .wg-frame {
+    clip-path: none;
   }
 }

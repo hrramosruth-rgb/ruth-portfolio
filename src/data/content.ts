@@ -16,6 +16,9 @@ export type CoverKind =
   | "touch"
   | "shopify";
 
+export const WORK_TAGS = ["Commerce", "Python", "SaaS", "Interfaces"] as const;
+export type WorkTag = (typeof WORK_TAGS)[number];
+
 export type Project = {
   slug: string;
   index: string;
@@ -34,6 +37,8 @@ export type Project = {
   highlights: Highlight[];
   figures: Figure[];
   cover: CoverKind;
+  /** Filter tags for the work gallery. */
+  tags: WorkTag[];
   /** Added by the requester; not on the résumé. */
   supplied?: boolean;
   /** Renders the storefront grid on the case study. */
@@ -231,6 +236,7 @@ export const PROJECTS: Project[] = [
       { value: 40, suffix: "%", label: "Faster issue resolution" },
     ],
     cover: "airrange",
+    tags: ["SaaS", "Python"],
   },
   {
     // Supplied by the requester. Only public facts about the product are stated.
@@ -247,6 +253,7 @@ export const PROJECTS: Project[] = [
     highlights: [],
     figures: [],
     cover: "manhattan",
+    tags: ["SaaS"],
     supplied: true,
   },
   {
@@ -281,6 +288,7 @@ export const PROJECTS: Project[] = [
       { value: 9, prefix: "+", suffix: "%", label: "Revenue" },
     ],
     cover: "albertsons",
+    tags: ["Commerce"],
   },
   {
     slug: "realtime-search",
@@ -302,6 +310,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "search",
+    tags: ["Commerce", "Python"],
   },
   {
     slug: "personalization-ai",
@@ -327,6 +336,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "personalization",
+    tags: ["Commerce", "Python"],
   },
   {
     slug: "component-systems",
@@ -355,6 +365,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "components",
+    tags: ["Interfaces"],
   },
   {
     slug: "touch-interfaces",
@@ -391,6 +402,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [],
     cover: "touch",
+    tags: ["Interfaces"],
   },
   {
     // Supplied by the requester. Only public facts about each store are stated.
@@ -406,6 +418,7 @@ export const PROJECTS: Project[] = [
     highlights: [],
     figures: [],
     cover: "shopify",
+    tags: ["Commerce"],
     supplied: true,
     stores: true,
   },

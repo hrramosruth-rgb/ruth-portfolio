@@ -3,25 +3,15 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ProjectCover } from "@/components/covers/project-cover";
-import type { CoverKind, Project } from "@/data/content";
+import type { Project } from "@/data/content";
 import { PROFILE, PROJECTS, projectTitle } from "@/data/content";
 import { prefersReducedMotion } from "@/lib/motion";
+import { TONES } from "@/lib/tones";
 
-const SLIDE_MS = 7000;
+const SLIDE_MS = 4500;
 const COUNT = PROJECTS.length;
 const pad = (n: number) => String(n).padStart(2, "0");
 
-/** Mood colour washed over each project's background. */
-const TONES: Record<CoverKind, string> = {
-  airrange: "#2b3f9e",
-  manhattan: "#0f6b4f",
-  albertsons: "#8c1c2b",
-  search: "#8a7651",
-  personalization: "#a2394c",
-  components: "#6f6455",
-  touch: "#7a1f2e",
-  shopify: "#8a6440",
-};
 
 type Slide = { index: number; previous: number; dir: 1 | -1; serial: number };
 
