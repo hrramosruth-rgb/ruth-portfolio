@@ -26,14 +26,14 @@ export async function GET() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#F1EEE8",
-          color: "#111010",
+          background: "#FBF5F3",
+          color: "#5A2338",
           padding: "52px 64px",
           fontFamily: "Bodoni",
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <svg width="64" height="64" viewBox="0 0 100 100" fill="#111010">
+          <svg width="64" height="64" viewBox="0 0 100 100" fill="#5A2338">
             <path d={MONOGRAM_PATH} />
             <path d={MONOGRAM_PATH} transform={MONOGRAM_MIRROR} />
           </svg>
@@ -42,7 +42,7 @@ export async function GET() {
         <div style={{ display: "flex", flexDirection: "column", fontSize: 200, lineHeight: 0.84, letterSpacing: -7 }}>
           <span>Ruth</span>
           <span style={{ display: "flex", alignSelf: "flex-end", fontStyle: "italic" }}>
-            Ramos<span style={{ color: "#8C1C2B", fontStyle: "normal" }}>.</span>
+            Ramos<span style={{ color: "#C0506A", fontStyle: "normal" }}>.</span>
           </span>
         </div>
         <div
@@ -52,7 +52,7 @@ export async function GET() {
             fontSize: 21,
             letterSpacing: 6,
             textTransform: "uppercase",
-            borderTop: "1px solid rgba(17,16,16,0.2)",
+            borderTop: "1px solid rgba(90,35,56,0.2)",
             paddingTop: 20,
           }}
         >

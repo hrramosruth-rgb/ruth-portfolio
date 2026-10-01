@@ -199,14 +199,17 @@ export function Career() {
                       ) : null}
 
                       {detail.highlights.length > 0 ? (
-                        <div className="career-block">
-                          <span className="ui muted career-label">What I did</span>
+                        <div className="career-block career-did-block">
+                          <h4 className="career-did display">
+                            What I <em>did</em>
+                            <span className="ui muted">{pad(detail.highlights.length)} highlights</span>
+                          </h4>
                           <ol className="career-highlights">
                             {detail.highlights.map((highlight, h) => (
                               <li key={highlight.lead} style={{ "--h": h } as React.CSSProperties}>
                                 <span className="ui muted">{pad(h + 1)}</span>
                                 <div>
-                                  <h4 className="display">{highlight.lead}</h4>
+                                  <h5 className="display">{highlight.lead}</h5>
                                   <p className="muted">{highlight.text}</p>
                                 </div>
                               </li>

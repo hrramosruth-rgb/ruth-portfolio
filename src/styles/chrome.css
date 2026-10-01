@@ -23,8 +23,11 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 20px var(--gut);
-  color: var(--paper);
-  mix-blend-mode: difference;
+  color: var(--fg);
+  background: linear-gradient(var(--bg) 55%, color-mix(in srgb, var(--bg) 0%, transparent));
+  transition:
+    color 1s var(--ease),
+    background 1s var(--ease);
 }
 
 .nav-mark {
@@ -119,8 +122,8 @@
   height: 10px;
   margin: -5px 0 0 -5px;
   border-radius: 50%;
-  background: var(--paper);
-  mix-blend-mode: difference;
+  background: var(--wine);
+  box-shadow: 0 0 0 1.5px rgba(251, 245, 243, 0.85);
   pointer-events: none;
   display: grid;
   place-items: center;
@@ -138,7 +141,7 @@
 
 .cursor span {
   opacity: 0;
-  color: var(--ink);
+  color: var(--paper);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -151,7 +154,7 @@
   width: 92px;
   height: 92px;
   margin: -46px 0 0 -46px;
-  mix-blend-mode: normal;
+  box-shadow: none;
 }
 
 .cursor.is-big span {

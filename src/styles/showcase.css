@@ -17,8 +17,8 @@
   min-height: 100svh;
   padding: 100px var(--gut) 28px;
   overflow: hidden;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--blush);
+  color: var(--wine);
   transition: --tone 1.6s var(--ease);
 }
 
@@ -31,8 +31,9 @@
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(38% 42% at 60% 52%, color-mix(in srgb, var(--tone) 30%, transparent), transparent 70%),
-    radial-gradient(28% 32% at 18% 82%, color-mix(in srgb, var(--tone) 12%, transparent), transparent 70%);
+    radial-gradient(40% 44% at 62% 50%, rgba(255, 255, 255, 0.75), transparent 70%),
+    radial-gradient(38% 42% at 60% 52%, color-mix(in srgb, var(--tone) 14%, transparent), transparent 70%),
+    radial-gradient(30% 34% at 14% 86%, rgba(192, 80, 106, 0.16), transparent 70%);
   filter: blur(48px);
   pointer-events: none;
   animation: sc-breathe 14s ease-in-out infinite alternate;
@@ -77,7 +78,7 @@
   align-items: baseline;
   gap: 24px;
   padding-bottom: 18px;
-  border-bottom: 1px solid rgba(241, 238, 232, 0.12);
+  border-bottom: 1px solid rgba(90, 35, 56, 0.12);
 }
 
 .sc-caption-name {
@@ -144,8 +145,7 @@
 .sc-title {
   position: relative;
   z-index: 5;
-  color: var(--paper);
-  mix-blend-mode: difference;
+  color: var(--wine);
   font-size: clamp(52px, 5.8vw, 112px);
   font-weight: 400;
   line-height: 0.92;
@@ -219,7 +219,7 @@
 .sc-summary {
   max-width: 380px;
   min-height: calc(1.7em * 3);
-  color: rgba(241, 238, 232, 0.78);
+  color: rgba(90, 35, 56, 0.78);
   font-size: 15px;
   line-height: 1.7;
 }
@@ -259,7 +259,7 @@
   width: 118px;
   height: 118px;
   border-radius: 50%;
-  color: var(--paper);
+  color: var(--wine);
   transform: translate(var(--tx, 0px), var(--ty, 0px));
   transition: transform 0.7s var(--ease);
 }
@@ -269,7 +269,7 @@
   position: absolute;
   inset: 20px;
   border-radius: 50%;
-  background: var(--paper);
+  background: var(--wine);
   transform: scale(0);
   transition: transform 0.7s var(--ease);
 }
@@ -304,7 +304,7 @@
 }
 
 .sc-cta:hover .sc-cta-arrow {
-  color: var(--ink);
+  color: var(--paper);
   transform: rotate(-45deg);
 }
 
@@ -322,10 +322,10 @@
 .sc-arrow {
   width: 54px;
   height: 54px;
-  border: 1px solid rgba(241, 238, 232, 0.28);
+  border: 1px solid rgba(90, 35, 56, 0.28);
   border-radius: 50%;
   background: none;
-  color: var(--paper);
+  color: var(--wine);
   font: inherit;
   font-size: 18px;
   cursor: inherit;
@@ -336,13 +336,13 @@
 }
 
 .sc-arrow:hover {
-  border-color: var(--paper);
-  background: var(--paper);
-  color: var(--ink);
+  border-color: var(--wine);
+  background: var(--wine);
+  color: var(--paper);
 }
 
 .sc-visit {
-  color: rgba(241, 238, 232, 0.78);
+  color: rgba(90, 35, 56, 0.78);
 }
 
 /* ---------- stage: wipe in, zoom settle; the old slide sinks back ---------- */
@@ -434,9 +434,10 @@ html:not(.is-ready) .sc-slide .sc-media {
   left: 18px;
   bottom: 16px;
   z-index: 3;
-  color: var(--paper);
-  mix-blend-mode: difference;
-  opacity: 0.8;
+  padding: 6px 11px;
+  border-radius: 99px;
+  background: rgba(251, 245, 243, 0.86);
+  color: var(--wine);
 }
 
 /* ---------- next-project peek ---------- */
@@ -449,7 +450,7 @@ html:not(.is-ready) .sc-slide .sc-media {
   padding: 0;
   border: 0;
   background: none;
-  color: var(--paper);
+  color: var(--wine);
   font: inherit;
   text-align: left;
   cursor: inherit;
@@ -510,7 +511,7 @@ html:not(.is-ready) .sc-slide .sc-media {
   padding: 0 0 4px;
   border: 0;
   background: none;
-  color: rgba(241, 238, 232, 0.45);
+  color: rgba(90, 35, 56, 0.6);
   font: inherit;
   text-align: left;
   cursor: inherit;
@@ -519,7 +520,7 @@ html:not(.is-ready) .sc-slide .sc-media {
 
 .sc-rail button:hover,
 .sc-rail button.is-active {
-  color: var(--paper);
+  color: var(--wine);
 }
 
 .sc-rail button .muted {
@@ -539,13 +540,13 @@ html:not(.is-ready) .sc-slide .sc-media {
   display: block;
   height: 1px;
   overflow: hidden;
-  background: rgba(241, 238, 232, 0.16);
+  background: rgba(90, 35, 56, 0.16);
 }
 
 .sc-progress {
   position: absolute;
   inset: 0;
-  background: var(--paper);
+  background: var(--rouge);
   transform-origin: left;
   animation-name: sc-progress;
   animation-timing-function: linear;

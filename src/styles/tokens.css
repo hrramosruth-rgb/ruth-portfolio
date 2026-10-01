@@ -1,10 +1,14 @@
-/* Design tokens. Sections switch the page between paper and ink (see SectionTheme). */
+/* Design tokens — "Blush Light". Sections switch the page between paper and blush bands (see
+   SectionTheme; the band theme keeps its historical name "ink"). There is no black: text and
+   fills are wine. */
 :root {
-  --paper: #f1eee8;
-  --ink: #111010;
-  --rouge: #8c1c2b;
-  --muted-paper: #6e6963;
-  --muted-ink: #8e8984;
+  --paper: #fbf5f3;
+  --blush: #f1dcdc;
+  --wine: #5a2338;
+  --ink: var(--wine);
+  --rouge: #c0506a;
+  --muted-paper: #845463;
+  --muted-ink: #7e4f5e;
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
   --gut: clamp(18px, 3vw, 48px);
@@ -29,7 +33,7 @@ body {
   --bg: var(--paper);
   --fg: var(--ink);
   --mu: var(--muted-paper);
-  --line: rgba(17, 16, 16, 0.14);
+  --line: rgba(90, 35, 56, 0.14);
   min-height: 100dvh;
   background: var(--bg);
   color: var(--fg);
@@ -44,10 +48,10 @@ body {
 }
 
 body.is-ink {
-  --bg: var(--ink);
-  --fg: var(--paper);
+  --bg: var(--blush);
+  --fg: var(--wine);
   --mu: var(--muted-ink);
-  --line: rgba(241, 238, 232, 0.14);
+  --line: rgba(90, 35, 56, 0.16);
 }
 
 a {
