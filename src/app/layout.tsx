@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fbf5f3",
+  themeColor: "#0b1426",
 };
 
 // Runs before first paint: marks JS as available (reveal styles key off `.js`); returning visitors

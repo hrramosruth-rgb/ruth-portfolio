@@ -1,14 +1,19 @@
-/* Design tokens — "Blush Light". Sections switch the page between paper and blush bands (see
-   SectionTheme; the band theme keeps its historical name "ink"). There is no black: text and
-   fills are wine. */
+/* Design tokens — "Twilight". The first page is Eli's black sky (body.is-night); everything after
+   it is night-blue with rose and gold, so the black melts into the rest of the site.
+   Token names are historical: --paper is the page background, --wine the foreground (text and
+   filled buttons), --blush the raised surface (cards, hover sweeps), --rouge the rose accent. */
 :root {
-  --paper: #fbf5f3;
-  --blush: #f1dcdc;
-  --wine: #5a2338;
+  --paper: #0b1426;
+  --band: #0f1a31;
+  --blush: #13203a;
+  --raised: #182844;
+  --wine: #eef1f7;
   --ink: var(--wine);
-  --rouge: #c0506a;
-  --muted-paper: #845463;
-  --muted-ink: #7e4f5e;
+  --rouge: #f2b8c6;
+  --gold: #d6b478;
+  --green: #3ddc84;
+  --muted-paper: #9aa6bd;
+  --muted-ink: #a7b2c7;
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
   --gut: clamp(18px, 3vw, 48px);
@@ -33,7 +38,7 @@ body {
   --bg: var(--paper);
   --fg: var(--ink);
   --mu: var(--muted-paper);
-  --line: rgba(90, 35, 56, 0.14);
+  --line: rgba(238, 241, 247, 0.1);
   min-height: 100dvh;
   background: var(--bg);
   color: var(--fg);
@@ -56,10 +61,10 @@ body.is-night {
 }
 
 body.is-ink {
-  --bg: var(--blush);
+  --bg: var(--band);
   --fg: var(--wine);
   --mu: var(--muted-ink);
-  --line: rgba(90, 35, 56, 0.16);
+  --line: rgba(238, 241, 247, 0.11);
 }
 
 a {

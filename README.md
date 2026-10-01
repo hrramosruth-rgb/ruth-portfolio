@@ -2,8 +2,8 @@
 
 Portfolio for Ruth Ramos, Full Stack Developer in Madrid. The home page opens on "Ruth's World"
 (`src/components/world/`): her projects orbit a pearl globe; click a project for its panel, or the
-globe to see where she's based. Then about, the project gallery, career and contact — plus a case
-study per project.
+globe to see where she's based. Below it, in the "Twilight" palette (`src/styles/tokens.css`): a bento
+About, the project gallery, career path and contact — plus a case study per project.
 
 ## Develop
 

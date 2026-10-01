@@ -17,10 +17,10 @@ export function GET() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#5A2338",
+          background: "#0B1426",
         }}
       >
-        <svg width="54" height="54" viewBox="0 0 100 100" fill="#F1DCDC">
+        <svg width="54" height="54" viewBox="0 0 100 100" fill="#EEF1F7">
           <path d={MONOGRAM_PATH} />
           <path d={MONOGRAM_PATH} transform={MONOGRAM_MIRROR} />
         </svg>

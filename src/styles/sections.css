@@ -10,6 +10,11 @@
   gap: 0.22em;
 }
 
+.work-heading .italic,
+.career-heading .italic {
+  color: var(--rouge);
+}
+
 .work-heading .split,
 .career-heading .split {
   padding-bottom: 0.1em;
@@ -356,8 +361,8 @@
   border-radius: 10px;
   background: #fff;
   box-shadow:
-    0 50px 90px -40px color-mix(in srgb, var(--tone) 60%, rgba(0, 0, 0, 0.7)),
-    0 2px 8px rgba(90, 35, 56, 0.08);
+    0 50px 90px -40px color-mix(in srgb, var(--tone) 50%, rgba(0, 0, 0, 0.85)),
+    0 0 0 1px rgba(238, 241, 247, 0.08);
   transform: translateY(calc(var(--py, 0) * 1%));
   transition: transform 0.9s var(--ease);
 }
@@ -373,15 +378,23 @@
   gap: 5px;
   height: 26px;
   padding: 0 10px;
-  border-bottom: 1px solid rgba(90, 35, 56, 0.08);
-  background: #fbfaf7;
+  border-bottom: 1px solid rgba(238, 241, 247, 0.06);
+  background: #1a2540;
 }
 
 .wg-bar i {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgba(90, 35, 56, 0.16);
+  background: #ff5f57;
+}
+
+.wg-bar i:nth-child(2) {
+  background: #febc2e;
+}
+
+.wg-bar i:nth-child(3) {
+  background: #28c840;
 }
 
 .wg-bar span {
@@ -418,8 +431,9 @@
   z-index: 1;
   padding: 6px 11px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.78);
-  color: var(--ink);
+  border: 1px solid rgba(238, 241, 247, 0.16);
+  background: rgba(11, 20, 38, 0.72);
+  color: var(--wine);
   font-size: 10px;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
@@ -600,12 +614,12 @@
 
 .mq-row-outline .mq-item {
   color: transparent;
-  -webkit-text-stroke: 1px rgba(90, 35, 56, 0.42);
+  -webkit-text-stroke: 1px rgba(238, 241, 247, 0.42);
 }
 
 .mq-row-outline .mq-item i {
   -webkit-text-stroke: 0;
-  color: rgba(90, 35, 56, 0.35);
+  color: rgba(238, 241, 247, 0.35);
 }
 
 @keyframes mq-move {
@@ -655,7 +669,7 @@
   display: grid;
   grid-template-columns: minmax(280px, 1fr) 2fr;
   gap: 6vw;
-  margin-top: 24vh;
+  margin-top: 12vh;
 }
 
 .career-aside {
@@ -690,7 +704,7 @@
   height: 9px;
   border-radius: 50%;
   background: var(--rouge);
-  box-shadow: 0 0 0 6px rgba(192, 80, 106, 0.22);
+  box-shadow: 0 0 0 6px rgba(242, 184, 198, 0.22);
   transform: translateY(-50%);
 }
 
@@ -775,7 +789,7 @@
   display: inline-flex;
   gap: 8px;
   padding: 10px 16px;
-  border: 1px solid rgba(90, 35, 56, 0.24);
+  border: 1px solid rgba(238, 241, 247, 0.24);
   border-radius: 99px;
   transition:
     background-color 0.45s var(--ease),
@@ -790,7 +804,7 @@
 }
 
 .career-work a:hover .muted {
-  color: rgba(251, 245, 243, 0.72);
+  color: rgba(11, 20, 38, 0.72);
 }
 
 /* Each role's detail: key project, results, what she did, stack, projects. */
@@ -910,7 +924,7 @@
 
 .career-stack li {
   padding: 7px 13px;
-  border: 1px solid rgba(90, 35, 56, 0.2);
+  border: 1px solid rgba(238, 241, 247, 0.2);
   border-radius: 99px;
 }
 

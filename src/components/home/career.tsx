@@ -7,7 +7,7 @@ import { InView } from "@/components/motion/in-view";
 import { SplitText } from "@/components/motion/split-text";
 import { useReveal } from "@/components/motion/use-reveal";
 import type { Figure, Highlight, Project, Role } from "@/data/content";
-import { CAREER, CRAFT_MARQUEE, FIGURES, STACK_MARQUEE, getProject, projectTitle } from "@/data/content";
+import { CAREER, CRAFT_MARQUEE, STACK_MARQUEE, getProject, projectTitle } from "@/data/content";
 import { prefersReducedMotion } from "@/lib/motion";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -40,7 +40,7 @@ function Marquee({ items, className }: { items: string[]; className?: string }) 
 
 /**
  * Figures and career, on ink. Two marquees of her stack run in opposite directions and speed up with
- * scrolling; figures count up as their rules draw; the timeline's sticky year follows the role in
+ * scrolling; the timeline's sticky year follows the role in
  * view while a rule fills with progress.
  */
 export function Career() {
@@ -121,22 +121,14 @@ export function Career() {
 
       <div className="section-head">
         <InView>
-          <h2 className="display career-heading">
-            <span className="sr-only">In numbers</span>
-            <SplitText text="In" delay={0} />
-            <SplitText text="numbers" className="italic" delay={0.12} />
+          <h2 id="career-title" className="display career-heading">
+            <span className="sr-only">Career path</span>
+            <SplitText text="Career" delay={0} />
+            <SplitText text="path" className="italic" delay={0.12} />
           </h2>
         </InView>
-        <span className="ui muted">Measured results</span>
+        <span className="ui muted">2020 — 2026 · three roles and a degree</span>
       </div>
-      <ul className="figures">
-        {FIGURES.map((figure, i) => (
-          <li key={figure.label} className="rv figure" style={{ "--row": i } as React.CSSProperties}>
-            <Counter figure={figure} className="display" />
-            <span className="muted">{figure.label}</span>
-          </li>
-        ))}
-      </ul>
 
       <div ref={timeline} className="career-grid">
         <aside className="career-aside" aria-hidden="true">
@@ -158,9 +150,6 @@ export function Career() {
         </aside>
 
         <div>
-          <h2 id="career-title" className="sr-only">
-            Career
-          </h2>
           <ol className="career-list">
             {CAREER.map((item, i) => (
               <li key={item.org} className="career-item rv" data-active={i === active}>
