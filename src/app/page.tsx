@@ -1,6 +1,6 @@
 import { About } from "@/components/home/about";
+import { Career } from "@/components/home/career";
 import { Contact } from "@/components/home/contact";
-import { Numbers } from "@/components/home/numbers";
 import { Showcase } from "@/components/home/showcase";
 import { WorkIndex } from "@/components/home/work-index";
 import { LINKS, PROFILE } from "@/data/content";
@@ -25,7 +25,7 @@ export default function Page() {
       <Showcase />
       <About />
       <WorkIndex />
-      <Numbers />
+      <Career />
       <Contact />
     </main>
   );

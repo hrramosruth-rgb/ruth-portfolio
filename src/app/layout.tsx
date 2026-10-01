@@ -13,6 +13,7 @@ import "@/styles/tokens.css";
 import "@/styles/chrome.css";
 import "@/styles/home.css";
 import "@/styles/showcase.css";
+import "@/styles/sections.css";
 import "@/styles/case.css";
 
 const bodoni = Bodoni_Moda({
@@ -54,8 +55,9 @@ export const viewport: Viewport = {
   themeColor: "#f1eee8",
 };
 
-// Runs before first paint: returning visitors and reduced-motion users skip the intro.
-const BOOT = `(function(){var d=document.documentElement;try{if(sessionStorage.getItem("rr-loaded")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("is-loaded","is-ready")}catch(e){d.classList.add("is-loaded","is-ready")}})();`;
+// Runs before first paint: marks JS as available (reveal styles key off `.js`); returning visitors
+// and reduced-motion users skip the intro.
+const BOOT = `(function(){var d=document.documentElement;d.classList.add("js");try{if(sessionStorage.getItem("rr-loaded")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("is-loaded","is-ready")}catch(e){d.classList.add("is-loaded","is-ready")}})();`;
 
 // Without JavaScript every reveal is shown in its final state.
 const NO_SCRIPT = `.loader{display:none}.split .ch,.fade-in,.word,.sc-rise,.sc-title .ch{opacity:1!important;transform:none!important;animation:none!important}.sc-slide .sc-media{transform:none!important}`;

@@ -52,7 +52,15 @@ export type Storefront = {
 };
 
 export type Discipline = { index: string; title: string; items: string[] };
-export type Role = { period: string; org: string; role: string; location: string };
+export type Role = {
+  period: string;
+  org: string;
+  role: string;
+  location: string;
+  description: string;
+  /** Slugs of the projects that came out of this role. */
+  projects: string[];
+};
 
 export const PROFILE = {
   name: "Ruth Ramos",
@@ -113,12 +121,64 @@ export const FIGURES: Figure[] = [
   { value: 40, suffix: "%", label: "Faster production issue resolution" },
 ];
 
-export const EXPERIENCE: Role[] = [
-  { period: "2024 — 2026", org: "The React Hub", role: "Full Stack Developer", location: "UK · Remote" },
-  { period: "2023 — 2024", org: "Scalater Dev", role: "Full Stack Developer", location: "US · Remote" },
-  { period: "2022 — 2023", org: "EXPIEY", role: "Web Developer", location: "Madrid · On-site" },
-  { period: "2020 — 2022", org: "UNED", role: "Bachelor of Computer Science", location: "Madrid" },
+export const CAREER: Role[] = [
+  {
+    period: "2024 — 2026",
+    org: "The React Hub",
+    role: "Full Stack Developer",
+    location: "UK · Remote",
+    description: "Software development company building cloud-native web applications and backend services.",
+    projects: ["airrange", "component-systems"],
+  },
+  {
+    period: "2023 — 2024",
+    org: "Scalater Dev",
+    role: "Full Stack Developer",
+    location: "US · Remote",
+    description: "Software company delivering e-commerce and data-intensive platforms for enterprise retail clients.",
+    projects: ["albertsons", "realtime-search", "personalization-ai"],
+  },
+  {
+    period: "2022 — 2023",
+    org: "EXPIEY",
+    role: "Web Developer",
+    location: "Madrid · On-site",
+    description: "Digital company building customer-facing and internal web applications.",
+    projects: ["touch-interfaces"],
+  },
+  {
+    period: "2020 — 2022",
+    org: "UNED",
+    role: "Bachelor of Computer Science",
+    location: "Madrid",
+    description: "National University of Distance Education.",
+    projects: [],
+  },
 ];
+
+/** The marquee: her stack, as the résumé lists it. */
+export const STACK_MARQUEE = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "Python",
+  "FastAPI",
+  "Django",
+  "GraphQL",
+  "PostgreSQL",
+  "MongoDB",
+  "Redis",
+  "Kafka",
+  "Elasticsearch",
+  "AWS",
+  "Docker",
+  "Kubernetes",
+  "Shopify",
+  "OpenAI API",
+];
+
+export const CRAFT_MARQUEE = ["Interfaces", "Services", "Data", "Search", "Cloud", "Commerce", "AI"];
 
 const ALBERTSONS_DESCRIPTION =
   "Enterprise digital retail and e-commerce initiative for one of the largest food and drug retailers in the United States, spanning online grocery, loyalty, pharmacy, and in-store customer experiences.";
