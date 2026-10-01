@@ -12,6 +12,7 @@ import { SITE_URL } from "@/lib/site-url";
 import "@/styles/tokens.css";
 import "@/styles/chrome.css";
 import "@/styles/home.css";
+import "@/styles/showcase.css";
 import "@/styles/case.css";
 
 const bodoni = Bodoni_Moda({
@@ -57,7 +58,7 @@ export const viewport: Viewport = {
 const BOOT = `(function(){var d=document.documentElement;try{if(sessionStorage.getItem("rr-loaded")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("is-loaded","is-ready")}catch(e){d.classList.add("is-loaded","is-ready")}})();`;
 
 // Without JavaScript every reveal is shown in its final state.
-const NO_SCRIPT = `.loader{display:none}.split .ch,.fade-in,.word{opacity:1!important;transform:none!important}.orbit-ring{transform:translateZ(calc(var(--r) * -1)) rotateX(-12deg)}`;
+const NO_SCRIPT = `.loader{display:none}.split .ch,.fade-in,.word,.sc-rise,.sc-title .ch{opacity:1!important;transform:none!important;animation:none!important}.sc-stage{clip-path:none!important}.sc-slide .sc-media{transform:scale(1.04)!important}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
