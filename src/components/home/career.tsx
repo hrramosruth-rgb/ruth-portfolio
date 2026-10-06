@@ -127,7 +127,7 @@ export function Career() {
             <SplitText text="path" className="italic" delay={0.12} />
           </h2>
         </InView>
-        <span className="ui muted">2020 — 2026 · three roles and a degree</span>
+        <span className="ui muted">2018 — 2026 · three roles and a degree</span>
       </div>
 
       <div ref={timeline} className="career-grid">

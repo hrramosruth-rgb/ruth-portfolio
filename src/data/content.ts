@@ -158,7 +158,7 @@ export const CAREER: Role[] = [
     keyProject: "albertsons",
   },
   {
-    period: "2022 — 2023",
+    period: "2021 — 2023",
     org: "EXPIEY",
     role: "Web Developer",
     location: "Madrid · On-site",
@@ -166,7 +166,7 @@ export const CAREER: Role[] = [
     projects: ["touch-interfaces"],
   },
   {
-    period: "2020 — 2022",
+    period: "2018 — 2021",
     org: "UNED",
     role: "Bachelor of Computer Science",
     location: "Madrid",
@@ -393,8 +393,8 @@ export const PROJECTS: Project[] = [
     context: "Web & touch",
     company: "EXPIEY",
     role: "Web Developer",
-    period: "Jun 2022 — Jul 2023",
-    years: "2022 — 23",
+    period: "2021 — 2023",
+    years: "2021 — 23",
     location: "Madrid · On-site",
     summary:
       "Responsive customer-facing and internal web applications, including touchscreen interfaces — clearer flows, consistent UI and faster screens.",
