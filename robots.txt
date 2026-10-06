@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://hrramosruth-rgb.github.io/ruth-portfolio/sitemap.xml
